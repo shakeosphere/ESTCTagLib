@@ -1,0 +1,1736 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<tlib-version>2.1</tlib-version>
+	<short-name>simp</short-name>
+	<uri>http://icts.uiowa.edu/ESTCTagLib</uri>
+
+	<tag>
+		<name>getSequenceNumber</name>
+		<tag-class>ESTCTagLib.Sequence</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>dbtest</name>
+		<tag-class>ESTCTagLib.DBTest</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>foreachPerson</name>
+		<tag-class>ESTCTagLib.person.PersonIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>person</name>
+		<tag-class>ESTCTagLib.person.Person</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deletePerson</name>
+		<tag-class>ESTCTagLib.person.PersonDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personPid</name>
+		<tag-class>ESTCTagLib.person.PersonPid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personFirstName</name>
+		<tag-class>ESTCTagLib.person.PersonFirstName</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>firstName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personLastName</name>
+		<tag-class>ESTCTagLib.person.PersonLastName</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>lastName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachAuthor</name>
+		<tag-class>ESTCTagLib.author.AuthorIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useRecord</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>author</name>
+		<tag-class>ESTCTagLib.author.Author</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteAuthor</name>
+		<tag-class>ESTCTagLib.author.AuthorDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>authorID</name>
+		<tag-class>ESTCTagLib.author.AuthorID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>authorPid</name>
+		<tag-class>ESTCTagLib.author.AuthorPid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachLocation</name>
+		<tag-class>ESTCTagLib.location.LocationIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>location</name>
+		<tag-class>ESTCTagLib.location.Location</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteLocation</name>
+		<tag-class>ESTCTagLib.location.LocationDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locationLid</name>
+		<tag-class>ESTCTagLib.location.LocationLid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locationLabel</name>
+		<tag-class>ESTCTagLib.location.LocationLabel</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>label</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachLocated</name>
+		<tag-class>ESTCTagLib.located.LocatedIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useLocation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>located</name>
+		<tag-class>ESTCTagLib.located.Located</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteLocated</name>
+		<tag-class>ESTCTagLib.located.LocatedDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locatedPid</name>
+		<tag-class>ESTCTagLib.located.LocatedPid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locatedLid</name>
+		<tag-class>ESTCTagLib.located.LocatedLid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachPrinter</name>
+		<tag-class>ESTCTagLib.printer.PrinterIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useRecord</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>printer</name>
+		<tag-class>ESTCTagLib.printer.Printer</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deletePrinter</name>
+		<tag-class>ESTCTagLib.printer.PrinterDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>printerID</name>
+		<tag-class>ESTCTagLib.printer.PrinterID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>printerPid</name>
+		<tag-class>ESTCTagLib.printer.PrinterPid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachPublisher</name>
+		<tag-class>ESTCTagLib.publisher.PublisherIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useRecord</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>publisher</name>
+		<tag-class>ESTCTagLib.publisher.Publisher</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deletePublisher</name>
+		<tag-class>ESTCTagLib.publisher.PublisherDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publisherID</name>
+		<tag-class>ESTCTagLib.publisher.PublisherID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publisherPid</name>
+		<tag-class>ESTCTagLib.publisher.PublisherPid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBookseller</name>
+		<tag-class>ESTCTagLib.bookseller.BooksellerIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useRecord</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>bookseller</name>
+		<tag-class>ESTCTagLib.bookseller.Bookseller</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteBookseller</name>
+		<tag-class>ESTCTagLib.bookseller.BooksellerDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>booksellerID</name>
+		<tag-class>ESTCTagLib.bookseller.BooksellerID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>booksellerPid</name>
+		<tag-class>ESTCTagLib.bookseller.BooksellerPid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachRecord</name>
+		<tag-class>ESTCTagLib.record.RecordIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>record</name>
+		<tag-class>ESTCTagLib.record.Record</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteRecord</name>
+		<tag-class>ESTCTagLib.record.RecordDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>recordID</name>
+		<tag-class>ESTCTagLib.record.RecordID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>recordLeader</name>
+		<tag-class>ESTCTagLib.record.RecordLeader</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>leader</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>recordC001</name>
+		<tag-class>ESTCTagLib.record.RecordC001</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>c001</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>recordC003</name>
+		<tag-class>ESTCTagLib.record.RecordC003</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>c003</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>recordC005</name>
+		<tag-class>ESTCTagLib.record.RecordC005</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>c005</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>recordC008</name>
+		<tag-class>ESTCTagLib.record.RecordC008</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>c008</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>recordC009</name>
+		<tag-class>ESTCTagLib.record.RecordC009</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>c009</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachPublication</name>
+		<tag-class>ESTCTagLib.publication.PublicationIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publication</name>
+		<tag-class>ESTCTagLib.publication.Publication</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deletePublication</name>
+		<tag-class>ESTCTagLib.publication.PublicationDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationID</name>
+		<tag-class>ESTCTagLib.publication.PublicationID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationRecType</name>
+		<tag-class>ESTCTagLib.publication.PublicationRecType</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>recType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationBibLevel</name>
+		<tag-class>ESTCTagLib.publication.PublicationBibLevel</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>bibLevel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationMultiLevel</name>
+		<tag-class>ESTCTagLib.publication.PublicationMultiLevel</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>multiLevel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationDateStatus</name>
+		<tag-class>ESTCTagLib.publication.PublicationDateStatus</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>dateStatus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationDate1</name>
+		<tag-class>ESTCTagLib.publication.PublicationDate1</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>date1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationDate2</name>
+		<tag-class>ESTCTagLib.publication.PublicationDate2</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>date2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationLocation</name>
+		<tag-class>ESTCTagLib.publication.PublicationLocation</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>location</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationLanguage</name>
+		<tag-class>ESTCTagLib.publication.PublicationLanguage</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>language</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationIllustrations</name>
+		<tag-class>ESTCTagLib.publication.PublicationIllustrations</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>illustrations</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationForm</name>
+		<tag-class>ESTCTagLib.publication.PublicationForm</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>form</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationTitle</name>
+		<tag-class>ESTCTagLib.publication.PublicationTitle</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationRemainder</name>
+		<tag-class>ESTCTagLib.publication.PublicationRemainder</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>remainder</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationExtent</name>
+		<tag-class>ESTCTagLib.publication.PublicationExtent</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>extent</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationDimensions</name>
+		<tag-class>ESTCTagLib.publication.PublicationDimensions</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>dimensions</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationOther</name>
+		<tag-class>ESTCTagLib.publication.PublicationOther</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>other</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationGac</name>
+		<tag-class>ESTCTagLib.publication.PublicationGac</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>gac</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationPubLocation</name>
+		<tag-class>ESTCTagLib.publication.PublicationPubLocation</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pubLocation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>publicationPublisher</name>
+		<tag-class>ESTCTagLib.publication.PublicationPublisher</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>publisher</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachMtag</name>
+		<tag-class>ESTCTagLib.mtag.MtagIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>mtag</name>
+		<tag-class>ESTCTagLib.mtag.Mtag</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteMtag</name>
+		<tag-class>ESTCTagLib.mtag.MtagDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>mtagID</name>
+		<tag-class>ESTCTagLib.mtag.MtagID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>mtagTag</name>
+		<tag-class>ESTCTagLib.mtag.MtagTag</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>mtagIndicator1</name>
+		<tag-class>ESTCTagLib.mtag.MtagIndicator1</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>indicator1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>mtagIndicator2</name>
+		<tag-class>ESTCTagLib.mtag.MtagIndicator2</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>indicator2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachSubtag</name>
+		<tag-class>ESTCTagLib.subtag.SubtagIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>code</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>subtag</name>
+		<tag-class>ESTCTagLib.subtag.Subtag</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>code</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteSubtag</name>
+		<tag-class>ESTCTagLib.subtag.SubtagDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>code</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>subtagID</name>
+		<tag-class>ESTCTagLib.subtag.SubtagID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>subtagTag</name>
+		<tag-class>ESTCTagLib.subtag.SubtagTag</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>subtagCode</name>
+		<tag-class>ESTCTagLib.subtag.SubtagCode</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>code</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>subtagValue</name>
+		<tag-class>ESTCTagLib.subtag.SubtagValue</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<function>
+		<name>personCount</name>
+		<function-class>ESTCTagLib.person.PersonIterator</function-class>
+		<function-signature>java.lang.String personCount()</function-signature>
+	</function>
+
+	<function>
+		<name>personExists</name>
+		<function-class>ESTCTagLib.person.PersonIterator</function-class>
+		<function-signature>java.lang.String personExists(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>authorExists</name>
+		<function-class>ESTCTagLib.author.AuthorIterator</function-class>
+		<function-signature>java.lang.String authorExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>authorCountByRecord</name>
+		<function-class>ESTCTagLib.author.AuthorIterator</function-class>
+		<function-signature>java.lang.String authorCountByRecord(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordHasAuthor</name>
+		<function-class>ESTCTagLib.author.AuthorIterator</function-class>
+		<function-signature>java.lang.Boolean recordHasAuthor(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>authorCountByPerson</name>
+		<function-class>ESTCTagLib.author.AuthorIterator</function-class>
+		<function-signature>java.lang.String authorCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasAuthor</name>
+		<function-class>ESTCTagLib.author.AuthorIterator</function-class>
+		<function-signature>java.lang.Boolean personHasAuthor(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordPersonExists</name>
+		<function-class>ESTCTagLib.author.AuthorIterator</function-class>
+		<function-signature>java.lang.Boolean recordPersonExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locationCount</name>
+		<function-class>ESTCTagLib.location.LocationIterator</function-class>
+		<function-signature>java.lang.String locationCount()</function-signature>
+	</function>
+
+	<function>
+		<name>locationExists</name>
+		<function-class>ESTCTagLib.location.LocationIterator</function-class>
+		<function-signature>java.lang.String locationExists(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locatedExists</name>
+		<function-class>ESTCTagLib.located.LocatedIterator</function-class>
+		<function-signature>java.lang.String locatedExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locatedCountByPerson</name>
+		<function-class>ESTCTagLib.located.LocatedIterator</function-class>
+		<function-signature>java.lang.String locatedCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasLocated</name>
+		<function-class>ESTCTagLib.located.LocatedIterator</function-class>
+		<function-signature>java.lang.Boolean personHasLocated(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locatedCountByLocation</name>
+		<function-class>ESTCTagLib.located.LocatedIterator</function-class>
+		<function-signature>java.lang.String locatedCountByLocation(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locationHasLocated</name>
+		<function-class>ESTCTagLib.located.LocatedIterator</function-class>
+		<function-signature>java.lang.Boolean locationHasLocated(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personLocationExists</name>
+		<function-class>ESTCTagLib.located.LocatedIterator</function-class>
+		<function-signature>java.lang.Boolean personLocationExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>printerExists</name>
+		<function-class>ESTCTagLib.printer.PrinterIterator</function-class>
+		<function-signature>java.lang.String printerExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>printerCountByRecord</name>
+		<function-class>ESTCTagLib.printer.PrinterIterator</function-class>
+		<function-signature>java.lang.String printerCountByRecord(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordHasPrinter</name>
+		<function-class>ESTCTagLib.printer.PrinterIterator</function-class>
+		<function-signature>java.lang.Boolean recordHasPrinter(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>printerCountByPerson</name>
+		<function-class>ESTCTagLib.printer.PrinterIterator</function-class>
+		<function-signature>java.lang.String printerCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasPrinter</name>
+		<function-class>ESTCTagLib.printer.PrinterIterator</function-class>
+		<function-signature>java.lang.Boolean personHasPrinter(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>publisherExists</name>
+		<function-class>ESTCTagLib.publisher.PublisherIterator</function-class>
+		<function-signature>java.lang.String publisherExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>publisherCountByRecord</name>
+		<function-class>ESTCTagLib.publisher.PublisherIterator</function-class>
+		<function-signature>java.lang.String publisherCountByRecord(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordHasPublisher</name>
+		<function-class>ESTCTagLib.publisher.PublisherIterator</function-class>
+		<function-signature>java.lang.Boolean recordHasPublisher(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>publisherCountByPerson</name>
+		<function-class>ESTCTagLib.publisher.PublisherIterator</function-class>
+		<function-signature>java.lang.String publisherCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasPublisher</name>
+		<function-class>ESTCTagLib.publisher.PublisherIterator</function-class>
+		<function-signature>java.lang.Boolean personHasPublisher(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>booksellerExists</name>
+		<function-class>ESTCTagLib.bookseller.BooksellerIterator</function-class>
+		<function-signature>java.lang.String booksellerExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>booksellerCountByRecord</name>
+		<function-class>ESTCTagLib.bookseller.BooksellerIterator</function-class>
+		<function-signature>java.lang.String booksellerCountByRecord(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordHasBookseller</name>
+		<function-class>ESTCTagLib.bookseller.BooksellerIterator</function-class>
+		<function-signature>java.lang.Boolean recordHasBookseller(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>booksellerCountByPerson</name>
+		<function-class>ESTCTagLib.bookseller.BooksellerIterator</function-class>
+		<function-signature>java.lang.String booksellerCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasBookseller</name>
+		<function-class>ESTCTagLib.bookseller.BooksellerIterator</function-class>
+		<function-signature>java.lang.Boolean personHasBookseller(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordCount</name>
+		<function-class>ESTCTagLib.record.RecordIterator</function-class>
+		<function-signature>java.lang.String recordCount()</function-signature>
+	</function>
+
+	<function>
+		<name>recordExists</name>
+		<function-class>ESTCTagLib.record.RecordIterator</function-class>
+		<function-signature>java.lang.String recordExists(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>publicationExists</name>
+		<function-class>ESTCTagLib.publication.PublicationIterator</function-class>
+		<function-signature>java.lang.String publicationExists(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>publicationCountByRecord</name>
+		<function-class>ESTCTagLib.publication.PublicationIterator</function-class>
+		<function-signature>java.lang.String publicationCountByRecord(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordHasPublication</name>
+		<function-class>ESTCTagLib.publication.PublicationIterator</function-class>
+		<function-signature>java.lang.Boolean recordHasPublication(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>mtagExists</name>
+		<function-class>ESTCTagLib.mtag.MtagIterator</function-class>
+		<function-signature>java.lang.String mtagExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>mtagCountByRecord</name>
+		<function-class>ESTCTagLib.mtag.MtagIterator</function-class>
+		<function-signature>java.lang.String mtagCountByRecord(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordHasMtag</name>
+		<function-class>ESTCTagLib.mtag.MtagIterator</function-class>
+		<function-signature>java.lang.Boolean recordHasMtag(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>subtagExists</name>
+		<function-class>ESTCTagLib.subtag.SubtagIterator</function-class>
+		<function-signature>java.lang.String subtagExists(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>subtagCountByMtag</name>
+		<function-class>ESTCTagLib.subtag.SubtagIterator</function-class>
+		<function-signature>java.lang.String subtagCountByMtag(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>mtagHasSubtag</name>
+		<function-class>ESTCTagLib.subtag.SubtagIterator</function-class>
+		<function-signature>java.lang.Boolean mtagHasSubtag(java.lang.String, java.lang.String)</function-signature>
+	</function>
+</taglib>
