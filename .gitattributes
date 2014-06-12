@@ -14,11 +14,13 @@ src/main/java/ESTCTagLib/ESTCTagLibTagSupport.java -text
 src/main/java/ESTCTagLib/README.txt -text
 src/main/java/ESTCTagLib/Sequence.java -text
 src/main/java/ESTCTagLib/author/Author.java -text
+src/main/java/ESTCTagLib/author/AuthorByYearIterator.java -text
 src/main/java/ESTCTagLib/author/AuthorDeleter.java -text
 src/main/java/ESTCTagLib/author/AuthorID.java -text
 src/main/java/ESTCTagLib/author/AuthorIterator.java -text
 src/main/java/ESTCTagLib/author/AuthorPid.java -text
 src/main/java/ESTCTagLib/bookseller/Bookseller.java -text
+src/main/java/ESTCTagLib/bookseller/BooksellerByYearIterator.java -text
 src/main/java/ESTCTagLib/bookseller/BooksellerDeleter.java -text
 src/main/java/ESTCTagLib/bookseller/BooksellerID.java -text
 src/main/java/ESTCTagLib/bookseller/BooksellerIterator.java -text
@@ -47,6 +49,7 @@ src/main/java/ESTCTagLib/person/PersonIterator.java -text
 src/main/java/ESTCTagLib/person/PersonLastName.java -text
 src/main/java/ESTCTagLib/person/PersonPid.java -text
 src/main/java/ESTCTagLib/printer/Printer.java -text
+src/main/java/ESTCTagLib/printer/PrinterByYearIterator.java -text
 src/main/java/ESTCTagLib/printer/PrinterDeleter.java -text
 src/main/java/ESTCTagLib/printer/PrinterID.java -text
 src/main/java/ESTCTagLib/printer/PrinterIterator.java -text
@@ -74,6 +77,7 @@ src/main/java/ESTCTagLib/publication/PublicationRecType.java -text
 src/main/java/ESTCTagLib/publication/PublicationRemainder.java -text
 src/main/java/ESTCTagLib/publication/PublicationTitle.java -text
 src/main/java/ESTCTagLib/publisher/Publisher.java -text
+src/main/java/ESTCTagLib/publisher/PublisherByYearIterator.java -text
 src/main/java/ESTCTagLib/publisher/PublisherDeleter.java -text
 src/main/java/ESTCTagLib/publisher/PublisherID.java -text
 src/main/java/ESTCTagLib/publisher/PublisherIterator.java -text
@@ -98,5 +102,7 @@ src/main/java/ESTCTagLib/subtag/SubtagValue.java -text
 src/main/resources/META-INF/taglib.tld -text
 src/non-packaged-resources/Model.clay -text
 src/non-packaged-resources/Model.sql -text
+src/non-packaged-resources/functions.tld -text
+src/non-packaged-resources/tags.tld -text
 src/test/java/ESTCTagLib/README.txt -text
 src/test/resources/README.txt -text

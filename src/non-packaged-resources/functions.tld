@@ -1,0 +1,26 @@
+
+	<function>
+		<name>personHasAuthorByYear</name>
+		<function-class>ESTCTagLib.author.AuthorByYearIterator</function-class>
+		<function-signature>java.lang.Boolean personHasAuthorByYear(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+
+	<function>
+		<name>personHasBooksellerByYear</name>
+		<function-class>ESTCTagLib.bookseller.BooksellerByYearIterator</function-class>
+		<function-signature>java.lang.Boolean personHasBooksellerByYear(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasPrinterByYear</name>
+		<function-class>ESTCTagLib.printer.PrinterByYearIterator</function-class>
+		<function-signature>java.lang.Boolean personHasPrinterByYear(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>personHasPublisherByYear</name>
+		<function-class>ESTCTagLib.publisher.PublisherByYearIterator</function-class>
+		<function-signature>java.lang.Boolean personHasPublisherByYear(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	

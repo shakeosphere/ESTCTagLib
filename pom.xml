@@ -80,6 +80,9 @@
 		 <property><name>generate.tld</name><value>true</value> </property> 
 		 <property><name>generate.tags</name><value>true</value> </property> 
 		 
+		 <property><name>tags.file.location</name><value>src/non-packaged-resources/tags.tld</value></property>
+      	 <property><name>functions.file.location</name><value>src/non-packaged-resources/functions.tld</value></property>
+
 		 <property> <name>mode</name> <value>tags</value> </property>
 		 <property><name>clay.file</name><value>src/non-packaged-resources/Model.clay</value></property>
 		 <property><name>prefix.path</name><value>${basedir}</value></property>
