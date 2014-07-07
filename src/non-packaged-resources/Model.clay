@@ -564,6 +564,132 @@
 <domain-list/>
 <table-list/>
 </schema>
+<schema alias="" name="moeml" remarks="" uid="9aee22e:14708618d59:-7ff5">
+<schema-description/>
+<domain-list/>
+<table-list>
+<table alias="" name="gazetteer" remarks="" uid="9aee22e:14708618d59:-7ff4">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="651" y="431"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="moeml_id" remarks="" uid="9aee22e:14708618d59:-7ff0">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="title" remarks="" uid="9aee22e:14708618d59:-7fef">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_GAZETTEER" remarks="" uid="9aee22e:14708618d59:-7ff3">
+<primary-key-description/>
+<primary-key-column name="moeml_id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+<table alias="" name="variant" remarks="" uid="9aee22e:14708618d59:-7fee">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="554" y="569"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="moeml_id" remarks="" uid="9aee22e:14708618d59:-7fea">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="seqnum" remarks="" uid="9aee22e:14708618d59:-7fe9">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="variant" remarks="" uid="9aee22e:14708618d59:-7fe8">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_VARIANT" remarks="" uid="9aee22e:14708618d59:-7fed">
+<primary-key-description/>
+<primary-key-column name="moeml_id"/>
+<primary-key-column name="seqnum"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="FK_variant_1" on-delete="" on-update="" referenced-key="PK_GAZETTEER" referenced-table="gazetteer" referenced-table-schema="moeml" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="9aee22e:14708618d59:-7f02">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="moeml_id" referenced-key-column-name="moeml_id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="match" remarks="" uid="9aee22e:14708618d59:-7fd0">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="331" y="472"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="moeml_id" remarks="" uid="9aee22e:14708618d59:-7f2b">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="seqnum" remarks="" uid="9aee22e:14708618d59:-7f2a">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="9aee22e:14708618d59:-7ec7">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="tag" remarks="" uid="9aee22e:14708618d59:-7f14">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_MATCH" remarks="" uid="9aee22e:14708618d59:-7fcf">
+<primary-key-description/>
+<primary-key-column name="moeml_id"/>
+<primary-key-column name="seqnum"/>
+<primary-key-column name="id"/>
+<primary-key-column name="tag"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="FK_match_2" on-delete="" on-update="" referenced-key="PK_RECORD" referenced-table="record" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="9aee22e:14708618d59:-7ec8">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key alias="" name="FK_match_3" on-delete="" on-update="" referenced-key="PK_GAZETTEER" referenced-table="gazetteer" referenced-table-schema="moeml" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="9aee22e:14708618d59:-7ead">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="moeml_id" referenced-key-column-name="moeml_id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+</table-list>
+</schema>
 </schema-list>
 </database-model>
 </clay-model>

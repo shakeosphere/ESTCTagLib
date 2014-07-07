@@ -51,7 +51,7 @@ public class Sequence extends ESTCTagLibTagSupport {
 
 			switch (theDriver) {
 				case POSTGRESQL:
-					PreparedStatement stat = conn.prepareStatement("SELECT nextval ('marc.seqnum')");
+					PreparedStatement stat = conn.prepareStatement("SELECT nextval ('moeml.seqnum')");
 
 					ResultSet rs = stat.executeQuery();
 

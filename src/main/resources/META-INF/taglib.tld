@@ -1483,6 +1483,379 @@
 	</tag>
 
 	<tag>
+		<name>foreachGazetteer</name>
+		<tag-class>ESTCTagLib.gazetteer.GazetteerIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>gazetteer</name>
+		<tag-class>ESTCTagLib.gazetteer.Gazetteer</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteGazetteer</name>
+		<tag-class>ESTCTagLib.gazetteer.GazetteerDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>gazetteerMoemlId</name>
+		<tag-class>ESTCTagLib.gazetteer.GazetteerMoemlId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>gazetteerTitle</name>
+		<tag-class>ESTCTagLib.gazetteer.GazetteerTitle</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachVariant</name>
+		<tag-class>ESTCTagLib.variant.VariantIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>seqnum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>variant</name>
+		<tag-class>ESTCTagLib.variant.Variant</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>seqnum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteVariant</name>
+		<tag-class>ESTCTagLib.variant.VariantDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>seqnum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>variantMoemlId</name>
+		<tag-class>ESTCTagLib.variant.VariantMoemlId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>variantSeqnum</name>
+		<tag-class>ESTCTagLib.variant.VariantSeqnum</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>seqnum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>variantVariant</name>
+		<tag-class>ESTCTagLib.variant.VariantVariant</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>variant</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachMatch</name>
+		<tag-class>ESTCTagLib.match.MatchIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>seqnum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useRecord</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useGazetteer</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>match</name>
+		<tag-class>ESTCTagLib.match.Match</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>seqnum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteMatch</name>
+		<tag-class>ESTCTagLib.match.MatchDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>seqnum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>matchMoemlId</name>
+		<tag-class>ESTCTagLib.match.MatchMoemlId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>moemlId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>matchSeqnum</name>
+		<tag-class>ESTCTagLib.match.MatchSeqnum</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>seqnum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>matchID</name>
+		<tag-class>ESTCTagLib.match.MatchID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>matchTag</name>
+		<tag-class>ESTCTagLib.match.MatchTag</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>tag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachAuthorByYear</name>
 		<tag-class>ESTCTagLib.author.AuthorByYearIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -1877,6 +2250,72 @@
 		<name>mtagHasSubtag</name>
 		<function-class>ESTCTagLib.subtag.SubtagIterator</function-class>
 		<function-signature>java.lang.Boolean mtagHasSubtag(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>gazetteerCount</name>
+		<function-class>ESTCTagLib.gazetteer.GazetteerIterator</function-class>
+		<function-signature>java.lang.String gazetteerCount()</function-signature>
+	</function>
+
+	<function>
+		<name>gazetteerExists</name>
+		<function-class>ESTCTagLib.gazetteer.GazetteerIterator</function-class>
+		<function-signature>java.lang.String gazetteerExists(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>variantExists</name>
+		<function-class>ESTCTagLib.variant.VariantIterator</function-class>
+		<function-signature>java.lang.String variantExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>variantCountByGazetteer</name>
+		<function-class>ESTCTagLib.variant.VariantIterator</function-class>
+		<function-signature>java.lang.String variantCountByGazetteer(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>gazetteerHasVariant</name>
+		<function-class>ESTCTagLib.variant.VariantIterator</function-class>
+		<function-signature>java.lang.Boolean gazetteerHasVariant(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>matchExists</name>
+		<function-class>ESTCTagLib.match.MatchIterator</function-class>
+		<function-signature>java.lang.String matchExists(java.lang.String, java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>matchCountByRecord</name>
+		<function-class>ESTCTagLib.match.MatchIterator</function-class>
+		<function-signature>java.lang.String matchCountByRecord(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordHasMatch</name>
+		<function-class>ESTCTagLib.match.MatchIterator</function-class>
+		<function-signature>java.lang.Boolean recordHasMatch(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>matchCountByGazetteer</name>
+		<function-class>ESTCTagLib.match.MatchIterator</function-class>
+		<function-signature>java.lang.String matchCountByGazetteer(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>gazetteerHasMatch</name>
+		<function-class>ESTCTagLib.match.MatchIterator</function-class>
+		<function-signature>java.lang.Boolean gazetteerHasMatch(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>recordGazetteerExists</name>
+		<function-class>ESTCTagLib.match.MatchIterator</function-class>
+		<function-signature>java.lang.Boolean recordGazetteerExists(java.lang.String, java.lang.String)</function-signature>
 	</function>
 
 
