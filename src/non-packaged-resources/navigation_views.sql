@@ -8,7 +8,9 @@ drop materialized view
 	navigation.location,
 	navigation.located,
 	navigation.located_by_year,
-	navigation.sublocations_by_year;
+	navigation.sublocations_by_year,
+	navigation.locator,
+	navigation.sublocator;
 	
 create materialized view navigation.person as select distinct id as pid,first_name,last_name from extraction.person;
 create materialized view navigation.author as select distinct estc_id as id, person_id as pid from extraction.role where role='Author';
@@ -30,6 +32,18 @@ select role.person_id, parent_id, pubdate as pubyear, locational,location_id,loc
 			and role.estc_id=sublocation.estc_id
 		group by 1,2,3,4,5,6;
 
+create materialized view navigation.locator as
+select estc_id as id, locational, location_id, location, count(*)
+	from extraction.place, extraction.location
+	where place.location_id=location.id
+	group by 1,2,3,4;
+
+create materialized view navigation.sublocator as
+select estc_id as id, parent_id, locational, location_id, location, count(*)
+	from extraction.location, extraction.sublocation
+	where sublocation.location_id=location.id
+	group by 1,2,3,4,5;
+
 create index ppid on navigation.person(pid);
 create index aei on navigation.author(id);
 create index apid on navigation.author(pid);
@@ -50,6 +64,10 @@ create index lbyl on navigation.located_by_year(lid);
 create index slbyper on navigation.sublocations_by_year(person_id);
 create index slbypar on navigation.sublocations_by_year(parent_id);
 create index slbyloc on navigation.sublocations_by_year(location_id);
+create index locid on navigation.locator(id);
+create index slocyper on navigation.sublocator(id);
+create index slocpar on navigation.sublocator(parent_id);
+create index slocloc on navigation.sublocator(location_id);
 
 analyze verbose navigation.person;
 analyze verbose navigation.author;
@@ -61,6 +79,8 @@ analyze verbose navigation.location;
 analyze verbose navigation.located;
 analyze verbose navigation.located_by_year;
 analyze verbose navigation.sublocations_by_year;
+analyze verbose navigation.locator;
+analyze verbose navigation.sublocator;
 
 grant select on table
 	navigation.person,
@@ -72,7 +92,9 @@ grant select on table
 	navigation.location,
 	navigation.located,
 	navigation.located_by_year,
-	navication.sublocations_by_year to estc;
+	navigation.sublocations_by_year,
+	navigation.locator,
+	navigation.sublocator to estc;
 
 delete from extraction.role where person_id not in (select id from extraction.person);
 refresh materialized view navigation.person;
@@ -85,3 +107,5 @@ refresh materialized view navigation.location;
 refresh materialized view navigation.located;
 refresh materialized view navigation.located_by_year;
 refresh materialized view navigation.sublocations_by_year;
+refresh materialized view navigation.locator;
+refresh materialized view navigation.sublocator;
