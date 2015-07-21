@@ -75,7 +75,7 @@ public class SessionIterator extends ESTCTagLibBodyTagSupport {
 						);
 
 			stat.setInt(1,Integer.parseInt(ID));
-			stat.setTimestamp(2,(Timestamp)new java.util.Date(Integer.parseInt(start)));
+			stat.setTimestamp(2,new Timestamp(Integer.parseInt(start)));
 			ResultSet crs = stat.executeQuery();
 
 			if (crs.next()) {

@@ -6,7 +6,9 @@ drop materialized view
 	navigation.publisher,
 	navigation.all_roles,
 	navigation.location,
-	navigation.located;
+	navigation.located,
+	navigation.located_by_year,
+	navigation.sublocations_by_year;
 	
 create materialized view navigation.person as select distinct id as pid,first_name,last_name from extraction.person;
 create materialized view navigation.author as select distinct estc_id as id, person_id as pid from extraction.role where role='Author';
@@ -18,6 +20,15 @@ create materialized view navigation.all_roles as select distinct estc_id as id, 
 
 create materialized view navigation.location as select distinct id as lid, location as label from extraction.location;
 create materialized view navigation.located as select distinct person_id as pid, location_id as lid from extraction.place;
+create materialized view navigation.located_by_year as select person_id as pid, location_id as lid, pubdate as pubyear, locational, count(*) from extraction.place,estc.pub_year where place.estc_id=pub_year.id group by 1,2,3,4;
+
+create materialized view navigation.sublocations_by_year as
+select role.person_id, parent_id, pubdate as pubyear, locational,location_id,location,count(*)
+		from extraction.sublocation,extraction.location,estc.pub_year,extraction.role
+		where sublocation.location_id=location.id
+			and sublocation.estc_id=pub_year.id
+			and role.estc_id=sublocation.estc_id
+		group by 1,2,3,4,5,6;
 
 create index ppid on navigation.person(pid);
 create index aei on navigation.author(id);
@@ -34,6 +45,11 @@ create index lid on navigation.location(lid);
 create index llab on navigation.location(label);
 create index llid on navigation.located(lid);
 create index lpid on navigation.located(pid);
+create index lbyp on navigation.located_by_year(pid);
+create index lbyl on navigation.located_by_year(lid);
+create index slbyper on navigation.sublocations_by_year(person_id);
+create index slbypar on navigation.sublocations_by_year(parent_id);
+create index slbyloc on navigation.sublocations_by_year(location_id);
 
 analyze verbose navigation.person;
 analyze verbose navigation.author;
@@ -43,6 +59,8 @@ analyze verbose navigation.publisher;
 analyze verbose navigation.all_roles;
 analyze verbose navigation.location;
 analyze verbose navigation.located;
+analyze verbose navigation.located_by_year;
+analyze verbose navigation.sublocations_by_year;
 
 grant select on table
 	navigation.person,
@@ -52,7 +70,9 @@ grant select on table
 	navigation.publisher,
 	navigation.all_roles,
 	navigation.location,
-	navigation.located to estc;
+	navigation.located,
+	navigation.located_by_year,
+	navication.sublocations_by_year to estc;
 
 delete from extraction.role where person_id not in (select id from extraction.person);
 refresh materialized view navigation.person;
@@ -63,3 +83,5 @@ refresh materialized view navigation.publisher;
 refresh materialized view navigation.all_roles;
 refresh materialized view navigation.location;
 refresh materialized view navigation.located;
+refresh materialized view navigation.located_by_year;
+refresh materialized view navigation.sublocations_by_year;

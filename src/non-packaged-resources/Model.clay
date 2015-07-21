@@ -552,6 +552,67 @@
 </foreign-key-list>
 <index-list/>
 </table>
+<table alias="" name="located_by_year" remarks="" uid="4e902799:14e8a08468b:-7f9f">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="750" y="236"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="pid" remarks="" uid="4e902799:14e8a08468b:-7f9d">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="lid" remarks="" uid="4e902799:14e8a08468b:-7f9c">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="pubyear" remarks="" uid="4e902799:14e8a08468b:-7f74">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="locational" remarks="" uid="4e902799:14e8a08468b:-7f73">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="count" remarks="" uid="4e902799:14e8a08468b:-7f72">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_LOCATED_BY_YEAR" remarks="" uid="4e902799:14e8a08468b:-7f9b">
+<primary-key-description/>
+<primary-key-column name="pid"/>
+<primary-key-column name="lid"/>
+<primary-key-column name="pubyear"/>
+<primary-key-column name="locational"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="FK_located_1_1" on-delete="" on-update="" referenced-key="PK_PERSON" referenced-table="person" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="4e902799:14e8a08468b:-7f8e">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="pid" referenced-key-column-name="pid"/>
+</foreign-key>
+<foreign-key alias="" name="FK_located_1_2" on-delete="" on-update="" referenced-key="PK_LOCATION" referenced-table="location" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="4e902799:14e8a08468b:-7f7f">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="lid" referenced-key-column-name="lid"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
 </table-list>
 </schema>
 <schema alias="" name="estc" remarks="" uid="2dee47c4:1468b39676e:-7ff8">

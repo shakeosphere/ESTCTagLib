@@ -1483,6 +1483,193 @@
 	</tag>
 
 	<tag>
+		<name>foreachLocatedByYear</name>
+		<tag-class>ESTCTagLib.locatedByYear.LocatedByYearIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pubyear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>locational</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useLocation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>locatedByYear</name>
+		<tag-class>ESTCTagLib.locatedByYear.LocatedByYear</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pubyear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>locational</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteLocatedByYear</name>
+		<tag-class>ESTCTagLib.locatedByYear.LocatedByYearDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pubyear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>locational</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locatedByYearPid</name>
+		<tag-class>ESTCTagLib.locatedByYear.LocatedByYearPid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locatedByYearLid</name>
+		<tag-class>ESTCTagLib.locatedByYear.LocatedByYearLid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>lid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locatedByYearPubyear</name>
+		<tag-class>ESTCTagLib.locatedByYear.LocatedByYearPubyear</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pubyear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locatedByYearLocational</name>
+		<tag-class>ESTCTagLib.locatedByYear.LocatedByYearLocational</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>locational</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>locatedByYearCount</name>
+		<tag-class>ESTCTagLib.locatedByYear.LocatedByYearCount</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>count</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachGazetteer</name>
 		<tag-class>ESTCTagLib.gazetteer.GazetteerIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -2676,6 +2863,36 @@
 		<name>mtagHasSubtag</name>
 		<function-class>ESTCTagLib.subtag.SubtagIterator</function-class>
 		<function-signature>java.lang.Boolean mtagHasSubtag(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locatedByYearExists</name>
+		<function-class>ESTCTagLib.locatedByYear.LocatedByYearIterator</function-class>
+		<function-signature>java.lang.String locatedByYearExists(java.lang.String, java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locatedByYearCountByPerson</name>
+		<function-class>ESTCTagLib.locatedByYear.LocatedByYearIterator</function-class>
+		<function-signature>java.lang.String locatedByYearCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasLocatedByYear</name>
+		<function-class>ESTCTagLib.locatedByYear.LocatedByYearIterator</function-class>
+		<function-signature>java.lang.Boolean personHasLocatedByYear(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locatedByYearCountByLocation</name>
+		<function-class>ESTCTagLib.locatedByYear.LocatedByYearIterator</function-class>
+		<function-signature>java.lang.String locatedByYearCountByLocation(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locationHasLocatedByYear</name>
+		<function-class>ESTCTagLib.locatedByYear.LocatedByYearIterator</function-class>
+		<function-signature>java.lang.Boolean locationHasLocatedByYear(java.lang.String)</function-signature>
 	</function>
 
 	<function>

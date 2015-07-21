@@ -35,6 +35,14 @@ src/main/java/ESTCTagLib/located/LocatedDeleter.java -text
 src/main/java/ESTCTagLib/located/LocatedIterator.java -text
 src/main/java/ESTCTagLib/located/LocatedLid.java -text
 src/main/java/ESTCTagLib/located/LocatedPid.java -text
+src/main/java/ESTCTagLib/locatedByYear/LocatedByYear.java -text
+src/main/java/ESTCTagLib/locatedByYear/LocatedByYearCount.java -text
+src/main/java/ESTCTagLib/locatedByYear/LocatedByYearDeleter.java -text
+src/main/java/ESTCTagLib/locatedByYear/LocatedByYearIterator.java -text
+src/main/java/ESTCTagLib/locatedByYear/LocatedByYearLid.java -text
+src/main/java/ESTCTagLib/locatedByYear/LocatedByYearLocational.java -text
+src/main/java/ESTCTagLib/locatedByYear/LocatedByYearPid.java -text
+src/main/java/ESTCTagLib/locatedByYear/LocatedByYearPubyear.java -text
 src/main/java/ESTCTagLib/location/Location.java -text
 src/main/java/ESTCTagLib/location/LocationDeleter.java -text
 src/main/java/ESTCTagLib/location/LocationIterator.java -text
