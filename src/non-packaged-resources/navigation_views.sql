@@ -1,3 +1,39 @@
+// take 2, using real tables for the base person and each of the roles
+
+create table navigation.person_base(pid serial primary key, first_name text, last_name text, seqnum int, unique(first_name,last_name,seqnum));
+create table navigation.person_authority(pid int, alias int);
+
+create index pap on navigation.person_authority(pid);
+create index paa on navigation.person_authority(alias);
+
+grant select on table navigation.person_base to estc;
+grant select on table navigation.person_authority to estc;
+
+truncate navigation.person_base;
+
+insert into navigation.person_base select id, first_name, last_name, seqnum from extraction.person;
+
+analyze navigation.person_base;
+
+create view person_aliased as select * from person_authority natural join person_base;
+create view person_aliases as select * from person_aliased where pid != alias;
+create view person as
+	select pid,first_name,last_name,seqnum from person_aliased where pid = alias
+	union
+	select * from person_base where not exists (select pid from person_authority where alias=person_base.pid);
+	
+create view navigation.all_roles as
+	select * from author
+	union
+	select * from bookseller
+	union
+	select * from printer
+	union
+	select * from publisher;
+
+// take 1, trying to use materialized views derived from extraction.  This requires exposure of extraction tables to manage authority
+
+
 drop materialized view
 	navigation.person,
 	navigation.author,
@@ -22,7 +58,12 @@ create materialized view navigation.all_roles as select distinct estc_id as id, 
 
 create materialized view navigation.location as select distinct id as lid, location as label from extraction.location;
 create materialized view navigation.located as select distinct person_id as pid, location_id as lid from extraction.place;
-create materialized view navigation.located_by_year as select person_id as pid, location_id as lid, pubdate as pubyear, locational, count(*) from extraction.place,estc.pub_year where place.estc_id=pub_year.id group by 1,2,3,4;
+
+create materialized view navigation.located_by_year as
+select person_id as pid, location_id as lid, pubdate as pubyear, locational, count(*)
+	from extraction.place,estc.pub_year
+	where place.estc_id=pub_year.id
+	group by 1,2,3,4;
 
 create materialized view navigation.sublocations_by_year as
 select role.person_id, parent_id, pubdate as pubyear, locational,location_id,location,count(*)
