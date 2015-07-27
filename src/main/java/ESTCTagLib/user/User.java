@@ -31,6 +31,7 @@ public class User extends ESTCTagLibTagSupport {
 	int ID = 0;
 	String handle = null;
 	String password = null;
+	boolean isApproved = false;
 	boolean isAdmin = false;
 	String firstName = null;
 	String lastName = null;
@@ -60,7 +61,7 @@ public class User extends ESTCTagLibTagSupport {
 			} else {
 				// an iterator or ID was provided as an attribute - we need to load a User from the database
 				boolean found = false;
-				PreparedStatement stmt = getConnection().prepareStatement("select handle,password,is_admin,first_name,last_name,email,created,last_login from admin.user where id = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("select handle,password,is_approved,is_admin,first_name,last_name,email,created,last_login from navigation.user where id = ?");
 				stmt.setInt(1,ID);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
@@ -68,18 +69,20 @@ public class User extends ESTCTagLibTagSupport {
 						handle = rs.getString(1);
 					if (password == null)
 						password = rs.getString(2);
+					if (isApproved == false)
+						isApproved = rs.getBoolean(3);
 					if (isAdmin == false)
-						isAdmin = rs.getBoolean(3);
+						isAdmin = rs.getBoolean(4);
 					if (firstName == null)
-						firstName = rs.getString(4);
+						firstName = rs.getString(5);
 					if (lastName == null)
-						lastName = rs.getString(5);
+						lastName = rs.getString(6);
 					if (email == null)
-						email = rs.getString(6);
+						email = rs.getString(7);
 					if (created == null)
-						created = rs.getTimestamp(7);
+						created = rs.getTimestamp(8);
 					if (lastLogin == null)
-						lastLogin = rs.getTimestamp(8);
+						lastLogin = rs.getTimestamp(9);
 					found = true;
 				}
 				stmt.close();
@@ -158,16 +161,17 @@ public class User extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update admin.user set handle = ?, password = ?, is_admin = ?, first_name = ?, last_name = ?, email = ?, created = ?, last_login = ? where id = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.user set handle = ?, password = ?, is_approved = ?, is_admin = ?, first_name = ?, last_name = ?, email = ?, created = ?, last_login = ? where id = ?");
 				stmt.setString(1,handle);
 				stmt.setString(2,password);
-				stmt.setBoolean(3,isAdmin);
-				stmt.setString(4,firstName);
-				stmt.setString(5,lastName);
-				stmt.setString(6,email);
-				stmt.setTimestamp(7,created == null ? null : new java.sql.Timestamp(created.getTime()));
-				stmt.setTimestamp(8,lastLogin == null ? null : new java.sql.Timestamp(lastLogin.getTime()));
-				stmt.setInt(9,ID);
+				stmt.setBoolean(3,isApproved);
+				stmt.setBoolean(4,isAdmin);
+				stmt.setString(5,firstName);
+				stmt.setString(6,lastName);
+				stmt.setString(7,email);
+				stmt.setTimestamp(8,created == null ? null : new java.sql.Timestamp(created.getTime()));
+				stmt.setTimestamp(9,lastLogin == null ? null : new java.sql.Timestamp(lastLogin.getTime()));
+				stmt.setInt(10,ID);
 				stmt.executeUpdate();
 				stmt.close();
 			}
@@ -215,16 +219,17 @@ public class User extends ESTCTagLibTagSupport {
 		if (email == null){
 			email = "";
 		}
-		PreparedStatement stmt = getConnection().prepareStatement("insert into admin.user(id,handle,password,is_admin,first_name,last_name,email,created,last_login) values (?,?,?,?,?,?,?,?,?)");
+		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.user(id,handle,password,is_approved,is_admin,first_name,last_name,email,created,last_login) values (?,?,?,?,?,?,?,?,?,?)");
 		stmt.setInt(1,ID);
 		stmt.setString(2,handle);
 		stmt.setString(3,password);
-		stmt.setBoolean(4,isAdmin);
-		stmt.setString(5,firstName);
-		stmt.setString(6,lastName);
-		stmt.setString(7,email);
-		stmt.setTimestamp(8,created == null ? null : new java.sql.Timestamp(created.getTime()));
-		stmt.setTimestamp(9,lastLogin == null ? null : new java.sql.Timestamp(lastLogin.getTime()));
+		stmt.setBoolean(4,isApproved);
+		stmt.setBoolean(5,isAdmin);
+		stmt.setString(6,firstName);
+		stmt.setString(7,lastName);
+		stmt.setString(8,email);
+		stmt.setTimestamp(9,created == null ? null : new java.sql.Timestamp(created.getTime()));
+		stmt.setTimestamp(10,lastLogin == null ? null : new java.sql.Timestamp(lastLogin.getTime()));
 		stmt.executeUpdate();
 		stmt.close();
 		freeConnection();
@@ -272,6 +277,19 @@ public class User extends ESTCTagLibTagSupport {
 
 	public String getActualPassword () {
 		return password;
+	}
+
+	public boolean getIsApproved () {
+		return isApproved;
+	}
+
+	public void setIsApproved (boolean isApproved) {
+		this.isApproved = isApproved;
+		commitNeeded = true;
+	}
+
+	public boolean getActualIsApproved () {
+		return isApproved;
 	}
 
 	public boolean getIsAdmin () {
@@ -407,6 +425,14 @@ public class User extends ESTCTagLibTagSupport {
 		}
 	}
 
+	public static Boolean isApprovedValue() throws JspException {
+		try {
+			return currentInstance.getIsApproved();
+		} catch (Exception e) {
+			 throw new JspTagException("Error in tag function isApprovedValue()");
+		}
+	}
+
 	public static Boolean isAdminValue() throws JspException {
 		try {
 			return currentInstance.getIsAdmin();
@@ -459,6 +485,7 @@ public class User extends ESTCTagLibTagSupport {
 		ID = 0;
 		handle = null;
 		password = null;
+		isApproved = false;
 		isAdmin = false;
 		firstName = null;
 		lastName = null;

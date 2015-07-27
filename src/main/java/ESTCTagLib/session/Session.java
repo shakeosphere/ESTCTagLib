@@ -63,7 +63,7 @@ public class Session extends ESTCTagLibTagSupport {
 			} else {
 				// an iterator or start was provided as an attribute - we need to load a Session from the database
 				boolean found = false;
-				PreparedStatement stmt = getConnection().prepareStatement("select finish from admin.session where id = ? and start = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("select finish from navigation.session where id = ? and start = ?");
 				stmt.setInt(1,ID);
 				stmt.setTimestamp(2,start == null ? null : new java.sql.Timestamp(start.getTime()));
 				ResultSet rs = stmt.executeQuery();
@@ -148,7 +148,7 @@ public class Session extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update admin.session set finish = ? where id = ? and start = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.session set finish = ? where id = ? and start = ?");
 				stmt.setTimestamp(1,finish == null ? null : new java.sql.Timestamp(finish.getTime()));
 				stmt.setInt(2,ID);
 				stmt.setTimestamp(3,start == null ? null : new java.sql.Timestamp(start.getTime()));
@@ -179,7 +179,7 @@ public class Session extends ESTCTagLibTagSupport {
 	}
 
 	public void insertEntity() throws JspException, SQLException {
-		PreparedStatement stmt = getConnection().prepareStatement("insert into admin.session(id,start,finish) values (?,?,?)");
+		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.session(id,start,finish) values (?,?,?)");
 		stmt.setInt(1,ID);
 		stmt.setTimestamp(2,start == null ? null : new java.sql.Timestamp(start.getTime()));
 		stmt.setTimestamp(3,finish == null ? null : new java.sql.Timestamp(finish.getTime()));

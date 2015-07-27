@@ -1670,6 +1670,619 @@
 	</tag>
 
 	<tag>
+		<name>foreachPersonAuthority</name>
+		<tag-class>ESTCTagLib.personAuthority.PersonAuthorityIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useUser</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>personAuthority</name>
+		<tag-class>ESTCTagLib.personAuthority.PersonAuthority</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deletePersonAuthority</name>
+		<tag-class>ESTCTagLib.personAuthority.PersonAuthorityDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAuthorityPid</name>
+		<tag-class>ESTCTagLib.personAuthority.PersonAuthorityPid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAuthorityID</name>
+		<tag-class>ESTCTagLib.personAuthority.PersonAuthorityID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAuthorityAlias</name>
+		<tag-class>ESTCTagLib.personAuthority.PersonAuthorityAlias</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>alias</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAuthorityDefined</name>
+		<tag-class>ESTCTagLib.personAuthority.PersonAuthorityDefined</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>defined</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>dateStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>timeStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAuthorityDefinedToNow</name>
+		<tag-class>ESTCTagLib.personAuthority.PersonAuthorityDefinedToNow</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>defined</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachUser</name>
+		<tag-class>ESTCTagLib.user.UserIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>user</name>
+		<tag-class>ESTCTagLib.user.User</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteUser</name>
+		<tag-class>ESTCTagLib.user.UserDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userID</name>
+		<tag-class>ESTCTagLib.user.UserID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userHandle</name>
+		<tag-class>ESTCTagLib.user.UserHandle</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>handle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userPassword</name>
+		<tag-class>ESTCTagLib.user.UserPassword</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>password</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userIsApproved</name>
+		<tag-class>ESTCTagLib.user.UserIsApproved</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>isApproved</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userIsAdmin</name>
+		<tag-class>ESTCTagLib.user.UserIsAdmin</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>isAdmin</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userFirstName</name>
+		<tag-class>ESTCTagLib.user.UserFirstName</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>firstName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userLastName</name>
+		<tag-class>ESTCTagLib.user.UserLastName</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>lastName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userEmail</name>
+		<tag-class>ESTCTagLib.user.UserEmail</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>email</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userCreated</name>
+		<tag-class>ESTCTagLib.user.UserCreated</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>created</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>dateStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>timeStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userCreatedToNow</name>
+		<tag-class>ESTCTagLib.user.UserCreatedToNow</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>created</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userLastLogin</name>
+		<tag-class>ESTCTagLib.user.UserLastLogin</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>lastLogin</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>dateStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>timeStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>userLastLoginToNow</name>
+		<tag-class>ESTCTagLib.user.UserLastLoginToNow</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>lastLogin</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachSession</name>
+		<tag-class>ESTCTagLib.session.SessionIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>start</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>session</name>
+		<tag-class>ESTCTagLib.session.Session</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>start</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteSession</name>
+		<tag-class>ESTCTagLib.session.SessionDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>start</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>sessionID</name>
+		<tag-class>ESTCTagLib.session.SessionID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>sessionStart</name>
+		<tag-class>ESTCTagLib.session.SessionStart</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>start</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>dateStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>timeStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>sessionStartToNow</name>
+		<tag-class>ESTCTagLib.session.SessionStartToNow</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>start</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>sessionFinish</name>
+		<tag-class>ESTCTagLib.session.SessionFinish</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>finish</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>dateStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>timeStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>sessionFinishToNow</name>
+		<tag-class>ESTCTagLib.session.SessionFinishToNow</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>finish</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachGazetteer</name>
 		<tag-class>ESTCTagLib.gazetteer.GazetteerIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -2037,432 +2650,6 @@
 
 		<attribute>
 			<name>tag</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachUser</name>
-		<tag-class>ESTCTagLib.user.UserIterator</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>var</name>
-			<required>true</required>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>sortCriteria</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>limitCriteria</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>ID</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>user</name>
-		<tag-class>ESTCTagLib.user.User</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>var</name>
-			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>ID</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>deleteUser</name>
-		<tag-class>ESTCTagLib.user.UserDeleter</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>ID</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userID</name>
-		<tag-class>ESTCTagLib.user.UserID</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>ID</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userHandle</name>
-		<tag-class>ESTCTagLib.user.UserHandle</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>handle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userPassword</name>
-		<tag-class>ESTCTagLib.user.UserPassword</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>password</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userIsAdmin</name>
-		<tag-class>ESTCTagLib.user.UserIsAdmin</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>isAdmin</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userFirstName</name>
-		<tag-class>ESTCTagLib.user.UserFirstName</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>firstName</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userLastName</name>
-		<tag-class>ESTCTagLib.user.UserLastName</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>lastName</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userEmail</name>
-		<tag-class>ESTCTagLib.user.UserEmail</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>email</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userCreated</name>
-		<tag-class>ESTCTagLib.user.UserCreated</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>created</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>type</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>dateStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>timeStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>pattern</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userCreatedToNow</name>
-		<tag-class>ESTCTagLib.user.UserCreatedToNow</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>created</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userLastLogin</name>
-		<tag-class>ESTCTagLib.user.UserLastLogin</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>lastLogin</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>type</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>dateStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>timeStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>pattern</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>userLastLoginToNow</name>
-		<tag-class>ESTCTagLib.user.UserLastLoginToNow</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>lastLogin</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachSession</name>
-		<tag-class>ESTCTagLib.session.SessionIterator</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>var</name>
-			<required>true</required>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>sortCriteria</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>limitCriteria</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>ID</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>start</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>session</name>
-		<tag-class>ESTCTagLib.session.Session</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>var</name>
-			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>ID</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>start</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>deleteSession</name>
-		<tag-class>ESTCTagLib.session.SessionDeleter</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>ID</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>start</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>sessionID</name>
-		<tag-class>ESTCTagLib.session.SessionID</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>ID</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>sessionStart</name>
-		<tag-class>ESTCTagLib.session.SessionStart</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>start</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>type</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>dateStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>timeStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>pattern</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>sessionStartToNow</name>
-		<tag-class>ESTCTagLib.session.SessionStartToNow</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>start</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>sessionFinish</name>
-		<tag-class>ESTCTagLib.session.SessionFinish</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>finish</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>type</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>dateStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>timeStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-
-		<attribute>
-			<name>pattern</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>sessionFinishToNow</name>
-		<tag-class>ESTCTagLib.session.SessionFinishToNow</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>finish</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -2896,6 +3083,72 @@
 	</function>
 
 	<function>
+		<name>personAuthorityExists</name>
+		<function-class>ESTCTagLib.personAuthority.PersonAuthorityIterator</function-class>
+		<function-signature>java.lang.String personAuthorityExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personAuthorityCountByPerson</name>
+		<function-class>ESTCTagLib.personAuthority.PersonAuthorityIterator</function-class>
+		<function-signature>java.lang.String personAuthorityCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasPersonAuthority</name>
+		<function-class>ESTCTagLib.personAuthority.PersonAuthorityIterator</function-class>
+		<function-signature>java.lang.Boolean personHasPersonAuthority(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personAuthorityCountByUser</name>
+		<function-class>ESTCTagLib.personAuthority.PersonAuthorityIterator</function-class>
+		<function-signature>java.lang.String personAuthorityCountByUser(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>userHasPersonAuthority</name>
+		<function-class>ESTCTagLib.personAuthority.PersonAuthorityIterator</function-class>
+		<function-signature>java.lang.Boolean userHasPersonAuthority(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personUserExists</name>
+		<function-class>ESTCTagLib.personAuthority.PersonAuthorityIterator</function-class>
+		<function-signature>java.lang.Boolean personUserExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>userCount</name>
+		<function-class>ESTCTagLib.user.UserIterator</function-class>
+		<function-signature>java.lang.String userCount()</function-signature>
+	</function>
+
+	<function>
+		<name>userExists</name>
+		<function-class>ESTCTagLib.user.UserIterator</function-class>
+		<function-signature>java.lang.String userExists(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>sessionExists</name>
+		<function-class>ESTCTagLib.session.SessionIterator</function-class>
+		<function-signature>java.lang.String sessionExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>sessionCountByUser</name>
+		<function-class>ESTCTagLib.session.SessionIterator</function-class>
+		<function-signature>java.lang.String sessionCountByUser(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>userHasSession</name>
+		<function-class>ESTCTagLib.session.SessionIterator</function-class>
+		<function-signature>java.lang.Boolean userHasSession(java.lang.String)</function-signature>
+	</function>
+
+	<function>
 		<name>gazetteerCount</name>
 		<function-class>ESTCTagLib.gazetteer.GazetteerIterator</function-class>
 		<function-signature>java.lang.String gazetteerCount()</function-signature>
@@ -2959,36 +3212,6 @@
 		<name>recordGazetteerExists</name>
 		<function-class>ESTCTagLib.match.MatchIterator</function-class>
 		<function-signature>java.lang.Boolean recordGazetteerExists(java.lang.String, java.lang.String)</function-signature>
-	</function>
-
-	<function>
-		<name>userCount</name>
-		<function-class>ESTCTagLib.user.UserIterator</function-class>
-		<function-signature>java.lang.String userCount()</function-signature>
-	</function>
-
-	<function>
-		<name>userExists</name>
-		<function-class>ESTCTagLib.user.UserIterator</function-class>
-		<function-signature>java.lang.String userExists(java.lang.String)</function-signature>
-	</function>
-
-	<function>
-		<name>sessionExists</name>
-		<function-class>ESTCTagLib.session.SessionIterator</function-class>
-		<function-signature>java.lang.String sessionExists(java.lang.String, java.lang.String)</function-signature>
-	</function>
-
-	<function>
-		<name>sessionCountByUser</name>
-		<function-class>ESTCTagLib.session.SessionIterator</function-class>
-		<function-signature>java.lang.String sessionCountByUser(java.lang.String)</function-signature>
-	</function>
-
-	<function>
-		<name>userHasSession</name>
-		<function-class>ESTCTagLib.session.SessionIterator</function-class>
-		<function-signature>java.lang.Boolean userHasSession(java.lang.String)</function-signature>
 	</function>
 
 

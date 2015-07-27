@@ -1,4 +1,4 @@
-package ESTCTagLib.session;
+package ESTCTagLib.personAuthority;
 
 
 import java.sql.PreparedStatement;
@@ -14,16 +14,18 @@ import javax.servlet.jsp.tagext.Tag;
 
 import ESTCTagLib.ESTCTagLibTagSupport;
 import ESTCTagLib.ESTCTagLibBodyTagSupport;
+import ESTCTagLib.person.Person;
 import ESTCTagLib.user.User;
 
 @SuppressWarnings("serial")
-public class SessionDeleter extends ESTCTagLibBodyTagSupport {
+public class PersonAuthorityDeleter extends ESTCTagLibBodyTagSupport {
+    int pid = 0;
     int ID = 0;
-    Date start = null;
-    Date finish = null;
+    int alias = 0;
+    Date defined = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(SessionDeleter.class);
+	private static final Log log = LogFactory.getLog(PersonAuthorityDeleter.class);
 
 
     ResultSet rs = null;
@@ -31,10 +33,17 @@ public class SessionDeleter extends ESTCTagLibBodyTagSupport {
     int rsCount = 0;
 
     public int doStartTag() throws JspException {
+		Person thePerson = (Person)findAncestorWithClass(this, Person.class);
+		if (thePerson!= null)
+			parentEntities.addElement(thePerson);
 		User theUser = (User)findAncestorWithClass(this, User.class);
 		if (theUser!= null)
 			parentEntities.addElement(theUser);
 
+		if (thePerson == null) {
+		} else {
+			pid = thePerson.getPid();
+		}
 		if (theUser == null) {
 		} else {
 			ID = theUser.getID();
@@ -44,18 +53,20 @@ public class SessionDeleter extends ESTCTagLibBodyTagSupport {
         PreparedStatement stat;
         try {
             int webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("DELETE from navigation.session where 1=1"
+            stat = getConnection().prepareStatement("DELETE from navigation.person_authority where 1=1"
+                                                        + (pid == 0 ? "" : " and pid = ? ")
                                                         + (ID == 0 ? "" : " and id = ? ")
-                                                        + (start == null ? "" : " and start = ? ")
+                                                        + (pid == 0 ? "" : " and pid = ? ")
                                                         + (ID == 0 ? "" : " and id = ? "));
+            if (pid != 0) stat.setInt(webapp_keySeq++, pid);
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
-            if (start != null) stat.setTimestamp(webapp_keySeq++, start == null ? null : new java.sql.Timestamp(start.getTime()));
+			if (pid != 0) stat.setInt(webapp_keySeq++, pid);
 			if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             stat.execute();
 
 			webapp_keySeq = 1;
         } catch (SQLException e) {
-            log.error("JDBC error generating Session deleter", e);
+            log.error("JDBC error generating PersonAuthority deleter", e);
 
 			clearServiceState();
 			freeConnection();
@@ -64,10 +75,10 @@ public class SessionDeleter extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating Session deleter");
+				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating PersonAuthority deleter");
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error generating Session deleter",e);
+				throw new JspException("Error: JDBC error generating PersonAuthority deleter",e);
 			}
 
         } finally {
@@ -103,8 +114,8 @@ public class SessionDeleter extends ESTCTagLibBodyTagSupport {
 	}
 
     private void clearServiceState() {
+        pid = 0;
         ID = 0;
-        start = null;
         parentEntities = new Vector<ESTCTagLibTagSupport>();
 
         this.rs = null;
@@ -122,6 +133,18 @@ public class SessionDeleter extends ESTCTagLibBodyTagSupport {
 
 
 
+	public int getPid () {
+		return pid;
+	}
+
+	public void setPid (int pid) {
+		this.pid = pid;
+	}
+
+	public int getActualPid () {
+		return pid;
+	}
+
 	public int getID () {
 		return ID;
 	}
@@ -132,21 +155,5 @@ public class SessionDeleter extends ESTCTagLibBodyTagSupport {
 
 	public int getActualID () {
 		return ID;
-	}
-
-	public Date getStart () {
-		return start;
-	}
-
-	public void setStart (Date start) {
-		this.start = start;
-	}
-
-	public Date getActualStart () {
-		return start;
-	}
-
-	public void setStartToNow ( ) {
-		this.start = new java.util.Date();
 	}
 }

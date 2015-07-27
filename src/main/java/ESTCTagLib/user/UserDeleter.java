@@ -20,6 +20,7 @@ public class UserDeleter extends ESTCTagLibBodyTagSupport {
     int ID = 0;
     String handle = null;
     String password = null;
+    boolean isApproved = false;
     boolean isAdmin = false;
     String firstName = null;
     String lastName = null;
@@ -42,7 +43,7 @@ public class UserDeleter extends ESTCTagLibBodyTagSupport {
         PreparedStatement stat;
         try {
             int webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("DELETE from admin.user where 1=1"
+            stat = getConnection().prepareStatement("DELETE from navigation.user where 1=1"
                                                         + (ID == 0 ? "" : " and id = ? "));
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             stat.execute();

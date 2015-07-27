@@ -68,6 +68,14 @@ src/main/java/ESTCTagLib/person/PersonFirstName.java -text
 src/main/java/ESTCTagLib/person/PersonIterator.java -text
 src/main/java/ESTCTagLib/person/PersonLastName.java -text
 src/main/java/ESTCTagLib/person/PersonPid.java -text
+src/main/java/ESTCTagLib/personAuthority/PersonAuthority.java -text
+src/main/java/ESTCTagLib/personAuthority/PersonAuthorityAlias.java -text
+src/main/java/ESTCTagLib/personAuthority/PersonAuthorityDefined.java -text
+src/main/java/ESTCTagLib/personAuthority/PersonAuthorityDefinedToNow.java -text
+src/main/java/ESTCTagLib/personAuthority/PersonAuthorityDeleter.java -text
+src/main/java/ESTCTagLib/personAuthority/PersonAuthorityID.java -text
+src/main/java/ESTCTagLib/personAuthority/PersonAuthorityIterator.java -text
+src/main/java/ESTCTagLib/personAuthority/PersonAuthorityPid.java -text
 src/main/java/ESTCTagLib/printer/Printer.java -text
 src/main/java/ESTCTagLib/printer/PrinterByYearIterator.java -text
 src/main/java/ESTCTagLib/printer/PrinterDeleter.java -text
@@ -136,6 +144,7 @@ src/main/java/ESTCTagLib/user/UserFirstName.java -text
 src/main/java/ESTCTagLib/user/UserHandle.java -text
 src/main/java/ESTCTagLib/user/UserID.java -text
 src/main/java/ESTCTagLib/user/UserIsAdmin.java -text
+src/main/java/ESTCTagLib/user/UserIsApproved.java -text
 src/main/java/ESTCTagLib/user/UserIterator.java -text
 src/main/java/ESTCTagLib/user/UserLastLogin.java -text
 src/main/java/ESTCTagLib/user/UserLastLoginToNow.java -text

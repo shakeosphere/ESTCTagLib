@@ -21,6 +21,7 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
     int ID = 0;
     String handle = null;
     String password = null;
+    boolean isApproved = false;
     boolean isAdmin = false;
     String firstName = null;
     String lastName = null;
@@ -43,7 +44,7 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
 		int count = 0;
 		UserIterator theIterator = new UserIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from admin.user"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.user"
 						);
 
 			ResultSet crs = stat.executeQuery();
@@ -65,7 +66,7 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
 		int count = 0;
 		UserIterator theIterator = new UserIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from admin.user where 1=1"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.user where 1=1"
 						+ " and id = ?"
 						);
 
@@ -104,7 +105,7 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
 
             //run select id query  
             webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("SELECT admin.user.id from " + generateFromClause() + " where 1=1"
+            stat = getConnection().prepareStatement("SELECT navigation.user.id from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
                                                         + " order by " + generateSortCriteria() + generateLimitCriteria());
             rs = stat.executeQuery();
@@ -136,7 +137,7 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private String generateFromClause() {
-       StringBuffer theBuffer = new StringBuffer("admin.user");
+       StringBuffer theBuffer = new StringBuffer("navigation.user");
       return theBuffer.toString();
     }
 
