@@ -74,7 +74,7 @@ create materialized view navigation.publisher as select distinct estc_id as id, 
 create materialized view navigation.all_roles as select distinct estc_id as id, first_name, last_name from extraction.role,extraction.person where role.person_id=person.id;
 
 create materialized view navigation.location as select distinct id as lid, location as label from extraction.location;
-create materialized view navigation.located as select distinct estc_id, person_id, locational, location_id from extraction.place;
+create materialized view navigation.located as select distinct estc_id, person_id as pid, locational, location_id as lid from extraction.place;
 
 create materialized view navigation.located_by_year as
 select person_id as pid, location_id as lid, pubdate as pubyear, locational, count(*)
