@@ -25,6 +25,7 @@ CREATE TABLE admin.user (
        id SERIAL NOT NULL
      , handle TEXT
      , password TEXT
+     , is_approved BOOLEAN
      , is_admin BOOLEAN
      , first_name TEXT
      , last_name TEXT
