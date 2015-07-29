@@ -29,6 +29,12 @@
 <variant type-name-pattern="TEXT"/>
 </data-type>
 </column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="gender_female" remarks="" uid="4e902799:14e8a08468b:-7e32">
+<column-description/>
+<data-type jdbc-type="16" name="BOOLEAN" selected-variant-pattern="BOOLEAN">
+<variant type-name-pattern="BOOLEAN"/>
+</data-type>
+</column>
 </column-list>
 <primary-key alias="" name="PK_PERSON" remarks="" uid="bab25cc:145969f43e0:-7ff4">
 <primary-key-description/>

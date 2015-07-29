@@ -1,6 +1,6 @@
 // take 2, using real tables for the base person and each of the roles
 
-create table navigation.person_base(pid serial primary key, first_name text, last_name text, seqnum int, unique(first_name,last_name,seqnum));
+create table navigation.person_base(pid serial primary key, first_name text, last_name text, seqnum int, gender_female boolean unique(first_name,last_name,seqnum));
 create table navigation.person_authority(pid int, alias int);
 create table navigation.all_roles(estc_id int, person_id int, role text);
 
@@ -27,7 +27,7 @@ analyze navigation.all_roles;
 create view person_aliased as select * from person_authority natural join person_base;
 create view person_aliases as select * from person_aliased where pid != alias;
 create view person as
-	select pid,first_name,last_name,seqnum from person_aliased where pid = alias
+	select pid,first_name,last_name,seqnum,gender_female from person_aliased where pid = alias
 	union
 	select * from person_base where not exists (select pid from person_authority where alias=person_base.pid);
 create view person_effective as
