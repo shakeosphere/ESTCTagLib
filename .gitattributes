@@ -163,5 +163,6 @@ src/non-packaged-resources/authority.sql -text
 src/non-packaged-resources/functions.tld -text
 src/non-packaged-resources/navigation_views.sql -text
 src/non-packaged-resources/tags.tld -text
+src/non-packaged-resources/visualization_views.sql -text
 src/test/java/ESTCTagLib/README.txt -text
 src/test/resources/README.txt -text
