@@ -1,3 +1,13 @@
+create materialized view all_roles as
+select pubdate, person.pid, first_name, last_name, count(*)
+from estc.pub_year, navigation.person, navigation.person_effective
+where pub_year.id=person_effective.effective_id
+  and person_effective.pid=person.pid
+group by 1,2,3,4;
+
+create index all_date on all_roles(pubdate);
+analyze all_roles;
+
 create materialized view author as
 select pubdate, person.pid, first_name, last_name, count(*)
 from estc.pub_year, navigation.person, navigation.person_effective, navigation.author
