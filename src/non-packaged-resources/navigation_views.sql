@@ -1,4 +1,4 @@
-// LDA views
+-- LDA views
 
 create materialized view lda as
 select distinct 1510 as year, document, topic, score from lda_1510
@@ -28,14 +28,15 @@ union
 select distinct 1630 as year, document, topic, score from lda_1630
 ;
 
-// take 2, using real tables for the base person and each of the roles
+-- take 2, using real tables for the base person and each of the roles
 
-create table navigation.person_base(pid serial primary key, first_name text, last_name text, seqnum int, gender_female boolean unique(first_name,last_name,seqnum));
-create table navigation.person_authority(pid int, alias int);
+create table navigation.person_base(pid serial primary key, first_name text, last_name text, seqnum int, gender_female boolean, unique(first_name,last_name,seqnum));
+create table navigation.person_authority(pid int, alias int, id int, defined timestamp);
 create table navigation.all_roles(estc_id int, person_id int, role text);
 
 create index pap on navigation.person_authority(pid);
 create index paa on navigation.person_authority(alias);
+create index pai on navigation.person_authority(id);
 create index are on navigation.all_roles(estc_id);
 create index arp on navigation.all_roles(person_id);
 
@@ -51,32 +52,28 @@ select setval('navigation.person_base_pid_seq',person_id_seq.last_value) from ex
 
 insert into navigation.all_roles select distinct estc_id, person_id, role from extraction.role;
 
+insert into navigation.person_authority select pid, alias, id, defined from navigation_old.person_authority;
+
 analyze navigation.person_base;
 analyze navigation.all_roles;
 
 create view person_aliased as select * from person_authority natural join person_base;
 create view person_aliases as select * from person_aliased where pid != alias;
-create view person as
-	select pid,first_name,last_name,seqnum,gender_female from person_aliased where pid = alias
+create view person as select pid,first_name,last_name,seqnum,gender_female from person_aliased where pid = alias
 	union
 	select * from person_base where not exists (select pid from person_authority where alias=person_base.pid);
-create view person_effective as
-	select pid, case when alias is not null then alias else pid end as effective_id
+create view person_effective as select pid, case when alias is not null then alias else pid end as effective_id
 	from person natural left outer join person_authority;
 	
-create view navigation.author as select estc_id as id, person_id as pid from navigation.all_roles where role='Author';
-create view navigation.bookseller as select estc_id as id, person_id as pid from navigation.all_roles where role='Bookseller';
-create view navigation.printer as select estc_id as id, person_id as pid from navigation.all_roles where role='Printer';
-create view navigation.publisher as select estc_id as id, person_id as pid from navigation.all_roles where role='Publisher';
+create view navigation.author as select estc_id as id, person_id as pid from navigation.all_roles where role='author';
+create view navigation.bookseller as select estc_id as id, person_id as pid from navigation.all_roles where role='bookseller';
+create view navigation.printer as select estc_id as id, person_id as pid from navigation.all_roles where role='printer';
+create view navigation.publisher as select estc_id as id, person_id as pid from navigation.all_roles where role='publisher';
 	
-create materialized view navigation.all_roles as
-	select id as estc_id,pid as person_id,'Author' as role from author
-	union
-	select id as estc_id,pid as person_id,'Bookseller' as role from bookseller
-	union
-	select id as estc_id,pid as person_id,'Printer' as role from printer
-	union
-	select id as estc_id,pid as person_id,'Publisher' as role from publisher;
+create view navigation.user as select * from admin.user;
+
+grant usage on schema navigation to estc;
+grant select on all tables in schema navigation to estc;
 
 // take 1, trying to use materialized views derived from extraction.  This requires exposure of extraction tables to manage authority
 
@@ -108,22 +105,22 @@ create materialized view navigation.located as select distinct estc_id, person_i
 
 create materialized view navigation.located_by_year as
 select person_id as pid, location_id as lid, pubdate as pubyear, locational, count(*)
-	from extraction.place,estc.pub_year
+	from extraction.person_in,estc.pub_year
 	where place.estc_id=pub_year.id
 	group by 1,2,3,4;
 
 create materialized view navigation.sublocations_by_year as
-select role.person_id, parent_id, pubdate as pubyear, locational,location_id,location,count(*)
-		from extraction.sublocation,extraction.location,estc.pub_year,extraction.role
-		where sublocation.location_id=location.id
-			and sublocation.estc_id=pub_year.id
-			and role.estc_id=sublocation.estc_id
+select role.person_id, location_id as parent_id, pubdate as pubyear, locational,sublocation_id as location_id,location,count(*)
+		from extraction.location_in,extraction.location,estc.pub_year,extraction.role
+		where location_in.sublocation_id=location.id
+			and location_in.estc_id=pub_year.id
+			and role.estc_id=location_in.estc_id
 		group by 1,2,3,4,5,6;
 
 create materialized view navigation.locator as
 select estc_id as id, locational, location_id, location, count(*)
-	from extraction.place, extraction.location
-	where place.location_id=location.id
+	from extraction.location_in, extraction.location
+	where location_in.location_id=location.id
 	group by 1,2,3,4;
 
 create materialized view navigation.sublocator as

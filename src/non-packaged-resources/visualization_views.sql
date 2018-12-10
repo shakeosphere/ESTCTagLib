@@ -123,3 +123,31 @@ group by 1,2,3;
 
 create index publisher_bookseller_date on publisher_bookseller(pubdate);
 analyze publisher_bookseller;
+
+grant usage on schema visualization to estc;
+grant select on all tables in schema visualization to estc;
+
+refresh materialized view all_roles;
+refresh materialized view author;
+refresh materialized view printer;
+refresh materialized view publisher;
+refresh materialized view bookseller;
+refresh materialized view author_printer;
+refresh materialized view author_publisher;
+refresh materialized view author_bookseller;
+refresh materialized view printer_publisher;
+refresh materialized view printer_bookseller;
+refresh materialized view publisher_bookseller;
+
+analyze all_roles;
+analyze author;
+analyze printer;
+analyze publisher;
+analyze bookseller;
+analyze author_printer;
+analyze author_publisher;
+analyze author_bookseller;
+analyze printer_publisher;
+analyze printer_bookseller;
+analyze publisher_bookseller;
+

@@ -1,4 +1,4 @@
-package ESTCTagLib.person;
+package ESTCTagLib.establishment;
 
 
 import java.sql.PreparedStatement;
@@ -16,14 +16,12 @@ import ESTCTagLib.ESTCTagLibTagSupport;
 import ESTCTagLib.ESTCTagLibBodyTagSupport;
 
 @SuppressWarnings("serial")
-public class PersonIterator extends ESTCTagLibBodyTagSupport {
-    int pid = 0;
-    String firstName = null;
-    String lastName = null;
-    boolean genderFemale = false;
+public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
+    int ID = 0;
+    String establishment = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(PersonIterator.class);
+	private static final Log log = LogFactory.getLog(EstablishmentIterator.class);
 
 
     PreparedStatement stat = null;
@@ -33,11 +31,11 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
     String var = null;
     int rsCount = 0;
 
-	public static String personCount() throws JspTagException {
+	public static String establishmentCount() throws JspTagException {
 		int count = 0;
-		PersonIterator theIterator = new PersonIterator();
+		EstablishmentIterator theIterator = new EstablishmentIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.establishment"
 						);
 
 			ResultSet crs = stat.executeQuery();
@@ -47,23 +45,23 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating Person iterator", e);
-			throw new JspTagException("Error: JDBC error generating Person iterator");
+			log.error("JDBC error generating Establishment iterator", e);
+			throw new JspTagException("Error: JDBC error generating Establishment iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
 		return "" + count;
 	}
 
-	public static Boolean personExists (String pid) throws JspTagException {
+	public static Boolean establishmentExists (String ID) throws JspTagException {
 		int count = 0;
-		PersonIterator theIterator = new PersonIterator();
+		EstablishmentIterator theIterator = new EstablishmentIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person where 1=1"
-						+ " and pid = ?"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.establishment where 1=1"
+						+ " and id = ?"
 						);
 
-			stat.setInt(1,Integer.parseInt(pid));
+			stat.setInt(1,Integer.parseInt(ID));
 			ResultSet crs = stat.executeQuery();
 
 			if (crs.next()) {
@@ -71,8 +69,8 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating Person iterator", e);
-			throw new JspTagException("Error: JDBC error generating Person iterator");
+			log.error("JDBC error generating Establishment iterator", e);
+			throw new JspTagException("Error: JDBC error generating Establishment iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
@@ -98,18 +96,18 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
 
             //run select id query  
             webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("SELECT navigation.person.pid from " + generateFromClause() + " where 1=1"
+            stat = getConnection().prepareStatement("SELECT navigation.establishment.id from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
                                                         + " order by " + generateSortCriteria() + generateLimitCriteria());
             rs = stat.executeQuery();
 
             if (rs.next()) {
-                pid = rs.getInt(1);
+                ID = rs.getInt(1);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_INCLUDE;
             }
         } catch (SQLException e) {
-            log.error("JDBC error generating Person iterator: " + stat.toString(), e);
+            log.error("JDBC error generating Establishment iterator: " + stat.toString(), e);
 
 			freeConnection();
 			clearServiceState();
@@ -118,10 +116,10 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating Person iterator: " + stat.toString());
+				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating Establishment iterator: " + stat.toString());
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error generating Person iterator: " + stat.toString(),e);
+				throw new JspException("Error: JDBC error generating Establishment iterator: " + stat.toString(),e);
 			}
 
         }
@@ -130,7 +128,7 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private String generateFromClause() {
-       StringBuffer theBuffer = new StringBuffer("navigation.person");
+       StringBuffer theBuffer = new StringBuffer("navigation.establishment");
       return theBuffer.toString();
     }
 
@@ -143,7 +141,7 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
         if (sortCriteria != null) {
             return sortCriteria;
         } else {
-            return "pid";
+            return "id";
         }
     }
 
@@ -158,12 +156,12 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
     public int doAfterBody() throws JspException {
         try {
             if (rs.next()) {
-                pid = rs.getInt(1);
+                ID = rs.getInt(1);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_AGAIN;
             }
         } catch (SQLException e) {
-            log.error("JDBC error iterating across Person", e);
+            log.error("JDBC error iterating across Establishment", e);
 
 			freeConnection();
 			clearServiceState();
@@ -172,10 +170,10 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error iterating across Person" + stat.toString());
+				pageContext.setAttribute("tagErrorMessage", "JDBC error iterating across Establishment" + stat.toString());
 				return parent.doEndTag();
 			}else{
-				throw new JspException("JDBC error iterating across Person",e);
+				throw new JspException("JDBC error iterating across Establishment",e);
 			}
 
         }
@@ -214,17 +212,17 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
             rs.close();
             stat.close();
         } catch (SQLException e) {
-            log.error("JDBC error ending Person iterator",e);
+            log.error("JDBC error ending Establishment iterator",e);
 			freeConnection();
 
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving pid " + pid);
+				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving ID " + ID);
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error ending Person iterator",e);
+				throw new JspException("Error: JDBC error ending Establishment iterator",e);
 			}
 
         } finally {
@@ -235,7 +233,7 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private void clearServiceState() {
-        pid = 0;
+        ID = 0;
         parentEntities = new Vector<ESTCTagLibTagSupport>();
 
         this.rs = null;
@@ -271,15 +269,15 @@ public class PersonIterator extends ESTCTagLibBodyTagSupport {
 
 
 
-	public int getPid () {
-		return pid;
+	public int getID () {
+		return ID;
 	}
 
-	public void setPid (int pid) {
-		this.pid = pid;
+	public void setID (int ID) {
+		this.ID = ID;
 	}
 
-	public int getActualPid () {
-		return pid;
+	public int getActualID () {
+		return ID;
 	}
 }

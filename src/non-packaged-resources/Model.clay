@@ -763,8 +763,8 @@
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="4e902799:14e8a08468b:-7fc7">
 <column-description/>
-<data-type jdbc-type="4" name="INTEGER" selected-variant-pattern="INTEGER">
-<variant type-name-pattern="INTEGER"/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
 </data-type>
 </column>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="start" remarks="" uid="4e902799:14e8a08468b:-7fab">
@@ -801,6 +801,193 @@
 <fk-fig-bendpoint-list/>
 </foreign-key-figure>
 <foreign-key-column column-name="id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="establishment" remarks="" uid="2d7254ae:166ad4835a1:-7f90">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="1402" y="172"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="2d7254ae:166ad4835a1:-7f8c">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="establishment" remarks="" uid="2d7254ae:166ad4835a1:-7f8b">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_ESTABLISHMENT" remarks="" uid="2d7254ae:166ad4835a1:-7f8f">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+<table alias="" name="person_at" remarks="" uid="2d7254ae:166ad4835a1:-7f8a">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="1118" y="298"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="estc_id" remarks="" uid="2d7254ae:166ad4835a1:-7ef6">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="establishment_id" remarks="" uid="2d7254ae:166ad4835a1:-7f48">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="person_id" remarks="" uid="2d7254ae:166ad4835a1:-7f26">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="locational" remarks="" uid="2d7254ae:166ad4835a1:-7ef5">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_PERSON_AT" remarks="" uid="2d7254ae:166ad4835a1:-7f89">
+<primary-key-description/>
+<primary-key-column name="estc_id"/>
+<primary-key-column name="establishment_id"/>
+<primary-key-column name="person_id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="FK_person_at_1" on-delete="" on-update="" referenced-key="PK_ESTABLISHMENT" referenced-table="establishment" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="2d7254ae:166ad4835a1:-7f49">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="establishment_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key alias="" name="FK_person_at_2" on-delete="" on-update="" referenced-key="PK_PERSON" referenced-table="person" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="2d7254ae:166ad4835a1:-7f27">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="person_id" referenced-key-column-name="pid"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="establishment_in" remarks="" uid="2d7254ae:166ad4835a1:-7ee0">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="1127" y="151"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="estc_id" remarks="" uid="2d7254ae:166ad4835a1:-7e81">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="establishment_id" remarks="" uid="2d7254ae:166ad4835a1:-7ec7">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="llocation_id" remarks="" uid="2d7254ae:166ad4835a1:-7ea2">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="locational" remarks="" uid="2d7254ae:166ad4835a1:-7e80">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_ESTABLISHMENT_IN" remarks="" uid="2d7254ae:166ad4835a1:-7edf">
+<primary-key-description/>
+<primary-key-column name="estc_id"/>
+<primary-key-column name="establishment_id"/>
+<primary-key-column name="llocation_id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="FK_establishment_in_1" on-delete="" on-update="" referenced-key="PK_ESTABLISHMENT" referenced-table="establishment" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="2d7254ae:166ad4835a1:-7ec8">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="establishment_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key alias="" name="FK_establishment_in_2" on-delete="" on-update="" referenced-key="PK_LOCATION" referenced-table="location" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="2d7254ae:166ad4835a1:-7ea3">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="llocation_id" referenced-key-column-name="lid"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="person_in" remarks="" uid="2d7254ae:166ad4835a1:-7e7f">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="737" y="29"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="estc_id" remarks="" uid="2d7254ae:166ad4835a1:-7e31">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="location_id" remarks="" uid="2d7254ae:166ad4835a1:-7e58">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="person_id" remarks="" uid="2d7254ae:166ad4835a1:-7e3a">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="locational" remarks="" uid="2d7254ae:166ad4835a1:-7e30">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_PERSON_IN" remarks="" uid="2d7254ae:166ad4835a1:-7e7e">
+<primary-key-description/>
+<primary-key-column name="estc_id"/>
+<primary-key-column name="location_id"/>
+<primary-key-column name="person_id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="FK_person_in_1" on-delete="" on-update="" referenced-key="PK_LOCATION" referenced-table="location" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="2d7254ae:166ad4835a1:-7e59">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="location_id" referenced-key-column-name="lid"/>
+</foreign-key>
+<foreign-key alias="" name="FK_person_in_2" on-delete="" on-update="" referenced-key="PK_PERSON" referenced-table="person" referenced-table-schema="navigation" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="2d7254ae:166ad4835a1:-7e3b">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="person_id" referenced-key-column-name="pid"/>
 </foreign-key>
 </foreign-key-list>
 <index-list/>

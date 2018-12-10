@@ -1,4 +1,4 @@
-package ESTCTagLib.person;
+package ESTCTagLib.establishment;
 
 
 import java.sql.PreparedStatement;
@@ -15,14 +15,12 @@ import ESTCTagLib.ESTCTagLibTagSupport;
 import ESTCTagLib.ESTCTagLibBodyTagSupport;
 
 @SuppressWarnings("serial")
-public class PersonDeleter extends ESTCTagLibBodyTagSupport {
-    int pid = 0;
-    String firstName = null;
-    String lastName = null;
-    boolean genderFemale = false;
+public class EstablishmentDeleter extends ESTCTagLibBodyTagSupport {
+    int ID = 0;
+    String establishment = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(PersonDeleter.class);
+	private static final Log log = LogFactory.getLog(EstablishmentDeleter.class);
 
 
     ResultSet rs = null;
@@ -36,14 +34,14 @@ public class PersonDeleter extends ESTCTagLibBodyTagSupport {
         PreparedStatement stat;
         try {
             int webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("DELETE from navigation.person where 1=1"
-                                                        + (pid == 0 ? "" : " and pid = ? "));
-            if (pid != 0) stat.setInt(webapp_keySeq++, pid);
+            stat = getConnection().prepareStatement("DELETE from navigation.establishment where 1=1"
+                                                        + (ID == 0 ? "" : " and id = ? "));
+            if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             stat.execute();
 
 			webapp_keySeq = 1;
         } catch (SQLException e) {
-            log.error("JDBC error generating Person deleter", e);
+            log.error("JDBC error generating Establishment deleter", e);
 
 			clearServiceState();
 			freeConnection();
@@ -52,10 +50,10 @@ public class PersonDeleter extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating Person deleter");
+				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating Establishment deleter");
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error generating Person deleter",e);
+				throw new JspException("Error: JDBC error generating Establishment deleter",e);
 			}
 
         } finally {
@@ -91,7 +89,7 @@ public class PersonDeleter extends ESTCTagLibBodyTagSupport {
 	}
 
     private void clearServiceState() {
-        pid = 0;
+        ID = 0;
         parentEntities = new Vector<ESTCTagLibTagSupport>();
 
         this.rs = null;
@@ -109,15 +107,15 @@ public class PersonDeleter extends ESTCTagLibBodyTagSupport {
 
 
 
-	public int getPid () {
-		return pid;
+	public int getID () {
+		return ID;
 	}
 
-	public void setPid (int pid) {
-		this.pid = pid;
+	public void setID (int ID) {
+		this.ID = ID;
 	}
 
-	public int getActualPid () {
-		return pid;
+	public int getActualID () {
+		return ID;
 	}
 }

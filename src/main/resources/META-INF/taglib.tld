@@ -122,6 +122,18 @@
 	</tag>
 
 	<tag>
+		<name>personGenderFemale</name>
+		<tag-class>ESTCTagLib.person.PersonGenderFemale</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>genderFemale</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachAuthor</name>
 		<tag-class>ESTCTagLib.author.AuthorIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -2283,6 +2295,561 @@
 	</tag>
 
 	<tag>
+		<name>foreachEstablishment</name>
+		<tag-class>ESTCTagLib.establishment.EstablishmentIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>establishment</name>
+		<tag-class>ESTCTagLib.establishment.Establishment</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteEstablishment</name>
+		<tag-class>ESTCTagLib.establishment.EstablishmentDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>establishmentID</name>
+		<tag-class>ESTCTagLib.establishment.EstablishmentID</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>ID</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>establishmentEstablishment</name>
+		<tag-class>ESTCTagLib.establishment.EstablishmentEstablishment</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>establishment</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachPersonAt</name>
+		<tag-class>ESTCTagLib.personAt.PersonAtIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>establishmentId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>personId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useEstablishment</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>personAt</name>
+		<tag-class>ESTCTagLib.personAt.PersonAt</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>establishmentId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>personId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deletePersonAt</name>
+		<tag-class>ESTCTagLib.personAt.PersonAtDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>establishmentId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>personId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAtEstcId</name>
+		<tag-class>ESTCTagLib.personAt.PersonAtEstcId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAtEstablishmentId</name>
+		<tag-class>ESTCTagLib.personAt.PersonAtEstablishmentId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>establishmentId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAtPersonId</name>
+		<tag-class>ESTCTagLib.personAt.PersonAtPersonId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>personId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personAtLocational</name>
+		<tag-class>ESTCTagLib.personAt.PersonAtLocational</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>locational</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachEstablishmentIn</name>
+		<tag-class>ESTCTagLib.establishmentIn.EstablishmentInIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>establishmentId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>llocationId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useEstablishment</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useLocation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>establishmentIn</name>
+		<tag-class>ESTCTagLib.establishmentIn.EstablishmentIn</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>establishmentId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>llocationId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deleteEstablishmentIn</name>
+		<tag-class>ESTCTagLib.establishmentIn.EstablishmentInDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>establishmentId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>llocationId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>establishmentInEstcId</name>
+		<tag-class>ESTCTagLib.establishmentIn.EstablishmentInEstcId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>establishmentInEstablishmentId</name>
+		<tag-class>ESTCTagLib.establishmentIn.EstablishmentInEstablishmentId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>establishmentId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>establishmentInLlocationId</name>
+		<tag-class>ESTCTagLib.establishmentIn.EstablishmentInLlocationId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>llocationId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>establishmentInLocational</name>
+		<tag-class>ESTCTagLib.establishmentIn.EstablishmentInLocational</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>locational</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachPersonIn</name>
+		<tag-class>ESTCTagLib.personIn.PersonInIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>sortCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>limitCriteria</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>locationId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>personId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>useLocation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>usePerson</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<tag>
+		<name>personIn</name>
+		<tag-class>ESTCTagLib.personIn.PersonIn</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>locationId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>personId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>deletePersonIn</name>
+		<tag-class>ESTCTagLib.personIn.PersonInDeleter</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>locationId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>personId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personInEstcId</name>
+		<tag-class>ESTCTagLib.personIn.PersonInEstcId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>estcId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personInLocationId</name>
+		<tag-class>ESTCTagLib.personIn.PersonInLocationId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>locationId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personInPersonId</name>
+		<tag-class>ESTCTagLib.personIn.PersonInPersonId</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>personId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>personInLocational</name>
+		<tag-class>ESTCTagLib.personIn.PersonInLocational</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>locational</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachGazetteer</name>
 		<tag-class>ESTCTagLib.gazetteer.GazetteerIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -3146,6 +3713,126 @@
 		<name>userHasSession</name>
 		<function-class>ESTCTagLib.session.SessionIterator</function-class>
 		<function-signature>java.lang.Boolean userHasSession(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentCount</name>
+		<function-class>ESTCTagLib.establishment.EstablishmentIterator</function-class>
+		<function-signature>java.lang.String establishmentCount()</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentExists</name>
+		<function-class>ESTCTagLib.establishment.EstablishmentIterator</function-class>
+		<function-signature>java.lang.String establishmentExists(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personAtExists</name>
+		<function-class>ESTCTagLib.personAt.PersonAtIterator</function-class>
+		<function-signature>java.lang.String personAtExists(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personAtCountByEstablishment</name>
+		<function-class>ESTCTagLib.personAt.PersonAtIterator</function-class>
+		<function-signature>java.lang.String personAtCountByEstablishment(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentHasPersonAt</name>
+		<function-class>ESTCTagLib.personAt.PersonAtIterator</function-class>
+		<function-signature>java.lang.Boolean establishmentHasPersonAt(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personAtCountByPerson</name>
+		<function-class>ESTCTagLib.personAt.PersonAtIterator</function-class>
+		<function-signature>java.lang.String personAtCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasPersonAt</name>
+		<function-class>ESTCTagLib.personAt.PersonAtIterator</function-class>
+		<function-signature>java.lang.Boolean personHasPersonAt(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentPersonExists</name>
+		<function-class>ESTCTagLib.personAt.PersonAtIterator</function-class>
+		<function-signature>java.lang.Boolean establishmentPersonExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentInExists</name>
+		<function-class>ESTCTagLib.establishmentIn.EstablishmentInIterator</function-class>
+		<function-signature>java.lang.String establishmentInExists(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentInCountByEstablishment</name>
+		<function-class>ESTCTagLib.establishmentIn.EstablishmentInIterator</function-class>
+		<function-signature>java.lang.String establishmentInCountByEstablishment(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentHasEstablishmentIn</name>
+		<function-class>ESTCTagLib.establishmentIn.EstablishmentInIterator</function-class>
+		<function-signature>java.lang.Boolean establishmentHasEstablishmentIn(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentInCountByLocation</name>
+		<function-class>ESTCTagLib.establishmentIn.EstablishmentInIterator</function-class>
+		<function-signature>java.lang.String establishmentInCountByLocation(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locationHasEstablishmentIn</name>
+		<function-class>ESTCTagLib.establishmentIn.EstablishmentInIterator</function-class>
+		<function-signature>java.lang.Boolean locationHasEstablishmentIn(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>establishmentLocationExists</name>
+		<function-class>ESTCTagLib.establishmentIn.EstablishmentInIterator</function-class>
+		<function-signature>java.lang.Boolean establishmentLocationExists(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personInExists</name>
+		<function-class>ESTCTagLib.personIn.PersonInIterator</function-class>
+		<function-signature>java.lang.String personInExists(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personInCountByLocation</name>
+		<function-class>ESTCTagLib.personIn.PersonInIterator</function-class>
+		<function-signature>java.lang.String personInCountByLocation(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locationHasPersonIn</name>
+		<function-class>ESTCTagLib.personIn.PersonInIterator</function-class>
+		<function-signature>java.lang.Boolean locationHasPersonIn(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personInCountByPerson</name>
+		<function-class>ESTCTagLib.personIn.PersonInIterator</function-class>
+		<function-signature>java.lang.String personInCountByPerson(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>personHasPersonIn</name>
+		<function-class>ESTCTagLib.personIn.PersonInIterator</function-class>
+		<function-signature>java.lang.Boolean personHasPersonIn(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>locationPersonExists</name>
+		<function-class>ESTCTagLib.personIn.PersonInIterator</function-class>
+		<function-signature>java.lang.Boolean locationPersonExists(java.lang.String, java.lang.String)</function-signature>
 	</function>
 
 	<function>

@@ -30,6 +30,7 @@ public class Person extends ESTCTagLibTagSupport {
 	int pid = 0;
 	String firstName = null;
 	String lastName = null;
+	boolean genderFemale = false;
 
 	private String var = null;
 
@@ -53,7 +54,7 @@ public class Person extends ESTCTagLibTagSupport {
 			} else {
 				// an iterator or pid was provided as an attribute - we need to load a Person from the database
 				boolean found = false;
-				PreparedStatement stmt = getConnection().prepareStatement("select first_name,last_name from navigation.person where pid = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("select first_name,last_name,gender_female from navigation.person where pid = ?");
 				stmt.setInt(1,pid);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
@@ -61,6 +62,8 @@ public class Person extends ESTCTagLibTagSupport {
 						firstName = rs.getString(1);
 					if (lastName == null)
 						lastName = rs.getString(2);
+					if (genderFemale == false)
+						genderFemale = rs.getBoolean(3);
 					found = true;
 				}
 				stmt.close();
@@ -139,10 +142,11 @@ public class Person extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.person set first_name = ?, last_name = ? where pid = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.person set first_name = ?, last_name = ?, gender_female = ? where pid = ?");
 				stmt.setString(1,firstName);
 				stmt.setString(2,lastName);
-				stmt.setInt(3,pid);
+				stmt.setBoolean(3,genderFemale);
+				stmt.setInt(4,pid);
 				stmt.executeUpdate();
 				stmt.close();
 			}
@@ -181,10 +185,11 @@ public class Person extends ESTCTagLibTagSupport {
 		if (lastName == null){
 			lastName = "";
 		}
-		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.person(pid,first_name,last_name) values (?,?,?)");
+		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.person(pid,first_name,last_name,gender_female) values (?,?,?,?)");
 		stmt.setInt(1,pid);
 		stmt.setString(2,firstName);
 		stmt.setString(3,lastName);
+		stmt.setBoolean(4,genderFemale);
 		stmt.executeUpdate();
 		stmt.close();
 		freeConnection();
@@ -234,6 +239,19 @@ public class Person extends ESTCTagLibTagSupport {
 		return lastName;
 	}
 
+	public boolean getGenderFemale () {
+		return genderFemale;
+	}
+
+	public void setGenderFemale (boolean genderFemale) {
+		this.genderFemale = genderFemale;
+		commitNeeded = true;
+	}
+
+	public boolean getActualGenderFemale () {
+		return genderFemale;
+	}
+
 	public String getVar () {
 		return var;
 	}
@@ -270,10 +288,19 @@ public class Person extends ESTCTagLibTagSupport {
 		}
 	}
 
+	public static Boolean genderFemaleValue() throws JspException {
+		try {
+			return currentInstance.getGenderFemale();
+		} catch (Exception e) {
+			 throw new JspTagException("Error in tag function genderFemaleValue()");
+		}
+	}
+
 	private void clearServiceState () {
 		pid = 0;
 		firstName = null;
 		lastName = null;
+		genderFemale = false;
 		newRecord = false;
 		commitNeeded = false;
 		parentEntities = new Vector<ESTCTagLibTagSupport>();
