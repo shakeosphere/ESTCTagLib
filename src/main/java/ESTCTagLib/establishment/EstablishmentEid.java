@@ -10,68 +10,68 @@ import org.apache.commons.logging.LogFactory;
 import ESTCTagLib.ESTCTagLibTagSupport;
 
 @SuppressWarnings("serial")
-public class EstablishmentID extends ESTCTagLibTagSupport {
+public class EstablishmentEid extends ESTCTagLibTagSupport {
 
-	private static final Log log = LogFactory.getLog(EstablishmentID.class);
+	private static final Log log = LogFactory.getLog(EstablishmentEid.class);
 
 	public int doStartTag() throws JspException {
 		try {
 			Establishment theEstablishment = (Establishment)findAncestorWithClass(this, Establishment.class);
 			if (!theEstablishment.commitNeeded) {
-				pageContext.getOut().print(theEstablishment.getID());
+				pageContext.getOut().print(theEstablishment.getEid());
 			}
 		} catch (Exception e) {
-			log.error("Can't find enclosing Establishment for ID tag ", e);
+			log.error("Can't find enclosing Establishment for eid tag ", e);
 			freeConnection();
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Establishment for ID tag ");
+				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Establishment for eid tag ");
 				return parent.doEndTag();
 			}else{
-				throw new JspTagException("Error: Can't find enclosing Establishment for ID tag ");
+				throw new JspTagException("Error: Can't find enclosing Establishment for eid tag ");
 			}
 
 		}
 		return SKIP_BODY;
 	}
 
-	public int getID() throws JspException {
+	public int getEid() throws JspException {
 		try {
 			Establishment theEstablishment = (Establishment)findAncestorWithClass(this, Establishment.class);
-			return theEstablishment.getID();
+			return theEstablishment.getEid();
 		} catch (Exception e) {
-			log.error("Can't find enclosing Establishment for ID tag ", e);
+			log.error("Can't find enclosing Establishment for eid tag ", e);
 			freeConnection();
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Establishment for ID tag ");
+				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Establishment for eid tag ");
 				parent.doEndTag();
 				return 0;
 			}else{
-				throw new JspTagException("Error: Can't find enclosing Establishment for ID tag ");
+				throw new JspTagException("Error: Can't find enclosing Establishment for eid tag ");
 			}
 		}
 	}
 
-	public void setID(int ID) throws JspException {
+	public void setEid(int eid) throws JspException {
 		try {
 			Establishment theEstablishment = (Establishment)findAncestorWithClass(this, Establishment.class);
-			theEstablishment.setID(ID);
+			theEstablishment.setEid(eid);
 		} catch (Exception e) {
-			log.error("Can't find enclosing Establishment for ID tag ", e);
+			log.error("Can't find enclosing Establishment for eid tag ", e);
 			freeConnection();
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Establishment for ID tag ");
+				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Establishment for eid tag ");
 				parent.doEndTag();
 			}else{
-				throw new JspTagException("Error: Can't find enclosing Establishment for ID tag ");
+				throw new JspTagException("Error: Can't find enclosing Establishment for eid tag ");
 			}
 		}
 	}

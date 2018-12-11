@@ -50,7 +50,7 @@ public class PersonAt extends ESTCTagLibTagSupport {
 
 			if (theEstablishment == null) {
 			} else {
-				establishmentId = theEstablishment.getID();
+				establishmentId = theEstablishment.getEid();
 			}
 			if (thePerson == null) {
 			} else {

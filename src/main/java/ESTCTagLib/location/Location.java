@@ -28,7 +28,7 @@ public class Location extends ESTCTagLibTagSupport {
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
 	int lid = 0;
-	String label = null;
+	String location = null;
 
 	private String var = null;
 
@@ -52,12 +52,12 @@ public class Location extends ESTCTagLibTagSupport {
 			} else {
 				// an iterator or lid was provided as an attribute - we need to load a Location from the database
 				boolean found = false;
-				PreparedStatement stmt = getConnection().prepareStatement("select label from navigation.location where lid = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("select location from navigation.location where lid = ?");
 				stmt.setInt(1,lid);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					if (label == null)
-						label = rs.getString(1);
+					if (location == null)
+						location = rs.getString(1);
 					found = true;
 				}
 				stmt.close();
@@ -136,8 +136,8 @@ public class Location extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.location set label = ? where lid = ?");
-				stmt.setString(1,label);
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.location set location = ? where lid = ?");
+				stmt.setString(1,location);
 				stmt.setInt(2,lid);
 				stmt.executeUpdate();
 				stmt.close();
@@ -171,12 +171,12 @@ public class Location extends ESTCTagLibTagSupport {
 			log.debug("generating new Location " + lid);
 		}
 
-		if (label == null){
-			label = "";
+		if (location == null){
+			location = "";
 		}
-		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.location(lid,label) values (?,?)");
+		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.location(lid,location) values (?,?)");
 		stmt.setInt(1,lid);
-		stmt.setString(2,label);
+		stmt.setString(2,location);
 		stmt.executeUpdate();
 		stmt.close();
 		freeConnection();
@@ -194,20 +194,20 @@ public class Location extends ESTCTagLibTagSupport {
 		return lid;
 	}
 
-	public String getLabel () {
+	public String getLocation () {
 		if (commitNeeded)
 			return "";
 		else
-			return label;
+			return location;
 	}
 
-	public void setLabel (String label) {
-		this.label = label;
+	public void setLocation (String location) {
+		this.location = location;
 		commitNeeded = true;
 	}
 
-	public String getActualLabel () {
-		return label;
+	public String getActualLocation () {
+		return location;
 	}
 
 	public String getVar () {
@@ -230,17 +230,17 @@ public class Location extends ESTCTagLibTagSupport {
 		}
 	}
 
-	public static String labelValue() throws JspException {
+	public static String locationValue() throws JspException {
 		try {
-			return currentInstance.getLabel();
+			return currentInstance.getLocation();
 		} catch (Exception e) {
-			 throw new JspTagException("Error in tag function labelValue()");
+			 throw new JspTagException("Error in tag function locationValue()");
 		}
 	}
 
 	private void clearServiceState () {
 		lid = 0;
-		label = null;
+		location = null;
 		newRecord = false;
 		commitNeeded = false;
 		parentEntities = new Vector<ESTCTagLibTagSupport>();

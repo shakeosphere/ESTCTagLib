@@ -41,7 +41,7 @@ public class PersonAtDeleter extends ESTCTagLibBodyTagSupport {
 
 		if (theEstablishment == null) {
 		} else {
-			establishmentId = theEstablishment.getID();
+			establishmentId = theEstablishment.getEid();
 		}
 		if (thePerson == null) {
 		} else {

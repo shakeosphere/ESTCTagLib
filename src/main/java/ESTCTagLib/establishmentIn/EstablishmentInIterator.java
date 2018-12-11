@@ -38,15 +38,15 @@ public class EstablishmentInIterator extends ESTCTagLibBodyTagSupport {
    boolean useEstablishment = false;
    boolean useLocation = false;
 
-	public static String establishmentInCountByEstablishment(String ID) throws JspTagException {
+	public static String establishmentInCountByEstablishment(String eid) throws JspTagException {
 		int count = 0;
 		EstablishmentInIterator theIterator = new EstablishmentInIterator();
 		try {
 			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.establishment_in where 1=1"
-						+ " and id = ?"
+						+ " and eid = ?"
 						);
 
-			stat.setInt(1,Integer.parseInt(ID));
+			stat.setInt(1,Integer.parseInt(eid));
 			ResultSet crs = stat.executeQuery();
 
 			if (crs.next()) {
@@ -62,8 +62,8 @@ public class EstablishmentInIterator extends ESTCTagLibBodyTagSupport {
 		return "" + count;
 	}
 
-	public static Boolean establishmentHasEstablishmentIn(String ID) throws JspTagException {
-		return ! establishmentInCountByEstablishment(ID).equals("0");
+	public static Boolean establishmentHasEstablishmentIn(String eid) throws JspTagException {
+		return ! establishmentInCountByEstablishment(eid).equals("0");
 	}
 
 	public static String establishmentInCountByLocation(String lid) throws JspTagException {
@@ -122,16 +122,16 @@ public class EstablishmentInIterator extends ESTCTagLibBodyTagSupport {
 		return count > 0;
 	}
 
-	public static Boolean establishmentLocationExists (String ID, String lid) throws JspTagException {
+	public static Boolean establishmentLocationExists (String eid, String lid) throws JspTagException {
 		int count = 0;
 		EstablishmentInIterator theIterator = new EstablishmentInIterator();
 		try {
 			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.establishment_in where 1=1"
-						+ " and id = ?"
+						+ " and eid = ?"
 						+ " and lid = ?"
 						);
 
-			stat.setInt(1,Integer.parseInt(ID));
+			stat.setInt(1,Integer.parseInt(eid));
 			stat.setInt(2,Integer.parseInt(lid));
 			ResultSet crs = stat.executeQuery();
 
@@ -158,7 +158,7 @@ public class EstablishmentInIterator extends ESTCTagLibBodyTagSupport {
 
 		if (theEstablishment == null) {
 		} else {
-			establishmentId = theEstablishment.getID();
+			establishmentId = theEstablishment.getEid();
 		}
 		if (theLocation == null) {
 		} else {
@@ -235,7 +235,7 @@ public class EstablishmentInIterator extends ESTCTagLibBodyTagSupport {
     private String generateJoinCriteria() {
        StringBuffer theBuffer = new StringBuffer();
        if (useEstablishment)
-          theBuffer.append(" and establishment.ID = establishment_in.null");
+          theBuffer.append(" and establishment.eid = establishment_in.null");
        if (useLocation)
           theBuffer.append(" and location.lid = establishment_in.null");
 

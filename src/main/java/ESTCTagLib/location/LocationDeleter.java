@@ -17,7 +17,7 @@ import ESTCTagLib.ESTCTagLibBodyTagSupport;
 @SuppressWarnings("serial")
 public class LocationDeleter extends ESTCTagLibBodyTagSupport {
     int lid = 0;
-    String label = null;
+    String location = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
 	private static final Log log = LogFactory.getLog(LocationDeleter.class);

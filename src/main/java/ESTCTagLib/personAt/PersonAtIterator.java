@@ -38,15 +38,15 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
    boolean useEstablishment = false;
    boolean usePerson = false;
 
-	public static String personAtCountByEstablishment(String ID) throws JspTagException {
+	public static String personAtCountByEstablishment(String eid) throws JspTagException {
 		int count = 0;
 		PersonAtIterator theIterator = new PersonAtIterator();
 		try {
 			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at where 1=1"
-						+ " and id = ?"
+						+ " and eid = ?"
 						);
 
-			stat.setInt(1,Integer.parseInt(ID));
+			stat.setInt(1,Integer.parseInt(eid));
 			ResultSet crs = stat.executeQuery();
 
 			if (crs.next()) {
@@ -62,8 +62,8 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 		return "" + count;
 	}
 
-	public static Boolean establishmentHasPersonAt(String ID) throws JspTagException {
-		return ! personAtCountByEstablishment(ID).equals("0");
+	public static Boolean establishmentHasPersonAt(String eid) throws JspTagException {
+		return ! personAtCountByEstablishment(eid).equals("0");
 	}
 
 	public static String personAtCountByPerson(String pid) throws JspTagException {
@@ -122,16 +122,16 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 		return count > 0;
 	}
 
-	public static Boolean establishmentPersonExists (String ID, String pid) throws JspTagException {
+	public static Boolean establishmentPersonExists (String eid, String pid) throws JspTagException {
 		int count = 0;
 		PersonAtIterator theIterator = new PersonAtIterator();
 		try {
 			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at where 1=1"
-						+ " and id = ?"
+						+ " and eid = ?"
 						+ " and pid = ?"
 						);
 
-			stat.setInt(1,Integer.parseInt(ID));
+			stat.setInt(1,Integer.parseInt(eid));
 			stat.setInt(2,Integer.parseInt(pid));
 			ResultSet crs = stat.executeQuery();
 
@@ -158,7 +158,7 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 
 		if (theEstablishment == null) {
 		} else {
-			establishmentId = theEstablishment.getID();
+			establishmentId = theEstablishment.getEid();
 		}
 		if (thePerson == null) {
 		} else {
@@ -235,7 +235,7 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
     private String generateJoinCriteria() {
        StringBuffer theBuffer = new StringBuffer();
        if (useEstablishment)
-          theBuffer.append(" and establishment.ID = person_at.null");
+          theBuffer.append(" and establishment.eid = person_at.null");
        if (usePerson)
           theBuffer.append(" and person.pid = person_at.null");
 

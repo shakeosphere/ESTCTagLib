@@ -1,4 +1,4 @@
-package ESTCTagLib.location;
+package ESTCTagLib.locationIn;
 
 
 import java.sql.PreparedStatement;
@@ -14,14 +14,17 @@ import javax.servlet.jsp.tagext.Tag;
 
 import ESTCTagLib.ESTCTagLibTagSupport;
 import ESTCTagLib.ESTCTagLibBodyTagSupport;
+import ESTCTagLib.location.Location;
 
 @SuppressWarnings("serial")
-public class LocationIterator extends ESTCTagLibBodyTagSupport {
-    int lid = 0;
-    String location = null;
+public class LocationInIterator extends ESTCTagLibBodyTagSupport {
+    int estcId = 0;
+    int sublocationId = 0;
+    int locationId = 0;
+    String locational = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(LocationIterator.class);
+	private static final Log log = LogFactory.getLog(LocationInIterator.class);
 
 
     PreparedStatement stat = null;
@@ -31,33 +34,11 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
     String var = null;
     int rsCount = 0;
 
-	public static String locationCount() throws JspTagException {
+	public static String locationInCountByLocation(String lid) throws JspTagException {
 		int count = 0;
-		LocationIterator theIterator = new LocationIterator();
+		LocationInIterator theIterator = new LocationInIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.location"
-						);
-
-			ResultSet crs = stat.executeQuery();
-
-			if (crs.next()) {
-				count = crs.getInt(1);
-			}
-			stat.close();
-		} catch (SQLException e) {
-			log.error("JDBC error generating Location iterator", e);
-			throw new JspTagException("Error: JDBC error generating Location iterator");
-		} finally {
-			theIterator.freeConnection();
-		}
-		return "" + count;
-	}
-
-	public static Boolean locationExists (String lid) throws JspTagException {
-		int count = 0;
-		LocationIterator theIterator = new LocationIterator();
-		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.location where 1=1"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.location_in where 1=1"
 						+ " and lid = ?"
 						);
 
@@ -69,8 +50,40 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating Location iterator", e);
-			throw new JspTagException("Error: JDBC error generating Location iterator");
+			log.error("JDBC error generating LocationIn iterator", e);
+			throw new JspTagException("Error: JDBC error generating LocationIn iterator");
+		} finally {
+			theIterator.freeConnection();
+		}
+		return "" + count;
+	}
+
+	public static Boolean locationHasLocationIn(String lid) throws JspTagException {
+		return ! locationInCountByLocation(lid).equals("0");
+	}
+
+	public static Boolean locationInExists (String estcId, String sublocationId, String locationId) throws JspTagException {
+		int count = 0;
+		LocationInIterator theIterator = new LocationInIterator();
+		try {
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.location_in where 1=1"
+						+ " and estc_id = ?"
+						+ " and sublocation_id = ?"
+						+ " and location_id = ?"
+						);
+
+			stat.setInt(1,Integer.parseInt(estcId));
+			stat.setInt(2,Integer.parseInt(sublocationId));
+			stat.setInt(3,Integer.parseInt(locationId));
+			ResultSet crs = stat.executeQuery();
+
+			if (crs.next()) {
+				count = crs.getInt(1);
+			}
+			stat.close();
+		} catch (SQLException e) {
+			log.error("JDBC error generating LocationIn iterator", e);
+			throw new JspTagException("Error: JDBC error generating LocationIn iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
@@ -78,7 +91,14 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
 	}
 
     public int doStartTag() throws JspException {
+		Location theLocation = (Location)findAncestorWithClass(this, Location.class);
+		if (theLocation!= null)
+			parentEntities.addElement(theLocation);
 
+		if (theLocation == null) {
+		} else {
+			sublocationId = theLocation.getLid();
+		}
 
 
       try {
@@ -86,7 +106,9 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
             int webapp_keySeq = 1;
             stat = getConnection().prepareStatement("SELECT count(*) from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
+                                                        + (sublocationId == 0 ? "" : " and sublocation_id = ?")
                                                         +  generateLimitCriteria());
+            if (sublocationId != 0) stat.setInt(webapp_keySeq++, sublocationId);
             rs = stat.executeQuery();
 
             if (rs.next()) {
@@ -96,18 +118,22 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
 
             //run select id query  
             webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("SELECT navigation.location.lid from " + generateFromClause() + " where 1=1"
+            stat = getConnection().prepareStatement("SELECT navigation.location_in.estc_id, navigation.location_in.sublocation_id, navigation.location_in.location_id from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
+                                                        + (sublocationId == 0 ? "" : " and sublocation_id = ?")
                                                         + " order by " + generateSortCriteria() + generateLimitCriteria());
+            if (sublocationId != 0) stat.setInt(webapp_keySeq++, sublocationId);
             rs = stat.executeQuery();
 
             if (rs.next()) {
-                lid = rs.getInt(1);
+                estcId = rs.getInt(1);
+                sublocationId = rs.getInt(2);
+                locationId = rs.getInt(3);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_INCLUDE;
             }
         } catch (SQLException e) {
-            log.error("JDBC error generating Location iterator: " + stat.toString(), e);
+            log.error("JDBC error generating LocationIn iterator: " + stat.toString(), e);
 
 			freeConnection();
 			clearServiceState();
@@ -116,10 +142,10 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating Location iterator: " + stat.toString());
+				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating LocationIn iterator: " + stat.toString());
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error generating Location iterator: " + stat.toString(),e);
+				throw new JspException("Error: JDBC error generating LocationIn iterator: " + stat.toString(),e);
 			}
 
         }
@@ -128,7 +154,7 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private String generateFromClause() {
-       StringBuffer theBuffer = new StringBuffer("navigation.location");
+       StringBuffer theBuffer = new StringBuffer("navigation.location_in");
       return theBuffer.toString();
     }
 
@@ -141,7 +167,7 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
         if (sortCriteria != null) {
             return sortCriteria;
         } else {
-            return "lid";
+            return "estc_id,sublocation_id,location_id";
         }
     }
 
@@ -156,12 +182,14 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
     public int doAfterBody() throws JspException {
         try {
             if (rs.next()) {
-                lid = rs.getInt(1);
+                estcId = rs.getInt(1);
+                sublocationId = rs.getInt(2);
+                locationId = rs.getInt(3);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_AGAIN;
             }
         } catch (SQLException e) {
-            log.error("JDBC error iterating across Location", e);
+            log.error("JDBC error iterating across LocationIn", e);
 
 			freeConnection();
 			clearServiceState();
@@ -170,10 +198,10 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error iterating across Location" + stat.toString());
+				pageContext.setAttribute("tagErrorMessage", "JDBC error iterating across LocationIn" + stat.toString());
 				return parent.doEndTag();
 			}else{
-				throw new JspException("JDBC error iterating across Location",e);
+				throw new JspException("JDBC error iterating across LocationIn",e);
 			}
 
         }
@@ -212,17 +240,17 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
             rs.close();
             stat.close();
         } catch (SQLException e) {
-            log.error("JDBC error ending Location iterator",e);
+            log.error("JDBC error ending LocationIn iterator",e);
 			freeConnection();
 
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving lid " + lid);
+				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving estcId " + estcId);
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error ending Location iterator",e);
+				throw new JspException("Error: JDBC error ending LocationIn iterator",e);
 			}
 
         } finally {
@@ -233,7 +261,9 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private void clearServiceState() {
-        lid = 0;
+        estcId = 0;
+        sublocationId = 0;
+        locationId = 0;
         parentEntities = new Vector<ESTCTagLibTagSupport>();
 
         this.rs = null;
@@ -269,15 +299,39 @@ public class LocationIterator extends ESTCTagLibBodyTagSupport {
 
 
 
-	public int getLid () {
-		return lid;
+	public int getEstcId () {
+		return estcId;
 	}
 
-	public void setLid (int lid) {
-		this.lid = lid;
+	public void setEstcId (int estcId) {
+		this.estcId = estcId;
 	}
 
-	public int getActualLid () {
-		return lid;
+	public int getActualEstcId () {
+		return estcId;
+	}
+
+	public int getSublocationId () {
+		return sublocationId;
+	}
+
+	public void setSublocationId (int sublocationId) {
+		this.sublocationId = sublocationId;
+	}
+
+	public int getActualSublocationId () {
+		return sublocationId;
+	}
+
+	public int getLocationId () {
+		return locationId;
+	}
+
+	public void setLocationId (int locationId) {
+		this.locationId = locationId;
+	}
+
+	public int getActualLocationId () {
+		return locationId;
 	}
 }

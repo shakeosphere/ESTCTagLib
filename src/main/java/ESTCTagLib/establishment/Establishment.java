@@ -27,7 +27,7 @@ public class Establishment extends ESTCTagLibTagSupport {
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	int ID = 0;
+	int eid = 0;
 	String establishment = null;
 
 	private String var = null;
@@ -42,18 +42,18 @@ public class Establishment extends ESTCTagLibTagSupport {
 			EstablishmentIterator theEstablishmentIterator = (EstablishmentIterator)findAncestorWithClass(this, EstablishmentIterator.class);
 
 			if (theEstablishmentIterator != null) {
-				ID = theEstablishmentIterator.getID();
+				eid = theEstablishmentIterator.getEid();
 			}
 
-			if (theEstablishmentIterator == null && ID == 0) {
-				// no ID was provided - the default is to assume that it is a new Establishment and to generate a new ID
-				ID = Sequence.generateID();
+			if (theEstablishmentIterator == null && eid == 0) {
+				// no eid was provided - the default is to assume that it is a new Establishment and to generate a new eid
+				eid = Sequence.generateID();
 				insertEntity();
 			} else {
-				// an iterator or ID was provided as an attribute - we need to load a Establishment from the database
+				// an iterator or eid was provided as an attribute - we need to load a Establishment from the database
 				boolean found = false;
-				PreparedStatement stmt = getConnection().prepareStatement("select establishment from navigation.establishment where id = ?");
-				stmt.setInt(1,ID);
+				PreparedStatement stmt = getConnection().prepareStatement("select establishment from navigation.establishment where eid = ?");
+				stmt.setInt(1,eid);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
 					if (establishment == null)
@@ -67,7 +67,7 @@ public class Establishment extends ESTCTagLibTagSupport {
 				}
 			}
 		} catch (SQLException e) {
-			log.error("JDBC error retrieving ID " + ID, e);
+			log.error("JDBC error retrieving eid " + eid, e);
 
 			freeConnection();
 			clearServiceState();
@@ -76,10 +76,10 @@ public class Establishment extends ESTCTagLibTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving ID " + ID);
+				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving eid " + eid);
 				return parent.doEndTag();
 			}else{
-				throw new JspException("JDBC error retrieving ID " + ID,e);
+				throw new JspException("JDBC error retrieving eid " + eid,e);
 			}
 
 		} finally {
@@ -136,9 +136,9 @@ public class Establishment extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.establishment set establishment = ? where id = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.establishment set establishment = ? where eid = ?");
 				stmt.setString(1,establishment);
-				stmt.setInt(2,ID);
+				stmt.setInt(2,eid);
 				stmt.executeUpdate();
 				stmt.close();
 			}
@@ -166,32 +166,32 @@ public class Establishment extends ESTCTagLibTagSupport {
 	}
 
 	public void insertEntity() throws JspException, SQLException {
-		if (ID == 0) {
-			ID = Sequence.generateID();
-			log.debug("generating new Establishment " + ID);
+		if (eid == 0) {
+			eid = Sequence.generateID();
+			log.debug("generating new Establishment " + eid);
 		}
 
 		if (establishment == null){
 			establishment = "";
 		}
-		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.establishment(id,establishment) values (?,?)");
-		stmt.setInt(1,ID);
+		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.establishment(eid,establishment) values (?,?)");
+		stmt.setInt(1,eid);
 		stmt.setString(2,establishment);
 		stmt.executeUpdate();
 		stmt.close();
 		freeConnection();
 	}
 
-	public int getID () {
-		return ID;
+	public int getEid () {
+		return eid;
 	}
 
-	public void setID (int ID) {
-		this.ID = ID;
+	public void setEid (int eid) {
+		this.eid = eid;
 	}
 
-	public int getActualID () {
-		return ID;
+	public int getActualEid () {
+		return eid;
 	}
 
 	public String getEstablishment () {
@@ -222,11 +222,11 @@ public class Establishment extends ESTCTagLibTagSupport {
 		return var;
 	}
 
-	public static Integer IDValue() throws JspException {
+	public static Integer eidValue() throws JspException {
 		try {
-			return currentInstance.getID();
+			return currentInstance.getEid();
 		} catch (Exception e) {
-			 throw new JspTagException("Error in tag function IDValue()");
+			 throw new JspTagException("Error in tag function eidValue()");
 		}
 	}
 
@@ -239,7 +239,7 @@ public class Establishment extends ESTCTagLibTagSupport {
 	}
 
 	private void clearServiceState () {
-		ID = 0;
+		eid = 0;
 		establishment = null;
 		newRecord = false;
 		commitNeeded = false;

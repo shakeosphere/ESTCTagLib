@@ -10,68 +10,68 @@ import org.apache.commons.logging.LogFactory;
 import ESTCTagLib.ESTCTagLibTagSupport;
 
 @SuppressWarnings("serial")
-public class LocationLabel extends ESTCTagLibTagSupport {
+public class LocationLocation extends ESTCTagLibTagSupport {
 
-	private static final Log log = LogFactory.getLog(LocationLabel.class);
+	private static final Log log = LogFactory.getLog(LocationLocation.class);
 
 	public int doStartTag() throws JspException {
 		try {
 			Location theLocation = (Location)findAncestorWithClass(this, Location.class);
 			if (!theLocation.commitNeeded) {
-				pageContext.getOut().print(theLocation.getLabel());
+				pageContext.getOut().print(theLocation.getLocation());
 			}
 		} catch (Exception e) {
-			log.error("Can't find enclosing Location for label tag ", e);
+			log.error("Can't find enclosing Location for location tag ", e);
 			freeConnection();
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Location for label tag ");
+				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Location for location tag ");
 				return parent.doEndTag();
 			}else{
-				throw new JspTagException("Error: Can't find enclosing Location for label tag ");
+				throw new JspTagException("Error: Can't find enclosing Location for location tag ");
 			}
 
 		}
 		return SKIP_BODY;
 	}
 
-	public String getLabel() throws JspException {
+	public String getLocation() throws JspException {
 		try {
 			Location theLocation = (Location)findAncestorWithClass(this, Location.class);
-			return theLocation.getLabel();
+			return theLocation.getLocation();
 		} catch (Exception e) {
-			log.error("Can't find enclosing Location for label tag ", e);
+			log.error("Can't find enclosing Location for location tag ", e);
 			freeConnection();
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Location for label tag ");
+				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Location for location tag ");
 				parent.doEndTag();
 				return null;
 			}else{
-				throw new JspTagException("Error: Can't find enclosing Location for label tag ");
+				throw new JspTagException("Error: Can't find enclosing Location for location tag ");
 			}
 		}
 	}
 
-	public void setLabel(String label) throws JspException {
+	public void setLocation(String location) throws JspException {
 		try {
 			Location theLocation = (Location)findAncestorWithClass(this, Location.class);
-			theLocation.setLabel(label);
+			theLocation.setLocation(location);
 		} catch (Exception e) {
-			log.error("Can't find enclosing Location for label tag ", e);
+			log.error("Can't find enclosing Location for location tag ", e);
 			freeConnection();
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Location for label tag ");
+				pageContext.setAttribute("tagErrorMessage", "Error: Can't find enclosing Location for location tag ");
 				parent.doEndTag();
 			}else{
-				throw new JspTagException("Error: Can't find enclosing Location for label tag ");
+				throw new JspTagException("Error: Can't find enclosing Location for location tag ");
 			}
 		}
 	}

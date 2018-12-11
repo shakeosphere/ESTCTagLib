@@ -17,7 +17,7 @@ import ESTCTagLib.ESTCTagLibBodyTagSupport;
 
 @SuppressWarnings("serial")
 public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
-    int ID = 0;
+    int eid = 0;
     String establishment = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -53,15 +53,15 @@ public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
 		return "" + count;
 	}
 
-	public static Boolean establishmentExists (String ID) throws JspTagException {
+	public static Boolean establishmentExists (String eid) throws JspTagException {
 		int count = 0;
 		EstablishmentIterator theIterator = new EstablishmentIterator();
 		try {
 			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.establishment where 1=1"
-						+ " and id = ?"
+						+ " and eid = ?"
 						);
 
-			stat.setInt(1,Integer.parseInt(ID));
+			stat.setInt(1,Integer.parseInt(eid));
 			ResultSet crs = stat.executeQuery();
 
 			if (crs.next()) {
@@ -96,13 +96,13 @@ public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
 
             //run select id query  
             webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("SELECT navigation.establishment.id from " + generateFromClause() + " where 1=1"
+            stat = getConnection().prepareStatement("SELECT navigation.establishment.eid from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
                                                         + " order by " + generateSortCriteria() + generateLimitCriteria());
             rs = stat.executeQuery();
 
             if (rs.next()) {
-                ID = rs.getInt(1);
+                eid = rs.getInt(1);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_INCLUDE;
             }
@@ -141,7 +141,7 @@ public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
         if (sortCriteria != null) {
             return sortCriteria;
         } else {
-            return "id";
+            return "eid";
         }
     }
 
@@ -156,7 +156,7 @@ public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
     public int doAfterBody() throws JspException {
         try {
             if (rs.next()) {
-                ID = rs.getInt(1);
+                eid = rs.getInt(1);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_AGAIN;
             }
@@ -219,7 +219,7 @@ public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving ID " + ID);
+				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving eid " + eid);
 				return parent.doEndTag();
 			}else{
 				throw new JspException("Error: JDBC error ending Establishment iterator",e);
@@ -233,7 +233,7 @@ public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private void clearServiceState() {
-        ID = 0;
+        eid = 0;
         parentEntities = new Vector<ESTCTagLibTagSupport>();
 
         this.rs = null;
@@ -269,15 +269,15 @@ public class EstablishmentIterator extends ESTCTagLibBodyTagSupport {
 
 
 
-	public int getID () {
-		return ID;
+	public int getEid () {
+		return eid;
 	}
 
-	public void setID (int ID) {
-		this.ID = ID;
+	public void setEid (int eid) {
+		this.eid = eid;
 	}
 
-	public int getActualID () {
-		return ID;
+	public int getActualEid () {
+		return eid;
 	}
 }

@@ -16,7 +16,7 @@ import ESTCTagLib.ESTCTagLibBodyTagSupport;
 
 @SuppressWarnings("serial")
 public class EstablishmentDeleter extends ESTCTagLibBodyTagSupport {
-    int ID = 0;
+    int eid = 0;
     String establishment = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -35,8 +35,8 @@ public class EstablishmentDeleter extends ESTCTagLibBodyTagSupport {
         try {
             int webapp_keySeq = 1;
             stat = getConnection().prepareStatement("DELETE from navigation.establishment where 1=1"
-                                                        + (ID == 0 ? "" : " and id = ? "));
-            if (ID != 0) stat.setInt(webapp_keySeq++, ID);
+                                                        + (eid == 0 ? "" : " and eid = ? "));
+            if (eid != 0) stat.setInt(webapp_keySeq++, eid);
             stat.execute();
 
 			webapp_keySeq = 1;
@@ -89,7 +89,7 @@ public class EstablishmentDeleter extends ESTCTagLibBodyTagSupport {
 	}
 
     private void clearServiceState() {
-        ID = 0;
+        eid = 0;
         parentEntities = new Vector<ESTCTagLibTagSupport>();
 
         this.rs = null;
@@ -107,15 +107,15 @@ public class EstablishmentDeleter extends ESTCTagLibBodyTagSupport {
 
 
 
-	public int getID () {
-		return ID;
+	public int getEid () {
+		return eid;
 	}
 
-	public void setID (int ID) {
-		this.ID = ID;
+	public void setEid (int eid) {
+		this.eid = eid;
 	}
 
-	public int getActualID () {
-		return ID;
+	public int getActualEid () {
+		return eid;
 	}
 }

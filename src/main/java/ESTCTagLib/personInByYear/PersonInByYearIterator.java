@@ -1,4 +1,4 @@
-package ESTCTagLib.locatedByYear;
+package ESTCTagLib.personInByYear;
 
 
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ import ESTCTagLib.person.Person;
 import ESTCTagLib.location.Location;
 
 @SuppressWarnings("serial")
-public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
+public class PersonInByYearIterator extends ESTCTagLibBodyTagSupport {
     int pid = 0;
     int lid = 0;
     int pubyear = 0;
@@ -26,7 +26,7 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
     int count = 0;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(LocatedByYearIterator.class);
+	private static final Log log = LogFactory.getLog(PersonInByYearIterator.class);
 
 
     PreparedStatement stat = null;
@@ -39,11 +39,11 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
    boolean usePerson = false;
    boolean useLocation = false;
 
-	public static String locatedByYearCountByPerson(String pid) throws JspTagException {
+	public static String personInByYearCountByPerson(String pid) throws JspTagException {
 		int count = 0;
-		LocatedByYearIterator theIterator = new LocatedByYearIterator();
+		PersonInByYearIterator theIterator = new PersonInByYearIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.located_by_year where 1=1"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_in_by_year where 1=1"
 						+ " and pid = ?"
 						);
 
@@ -55,23 +55,23 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating LocatedByYear iterator", e);
-			throw new JspTagException("Error: JDBC error generating LocatedByYear iterator");
+			log.error("JDBC error generating PersonInByYear iterator", e);
+			throw new JspTagException("Error: JDBC error generating PersonInByYear iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
 		return "" + count;
 	}
 
-	public static Boolean personHasLocatedByYear(String pid) throws JspTagException {
-		return ! locatedByYearCountByPerson(pid).equals("0");
+	public static Boolean personHasPersonInByYear(String pid) throws JspTagException {
+		return ! personInByYearCountByPerson(pid).equals("0");
 	}
 
-	public static String locatedByYearCountByLocation(String lid) throws JspTagException {
+	public static String personInByYearCountByLocation(String lid) throws JspTagException {
 		int count = 0;
-		LocatedByYearIterator theIterator = new LocatedByYearIterator();
+		PersonInByYearIterator theIterator = new PersonInByYearIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.located_by_year where 1=1"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_in_by_year where 1=1"
 						+ " and lid = ?"
 						);
 
@@ -83,23 +83,23 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating LocatedByYear iterator", e);
-			throw new JspTagException("Error: JDBC error generating LocatedByYear iterator");
+			log.error("JDBC error generating PersonInByYear iterator", e);
+			throw new JspTagException("Error: JDBC error generating PersonInByYear iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
 		return "" + count;
 	}
 
-	public static Boolean locationHasLocatedByYear(String lid) throws JspTagException {
-		return ! locatedByYearCountByLocation(lid).equals("0");
+	public static Boolean locationHasPersonInByYear(String lid) throws JspTagException {
+		return ! personInByYearCountByLocation(lid).equals("0");
 	}
 
-	public static Boolean locatedByYearExists (String pid, String lid, String pubyear, String locational) throws JspTagException {
+	public static Boolean personInByYearExists (String pid, String lid, String pubyear, String locational) throws JspTagException {
 		int count = 0;
-		LocatedByYearIterator theIterator = new LocatedByYearIterator();
+		PersonInByYearIterator theIterator = new PersonInByYearIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.located_by_year where 1=1"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_in_by_year where 1=1"
 						+ " and pid = ?"
 						+ " and lid = ?"
 						+ " and pubyear = ?"
@@ -117,8 +117,8 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating LocatedByYear iterator", e);
-			throw new JspTagException("Error: JDBC error generating LocatedByYear iterator");
+			log.error("JDBC error generating PersonInByYear iterator", e);
+			throw new JspTagException("Error: JDBC error generating PersonInByYear iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
@@ -127,9 +127,9 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 
 	public static Boolean personLocationExists (String pid, String lid) throws JspTagException {
 		int count = 0;
-		LocatedByYearIterator theIterator = new LocatedByYearIterator();
+		PersonInByYearIterator theIterator = new PersonInByYearIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.located_by_year where 1=1"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_in_by_year where 1=1"
 						+ " and pid = ?"
 						+ " and lid = ?"
 						);
@@ -143,8 +143,8 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating LocatedByYear iterator", e);
-			throw new JspTagException("Error: JDBC error generating LocatedByYear iterator");
+			log.error("JDBC error generating PersonInByYear iterator", e);
+			throw new JspTagException("Error: JDBC error generating PersonInByYear iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
@@ -188,7 +188,7 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 
             //run select id query  
             webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("SELECT navigation.located_by_year.pid, navigation.located_by_year.lid, navigation.located_by_year.pubyear, navigation.located_by_year.locational from " + generateFromClause() + " where 1=1"
+            stat = getConnection().prepareStatement("SELECT navigation.person_in_by_year.pid, navigation.person_in_by_year.lid, navigation.person_in_by_year.pubyear, navigation.person_in_by_year.locational from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
                                                         + (pid == 0 ? "" : " and pid = ?")
                                                         + (lid == 0 ? "" : " and lid = ?")
@@ -206,7 +206,7 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
                 return EVAL_BODY_INCLUDE;
             }
         } catch (SQLException e) {
-            log.error("JDBC error generating LocatedByYear iterator: " + stat.toString(), e);
+            log.error("JDBC error generating PersonInByYear iterator: " + stat.toString(), e);
 
 			freeConnection();
 			clearServiceState();
@@ -215,10 +215,10 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating LocatedByYear iterator: " + stat.toString());
+				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating PersonInByYear iterator: " + stat.toString());
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error generating LocatedByYear iterator: " + stat.toString(),e);
+				throw new JspException("Error: JDBC error generating PersonInByYear iterator: " + stat.toString(),e);
 			}
 
         }
@@ -227,7 +227,7 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private String generateFromClause() {
-       StringBuffer theBuffer = new StringBuffer("navigation.located_by_year");
+       StringBuffer theBuffer = new StringBuffer("navigation.person_in_by_year");
        if (usePerson)
           theBuffer.append(", navigation.person");
        if (useLocation)
@@ -239,9 +239,9 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
     private String generateJoinCriteria() {
        StringBuffer theBuffer = new StringBuffer();
        if (usePerson)
-          theBuffer.append(" and person.pid = located_by_year.null");
+          theBuffer.append(" and person.pid = person_in_by_year.null");
        if (useLocation)
-          theBuffer.append(" and location.lid = located_by_year.null");
+          theBuffer.append(" and location.lid = person_in_by_year.null");
 
       return theBuffer.toString();
     }
@@ -273,7 +273,7 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
                 return EVAL_BODY_AGAIN;
             }
         } catch (SQLException e) {
-            log.error("JDBC error iterating across LocatedByYear", e);
+            log.error("JDBC error iterating across PersonInByYear", e);
 
 			freeConnection();
 			clearServiceState();
@@ -282,10 +282,10 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error iterating across LocatedByYear" + stat.toString());
+				pageContext.setAttribute("tagErrorMessage", "JDBC error iterating across PersonInByYear" + stat.toString());
 				return parent.doEndTag();
 			}else{
-				throw new JspException("JDBC error iterating across LocatedByYear",e);
+				throw new JspException("JDBC error iterating across PersonInByYear",e);
 			}
 
         }
@@ -324,7 +324,7 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
             rs.close();
             stat.close();
         } catch (SQLException e) {
-            log.error("JDBC error ending LocatedByYear iterator",e);
+            log.error("JDBC error ending PersonInByYear iterator",e);
 			freeConnection();
 
 			Tag parent = getParent();
@@ -334,7 +334,7 @@ public class LocatedByYearIterator extends ESTCTagLibBodyTagSupport {
 				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving pubyear " + pubyear);
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error ending LocatedByYear iterator",e);
+				throw new JspException("Error: JDBC error ending PersonInByYear iterator",e);
 			}
 
         } finally {

@@ -1,4 +1,4 @@
-package ESTCTagLib.locatedByYear;
+package ESTCTagLib.personInByYear;
 
 
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import ESTCTagLib.person.Person;
 import ESTCTagLib.location.Location;
 
 @SuppressWarnings("serial")
-public class LocatedByYearDeleter extends ESTCTagLibBodyTagSupport {
+public class PersonInByYearDeleter extends ESTCTagLibBodyTagSupport {
     int pid = 0;
     int lid = 0;
     int pubyear = 0;
@@ -25,7 +25,7 @@ public class LocatedByYearDeleter extends ESTCTagLibBodyTagSupport {
     int count = 0;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(LocatedByYearDeleter.class);
+	private static final Log log = LogFactory.getLog(PersonInByYearDeleter.class);
 
 
     ResultSet rs = null;
@@ -53,7 +53,7 @@ public class LocatedByYearDeleter extends ESTCTagLibBodyTagSupport {
         PreparedStatement stat;
         try {
             int webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("DELETE from navigation.located_by_year where 1=1"
+            stat = getConnection().prepareStatement("DELETE from navigation.person_in_by_year where 1=1"
                                                         + (pid == 0 ? "" : " and pid = ? ")
                                                         + (lid == 0 ? "" : " and lid = ? ")
                                                         + (pubyear == 0 ? "" : " and pubyear = ? ")
@@ -70,7 +70,7 @@ public class LocatedByYearDeleter extends ESTCTagLibBodyTagSupport {
 
 			webapp_keySeq = 1;
         } catch (SQLException e) {
-            log.error("JDBC error generating LocatedByYear deleter", e);
+            log.error("JDBC error generating PersonInByYear deleter", e);
 
 			clearServiceState();
 			freeConnection();
@@ -79,10 +79,10 @@ public class LocatedByYearDeleter extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating LocatedByYear deleter");
+				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating PersonInByYear deleter");
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error generating LocatedByYear deleter",e);
+				throw new JspException("Error: JDBC error generating PersonInByYear deleter",e);
 			}
 
         } finally {

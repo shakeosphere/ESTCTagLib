@@ -50,7 +50,7 @@ public class EstablishmentIn extends ESTCTagLibTagSupport {
 
 			if (theEstablishment == null) {
 			} else {
-				establishmentId = theEstablishment.getID();
+				establishmentId = theEstablishment.getEid();
 			}
 			if (theLocation == null) {
 			} else {
