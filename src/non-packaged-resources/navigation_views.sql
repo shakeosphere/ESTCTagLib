@@ -72,9 +72,10 @@ create index eid on navigation.establishment(eid);
 create index eest on navigation.establishment(establishment);
 analyze navigation.location;
 
--- map in the publication table
+-- map in the publication tables
 
-create view navigation.publication as select * from estc.publication;
+create view navigation.record as select * from estc_marc.record;
+create view navigation.publication as select * from estc_marc.publication;
 
 -- map in the user table for authority attribution
 
@@ -115,7 +116,7 @@ create index lbyl on navigation.person_in_by_year(lid);
 analyze navigation.person_in_by_year;
 
 create materialized view navigation.location_in_by_year as
-select all_roles.person_id, location_id as parent_id, pubdate as pubyear, locational,sublocation_id as location_id,location,count(*)
+select all_roles.person_id, sublocation_id, pubdate as pubyear, locational,location_id,location,count(*)
 		from navigation.location_in,navigation.location,estc.pub_year,navigation.all_roles
 		where location_in.sublocation_id=location.lid
 			and location_in.estc_id=pub_year.id

@@ -43,7 +43,7 @@ public class PersonInIterator extends ESTCTagLibBodyTagSupport {
 		PersonInIterator theIterator = new PersonInIterator();
 		try {
 			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_in where 1=1"
-						+ " and lid = ?"
+						+ " and location_id = ?"
 						);
 
 			stat.setInt(1,Integer.parseInt(lid));
