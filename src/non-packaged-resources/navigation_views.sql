@@ -104,6 +104,13 @@ create index lil on navigation.location_in(sublocation_id);
 create index lip on navigation.location_in(location_id);
 analyze navigation.location_in;
 
+create table navigation.establishment_in(estc_id int, establishment_id int, location_id int, locational text);
+insert into navigation.establishment_in select distinct estc_id,establishment_id,location_id,locational from extraction.establishment_in where establishment_id > 0 and location_id > 0;
+create index eie on navigation.establishment_in(estc_id);
+create index eil on navigation.establishment_in(establishment_id);
+create index eip on navigation.establishment_in(location_id);
+analyze navigation.establishment_in;
+
 -- generate analytic views
 
 create materialized view navigation.person_in_by_year as
@@ -134,6 +141,14 @@ select estc_id as id, locational, location_id, location, count(*)
 	group by 1,2,3,4;
 create index locid on navigation.locator(id);
 analyze navigation.locator;
+
+create materialized view navigation.establisher as
+select estc_id as id, locational, establishment_id, establishment, count(*)
+	from navigation.establishment_in, navigation.establishment
+	where establishment_in.establishment_id=establishment.eid
+	group by 1,2,3,4;
+create index estid on navigation.establisher(id);
+analyze navigation.establisher;
 
 create materialized view navigation.sublocator as
 select estc_id as id, location_id, locational, sublocation_id, location, count(*)
