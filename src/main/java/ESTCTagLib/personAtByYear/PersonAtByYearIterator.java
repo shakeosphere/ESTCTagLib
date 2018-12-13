@@ -1,4 +1,4 @@
-package ESTCTagLib.personAt;
+package ESTCTagLib.personAtByYear;
 
 
 import java.sql.PreparedStatement;
@@ -14,18 +14,19 @@ import javax.servlet.jsp.tagext.Tag;
 
 import ESTCTagLib.ESTCTagLibTagSupport;
 import ESTCTagLib.ESTCTagLibBodyTagSupport;
-import ESTCTagLib.establishment.Establishment;
 import ESTCTagLib.person.Person;
+import ESTCTagLib.establishment.Establishment;
 
 @SuppressWarnings("serial")
-public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
-    int estcId = 0;
-    int establishmentId = 0;
-    int personId = 0;
+public class PersonAtByYearIterator extends ESTCTagLibBodyTagSupport {
+    int pid = 0;
+    int eid = 0;
+    int pubyear = 0;
     String locational = null;
+    int count = 0;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(PersonAtIterator.class);
+	private static final Log log = LogFactory.getLog(PersonAtByYearIterator.class);
 
 
     PreparedStatement stat = null;
@@ -35,42 +36,14 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
     String var = null;
     int rsCount = 0;
 
-   boolean useEstablishment = false;
    boolean usePerson = false;
+   boolean useEstablishment = false;
 
-	public static String personAtCountByEstablishment(String eid) throws JspTagException {
+	public static String personAtByYearCountByPerson(String pid) throws JspTagException {
 		int count = 0;
-		PersonAtIterator theIterator = new PersonAtIterator();
+		PersonAtByYearIterator theIterator = new PersonAtByYearIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at where 1=1"
-						+ " and establishment_id = ?"
-						);
-
-			stat.setInt(1,Integer.parseInt(eid));
-			ResultSet crs = stat.executeQuery();
-
-			if (crs.next()) {
-				count = crs.getInt(1);
-			}
-			stat.close();
-		} catch (SQLException e) {
-			log.error("JDBC error generating PersonAt iterator", e);
-			throw new JspTagException("Error: JDBC error generating PersonAt iterator");
-		} finally {
-			theIterator.freeConnection();
-		}
-		return "" + count;
-	}
-
-	public static Boolean establishmentHasPersonAt(String eid) throws JspTagException {
-		return ! personAtCountByEstablishment(eid).equals("0");
-	}
-
-	public static String personAtCountByPerson(String pid) throws JspTagException {
-		int count = 0;
-		PersonAtIterator theIterator = new PersonAtIterator();
-		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at where 1=1"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at_by_year where 1=1"
 						+ " and pid = ?"
 						);
 
@@ -82,31 +55,27 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating PersonAt iterator", e);
-			throw new JspTagException("Error: JDBC error generating PersonAt iterator");
+			log.error("JDBC error generating PersonAtByYear iterator", e);
+			throw new JspTagException("Error: JDBC error generating PersonAtByYear iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
 		return "" + count;
 	}
 
-	public static Boolean personHasPersonAt(String pid) throws JspTagException {
-		return ! personAtCountByPerson(pid).equals("0");
+	public static Boolean personHasPersonAtByYear(String pid) throws JspTagException {
+		return ! personAtByYearCountByPerson(pid).equals("0");
 	}
 
-	public static Boolean personAtExists (String estcId, String establishmentId, String personId) throws JspTagException {
+	public static String personAtByYearCountByEstablishment(String eid) throws JspTagException {
 		int count = 0;
-		PersonAtIterator theIterator = new PersonAtIterator();
+		PersonAtByYearIterator theIterator = new PersonAtByYearIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at where 1=1"
-						+ " and estc_id = ?"
-						+ " and establishment_id = ?"
-						+ " and person_id = ?"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at_by_year where 1=1"
+						+ " and eid = ?"
 						);
 
-			stat.setInt(1,Integer.parseInt(estcId));
-			stat.setInt(2,Integer.parseInt(establishmentId));
-			stat.setInt(3,Integer.parseInt(personId));
+			stat.setInt(1,Integer.parseInt(eid));
 			ResultSet crs = stat.executeQuery();
 
 			if (crs.next()) {
@@ -114,25 +83,59 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating PersonAt iterator", e);
-			throw new JspTagException("Error: JDBC error generating PersonAt iterator");
+			log.error("JDBC error generating PersonAtByYear iterator", e);
+			throw new JspTagException("Error: JDBC error generating PersonAtByYear iterator");
+		} finally {
+			theIterator.freeConnection();
+		}
+		return "" + count;
+	}
+
+	public static Boolean establishmentHasPersonAtByYear(String eid) throws JspTagException {
+		return ! personAtByYearCountByEstablishment(eid).equals("0");
+	}
+
+	public static Boolean personAtByYearExists (String pid, String eid, String pubyear, String locational) throws JspTagException {
+		int count = 0;
+		PersonAtByYearIterator theIterator = new PersonAtByYearIterator();
+		try {
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at_by_year where 1=1"
+						+ " and pid = ?"
+						+ " and eid = ?"
+						+ " and pubyear = ?"
+						+ " and locational = ?"
+						);
+
+			stat.setInt(1,Integer.parseInt(pid));
+			stat.setInt(2,Integer.parseInt(eid));
+			stat.setInt(3,Integer.parseInt(pubyear));
+			stat.setString(4,locational);
+			ResultSet crs = stat.executeQuery();
+
+			if (crs.next()) {
+				count = crs.getInt(1);
+			}
+			stat.close();
+		} catch (SQLException e) {
+			log.error("JDBC error generating PersonAtByYear iterator", e);
+			throw new JspTagException("Error: JDBC error generating PersonAtByYear iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
 		return count > 0;
 	}
 
-	public static Boolean establishmentPersonExists (String eid, String pid) throws JspTagException {
+	public static Boolean personEstablishmentExists (String pid, String eid) throws JspTagException {
 		int count = 0;
-		PersonAtIterator theIterator = new PersonAtIterator();
+		PersonAtByYearIterator theIterator = new PersonAtByYearIterator();
 		try {
-			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at where 1=1"
-						+ " and eid = ?"
+			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.person_at_by_year where 1=1"
 						+ " and pid = ?"
+						+ " and eid = ?"
 						);
 
-			stat.setInt(1,Integer.parseInt(eid));
-			stat.setInt(2,Integer.parseInt(pid));
+			stat.setInt(1,Integer.parseInt(pid));
+			stat.setInt(2,Integer.parseInt(eid));
 			ResultSet crs = stat.executeQuery();
 
 			if (crs.next()) {
@@ -140,8 +143,8 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 			}
 			stat.close();
 		} catch (SQLException e) {
-			log.error("JDBC error generating PersonAt iterator", e);
-			throw new JspTagException("Error: JDBC error generating PersonAt iterator");
+			log.error("JDBC error generating PersonAtByYear iterator", e);
+			throw new JspTagException("Error: JDBC error generating PersonAtByYear iterator");
 		} finally {
 			theIterator.freeConnection();
 		}
@@ -149,20 +152,20 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 	}
 
     public int doStartTag() throws JspException {
-		Establishment theEstablishment = (Establishment)findAncestorWithClass(this, Establishment.class);
-		if (theEstablishment!= null)
-			parentEntities.addElement(theEstablishment);
 		Person thePerson = (Person)findAncestorWithClass(this, Person.class);
 		if (thePerson!= null)
 			parentEntities.addElement(thePerson);
+		Establishment theEstablishment = (Establishment)findAncestorWithClass(this, Establishment.class);
+		if (theEstablishment!= null)
+			parentEntities.addElement(theEstablishment);
 
-		if (theEstablishment == null) {
-		} else {
-			establishmentId = theEstablishment.getEid();
-		}
 		if (thePerson == null) {
 		} else {
-			personId = thePerson.getPid();
+			pid = thePerson.getPid();
+		}
+		if (theEstablishment == null) {
+		} else {
+			eid = theEstablishment.getEid();
 		}
 
 
@@ -171,11 +174,11 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
             int webapp_keySeq = 1;
             stat = getConnection().prepareStatement("SELECT count(*) from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
-                                                        + (establishmentId == 0 ? "" : " and establishment_id = ?")
-                                                        + (personId == 0 ? "" : " and person_id = ?")
+                                                        + (pid == 0 ? "" : " and pid = ?")
+                                                        + (eid == 0 ? "" : " and eid = ?")
                                                         +  generateLimitCriteria());
-            if (establishmentId != 0) stat.setInt(webapp_keySeq++, establishmentId);
-            if (personId != 0) stat.setInt(webapp_keySeq++, personId);
+            if (pid != 0) stat.setInt(webapp_keySeq++, pid);
+            if (eid != 0) stat.setInt(webapp_keySeq++, eid);
             rs = stat.executeQuery();
 
             if (rs.next()) {
@@ -185,24 +188,25 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 
             //run select id query  
             webapp_keySeq = 1;
-            stat = getConnection().prepareStatement("SELECT navigation.person_at.estc_id, navigation.person_at.establishment_id, navigation.person_at.person_id from " + generateFromClause() + " where 1=1"
+            stat = getConnection().prepareStatement("SELECT navigation.person_at_by_year.pid, navigation.person_at_by_year.eid, navigation.person_at_by_year.pubyear, navigation.person_at_by_year.locational from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
-                                                        + (establishmentId == 0 ? "" : " and establishment_id = ?")
-                                                        + (personId == 0 ? "" : " and person_id = ?")
+                                                        + (pid == 0 ? "" : " and pid = ?")
+                                                        + (eid == 0 ? "" : " and eid = ?")
                                                         + " order by " + generateSortCriteria() + generateLimitCriteria());
-            if (establishmentId != 0) stat.setInt(webapp_keySeq++, establishmentId);
-            if (personId != 0) stat.setInt(webapp_keySeq++, personId);
+            if (pid != 0) stat.setInt(webapp_keySeq++, pid);
+            if (eid != 0) stat.setInt(webapp_keySeq++, eid);
             rs = stat.executeQuery();
 
             if (rs.next()) {
-                estcId = rs.getInt(1);
-                establishmentId = rs.getInt(2);
-                personId = rs.getInt(3);
+                pid = rs.getInt(1);
+                eid = rs.getInt(2);
+                pubyear = rs.getInt(3);
+                locational = rs.getString(4);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_INCLUDE;
             }
         } catch (SQLException e) {
-            log.error("JDBC error generating PersonAt iterator: " + stat.toString(), e);
+            log.error("JDBC error generating PersonAtByYear iterator: " + stat.toString(), e);
 
 			freeConnection();
 			clearServiceState();
@@ -211,10 +215,10 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating PersonAt iterator: " + stat.toString());
+				pageContext.setAttribute("tagErrorMessage", "Error: JDBC error generating PersonAtByYear iterator: " + stat.toString());
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error generating PersonAt iterator: " + stat.toString(),e);
+				throw new JspException("Error: JDBC error generating PersonAtByYear iterator: " + stat.toString(),e);
 			}
 
         }
@@ -223,21 +227,21 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private String generateFromClause() {
-       StringBuffer theBuffer = new StringBuffer("navigation.person_at");
-       if (useEstablishment)
-          theBuffer.append(", navigation.establishment");
+       StringBuffer theBuffer = new StringBuffer("navigation.person_at_by_year");
        if (usePerson)
           theBuffer.append(", navigation.person");
+       if (useEstablishment)
+          theBuffer.append(", navigation.establishment");
 
       return theBuffer.toString();
     }
 
     private String generateJoinCriteria() {
        StringBuffer theBuffer = new StringBuffer();
-       if (useEstablishment)
-          theBuffer.append(" and establishment.eid = person_at.null");
        if (usePerson)
-          theBuffer.append(" and person.pid = person_at.null");
+          theBuffer.append(" and person.pid = person_at_by_year.null");
+       if (useEstablishment)
+          theBuffer.append(" and establishment.eid = person_at_by_year.null");
 
       return theBuffer.toString();
     }
@@ -246,7 +250,7 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
         if (sortCriteria != null) {
             return sortCriteria;
         } else {
-            return "estc_id,establishment_id,person_id";
+            return "pid,eid,pubyear,locational";
         }
     }
 
@@ -261,14 +265,15 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
     public int doAfterBody() throws JspException {
         try {
             if (rs.next()) {
-                estcId = rs.getInt(1);
-                establishmentId = rs.getInt(2);
-                personId = rs.getInt(3);
+                pid = rs.getInt(1);
+                eid = rs.getInt(2);
+                pubyear = rs.getInt(3);
+                locational = rs.getString(4);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_AGAIN;
             }
         } catch (SQLException e) {
-            log.error("JDBC error iterating across PersonAt", e);
+            log.error("JDBC error iterating across PersonAtByYear", e);
 
 			freeConnection();
 			clearServiceState();
@@ -277,10 +282,10 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error iterating across PersonAt" + stat.toString());
+				pageContext.setAttribute("tagErrorMessage", "JDBC error iterating across PersonAtByYear" + stat.toString());
 				return parent.doEndTag();
 			}else{
-				throw new JspException("JDBC error iterating across PersonAt",e);
+				throw new JspException("JDBC error iterating across PersonAtByYear",e);
 			}
 
         }
@@ -319,17 +324,17 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
             rs.close();
             stat.close();
         } catch (SQLException e) {
-            log.error("JDBC error ending PersonAt iterator",e);
+            log.error("JDBC error ending PersonAtByYear iterator",e);
 			freeConnection();
 
 			Tag parent = getParent();
 			if(parent != null){
 				pageContext.setAttribute("tagError", true);
 				pageContext.setAttribute("tagErrorException", e);
-				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving estcId " + estcId);
+				pageContext.setAttribute("tagErrorMessage", "JDBC error retrieving pubyear " + pubyear);
 				return parent.doEndTag();
 			}else{
-				throw new JspException("Error: JDBC error ending PersonAt iterator",e);
+				throw new JspException("Error: JDBC error ending PersonAtByYear iterator",e);
 			}
 
         } finally {
@@ -340,9 +345,10 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
     }
 
     private void clearServiceState() {
-        estcId = 0;
-        establishmentId = 0;
-        personId = 0;
+        pid = 0;
+        eid = 0;
+        pubyear = 0;
+        locational = null;
         parentEntities = new Vector<ESTCTagLibTagSupport>();
 
         this.rs = null;
@@ -377,14 +383,6 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
     }
 
 
-   public boolean getUseEstablishment() {
-        return useEstablishment;
-    }
-
-    public void setUseEstablishment(boolean useEstablishment) {
-        this.useEstablishment = useEstablishment;
-    }
-
    public boolean getUsePerson() {
         return usePerson;
     }
@@ -393,41 +391,61 @@ public class PersonAtIterator extends ESTCTagLibBodyTagSupport {
         this.usePerson = usePerson;
     }
 
+   public boolean getUseEstablishment() {
+        return useEstablishment;
+    }
+
+    public void setUseEstablishment(boolean useEstablishment) {
+        this.useEstablishment = useEstablishment;
+    }
 
 
-	public int getEstcId () {
-		return estcId;
+
+	public int getPid () {
+		return pid;
 	}
 
-	public void setEstcId (int estcId) {
-		this.estcId = estcId;
+	public void setPid (int pid) {
+		this.pid = pid;
 	}
 
-	public int getActualEstcId () {
-		return estcId;
+	public int getActualPid () {
+		return pid;
 	}
 
-	public int getEstablishmentId () {
-		return establishmentId;
+	public int getEid () {
+		return eid;
 	}
 
-	public void setEstablishmentId (int establishmentId) {
-		this.establishmentId = establishmentId;
+	public void setEid (int eid) {
+		this.eid = eid;
 	}
 
-	public int getActualEstablishmentId () {
-		return establishmentId;
+	public int getActualEid () {
+		return eid;
 	}
 
-	public int getPersonId () {
-		return personId;
+	public int getPubyear () {
+		return pubyear;
 	}
 
-	public void setPersonId (int personId) {
-		this.personId = personId;
+	public void setPubyear (int pubyear) {
+		this.pubyear = pubyear;
 	}
 
-	public int getActualPersonId () {
-		return personId;
+	public int getActualPubyear () {
+		return pubyear;
+	}
+
+	public String getLocational () {
+		return locational;
+	}
+
+	public void setLocational (String locational) {
+		this.locational = locational;
+	}
+
+	public String getActualLocational () {
+		return locational;
 	}
 }

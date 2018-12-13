@@ -34,7 +34,7 @@ create view navigation.person_effective as
 -- create role elements
 
 create table navigation.all_roles(estc_id int, person_id int, role text);
-insert into navigation.all_roles select distinct estc_id, person_id, role from extraction.role;
+insert into navigation.all_roles select distinct estc_id, person_id, role from extraction.role where person_id != 0;
 create index are on navigation.all_roles(estc_id);
 create index arp on navigation.all_roles(person_id);
 analyze navigation.all_roles;
@@ -121,6 +121,15 @@ select person_id as pid, location_id as lid, pubdate as pubyear, locational, cou
 create index lbyp on navigation.person_in_by_year(pid);
 create index lbyl on navigation.person_in_by_year(lid);
 analyze navigation.person_in_by_year;
+
+create materialized view navigation.person_at_by_year as
+select person_id as pid, establishment_id as eid, pubdate as pubyear, locational, count(*)
+	from navigation.person_at,estc.pub_year
+	where person_at.estc_id=pub_year.id
+	group by 1,2,3,4;
+create index ebyp on navigation.person_at_by_year(pid);
+create index ebyl on navigation.person_at_by_year(eid);
+analyze navigation.person_at_by_year;
 
 create materialized view navigation.location_in_by_year as
 select all_roles.person_id, sublocation_id, pubdate as pubyear, locational,location_id,location,count(*)

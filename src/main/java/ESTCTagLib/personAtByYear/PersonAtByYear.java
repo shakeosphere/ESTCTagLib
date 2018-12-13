@@ -1,4 +1,4 @@
-package ESTCTagLib.personInByYear;
+package ESTCTagLib.personAtByYear;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,31 +13,31 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.Tag;
 
 import ESTCTagLib.person.Person;
-import ESTCTagLib.location.Location;
+import ESTCTagLib.establishment.Establishment;
 
 import ESTCTagLib.ESTCTagLibTagSupport;
 import ESTCTagLib.Sequence;
 
 @SuppressWarnings("serial")
-public class PersonInByYear extends ESTCTagLibTagSupport {
+public class PersonAtByYear extends ESTCTagLibTagSupport {
 
-	static PersonInByYear currentInstance = null;
+	static PersonAtByYear currentInstance = null;
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(PersonInByYear.class);
+	private static final Log log = LogFactory.getLog(PersonAtByYear.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
 	int pid = 0;
-	int lid = 0;
+	int eid = 0;
 	int pubyear = 0;
 	String locational = null;
 	int count = 0;
 
 	private String var = null;
 
-	private PersonInByYear cachedPersonInByYear = null;
+	private PersonAtByYear cachedPersonAtByYear = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -45,41 +45,41 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 			Person thePerson = (Person)findAncestorWithClass(this, Person.class);
 			if (thePerson!= null)
 				parentEntities.addElement(thePerson);
-			Location theLocation = (Location)findAncestorWithClass(this, Location.class);
-			if (theLocation!= null)
-				parentEntities.addElement(theLocation);
+			Establishment theEstablishment = (Establishment)findAncestorWithClass(this, Establishment.class);
+			if (theEstablishment!= null)
+				parentEntities.addElement(theEstablishment);
 
 			if (thePerson == null) {
 			} else {
 				pid = thePerson.getPid();
 			}
-			if (theLocation == null) {
+			if (theEstablishment == null) {
 			} else {
-				lid = theLocation.getLid();
+				eid = theEstablishment.getEid();
 			}
 
-			PersonInByYearIterator thePersonInByYearIterator = (PersonInByYearIterator)findAncestorWithClass(this, PersonInByYearIterator.class);
+			PersonAtByYearIterator thePersonAtByYearIterator = (PersonAtByYearIterator)findAncestorWithClass(this, PersonAtByYearIterator.class);
 
-			if (thePersonInByYearIterator != null) {
-				pid = thePersonInByYearIterator.getPid();
-				lid = thePersonInByYearIterator.getLid();
-				pubyear = thePersonInByYearIterator.getPubyear();
-				locational = thePersonInByYearIterator.getLocational();
+			if (thePersonAtByYearIterator != null) {
+				pid = thePersonAtByYearIterator.getPid();
+				eid = thePersonAtByYearIterator.getEid();
+				pubyear = thePersonAtByYearIterator.getPubyear();
+				locational = thePersonAtByYearIterator.getLocational();
 			}
 
-			if (thePersonInByYearIterator == null && thePerson == null && theLocation == null && pubyear == 0) {
-				// no pubyear was provided - the default is to assume that it is a new PersonInByYear and to generate a new pubyear
+			if (thePersonAtByYearIterator == null && thePerson == null && theEstablishment == null && pubyear == 0) {
+				// no pubyear was provided - the default is to assume that it is a new PersonAtByYear and to generate a new pubyear
 				pubyear = Sequence.generateID();
 				insertEntity();
-			} else if (thePersonInByYearIterator == null && thePerson != null && theLocation == null) {
-				// an pubyear was provided as an attribute - we need to load a PersonInByYear from the database
+			} else if (thePersonAtByYearIterator == null && thePerson != null && theEstablishment == null) {
+				// an pubyear was provided as an attribute - we need to load a PersonAtByYear from the database
 				boolean found = false;
-				PreparedStatement stmt = getConnection().prepareStatement("select lid,pubyear,locational,count from navigation.person_in_by_year where pid = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("select eid,pubyear,locational,count from navigation.person_at_by_year where pid = ?");
 				stmt.setInt(1,pid);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					if (lid == 0)
-						lid = rs.getInt(1);
+					if (eid == 0)
+						eid = rs.getInt(1);
 					if (pubyear == 0)
 						pubyear = rs.getInt(2);
 					if (locational == null)
@@ -93,11 +93,11 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 				if (!found) {
 					insertEntity();
 				}
-			} else if (thePersonInByYearIterator == null && thePerson == null && theLocation != null) {
-				// an pubyear was provided as an attribute - we need to load a PersonInByYear from the database
+			} else if (thePersonAtByYearIterator == null && thePerson == null && theEstablishment != null) {
+				// an pubyear was provided as an attribute - we need to load a PersonAtByYear from the database
 				boolean found = false;
-				PreparedStatement stmt = getConnection().prepareStatement("select pid,pubyear,locational,count from navigation.person_in_by_year where lid = ?");
-				stmt.setInt(1,lid);
+				PreparedStatement stmt = getConnection().prepareStatement("select pid,pubyear,locational,count from navigation.person_at_by_year where eid = ?");
+				stmt.setInt(1,eid);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
 					if (pid == 0)
@@ -116,11 +116,11 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 					insertEntity();
 				}
 			} else {
-				// an iterator or pubyear was provided as an attribute - we need to load a PersonInByYear from the database
+				// an iterator or pubyear was provided as an attribute - we need to load a PersonAtByYear from the database
 				boolean found = false;
-				PreparedStatement stmt = getConnection().prepareStatement("select count from navigation.person_in_by_year where pid = ? and lid = ? and pubyear = ? and locational = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("select count from navigation.person_at_by_year where pid = ? and eid = ? and pubyear = ? and locational = ?");
 				stmt.setInt(1,pid);
-				stmt.setInt(2,lid);
+				stmt.setInt(2,eid);
 				stmt.setInt(3,pubyear);
 				stmt.setString(4,locational);
 				ResultSet rs = stmt.executeQuery();
@@ -156,12 +156,12 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 		}
 
 		if(pageContext != null){
-			PersonInByYear currentPersonInByYear = (PersonInByYear) pageContext.getAttribute("tag_personInByYear");
-			if(currentPersonInByYear != null){
-				cachedPersonInByYear = currentPersonInByYear;
+			PersonAtByYear currentPersonAtByYear = (PersonAtByYear) pageContext.getAttribute("tag_personAtByYear");
+			if(currentPersonAtByYear != null){
+				cachedPersonAtByYear = currentPersonAtByYear;
 			}
-			currentPersonInByYear = this;
-			pageContext.setAttribute((var == null ? "tag_personInByYear" : var), currentPersonInByYear);
+			currentPersonAtByYear = this;
+			pageContext.setAttribute((var == null ? "tag_personAtByYear" : var), currentPersonAtByYear);
 		}
 
 		return EVAL_PAGE;
@@ -171,11 +171,11 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 		currentInstance = null;
 
 		if(pageContext != null){
-			if(this.cachedPersonInByYear != null){
-				pageContext.setAttribute((var == null ? "tag_personInByYear" : var), this.cachedPersonInByYear);
+			if(this.cachedPersonAtByYear != null){
+				pageContext.setAttribute((var == null ? "tag_personAtByYear" : var), this.cachedPersonAtByYear);
 			}else{
-				pageContext.removeAttribute((var == null ? "tag_personInByYear" : var));
-				this.cachedPersonInByYear = null;
+				pageContext.removeAttribute((var == null ? "tag_personAtByYear" : var));
+				this.cachedPersonAtByYear = null;
 			}
 		}
 
@@ -205,10 +205,10 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.person_in_by_year set count = ? where pid = ? and lid = ? and pubyear = ? and locational = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.person_at_by_year set count = ? where pid = ? and eid = ? and pubyear = ? and locational = ?");
 				stmt.setInt(1,count);
 				stmt.setInt(2,pid);
-				stmt.setInt(3,lid);
+				stmt.setInt(3,eid);
 				stmt.setInt(4,pubyear);
 				stmt.setString(5,locational);
 				stmt.executeUpdate();
@@ -240,12 +240,12 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 	public void insertEntity() throws JspException, SQLException {
 		if (pubyear == 0) {
 			pubyear = Sequence.generateID();
-			log.debug("generating new PersonInByYear " + pubyear);
+			log.debug("generating new PersonAtByYear " + pubyear);
 		}
 
-		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.person_in_by_year(pid,lid,pubyear,locational,count) values (?,?,?,?,?)");
+		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.person_at_by_year(pid,eid,pubyear,locational,count) values (?,?,?,?,?)");
 		stmt.setInt(1,pid);
-		stmt.setInt(2,lid);
+		stmt.setInt(2,eid);
 		stmt.setInt(3,pubyear);
 		stmt.setString(4,locational);
 		stmt.setInt(5,count);
@@ -266,16 +266,16 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 		return pid;
 	}
 
-	public int getLid () {
-		return lid;
+	public int getEid () {
+		return eid;
 	}
 
-	public void setLid (int lid) {
-		this.lid = lid;
+	public void setEid (int eid) {
+		this.eid = eid;
 	}
 
-	public int getActualLid () {
-		return lid;
+	public int getActualEid () {
+		return eid;
 	}
 
 	public int getPubyear () {
@@ -338,11 +338,11 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 		}
 	}
 
-	public static Integer lidValue() throws JspException {
+	public static Integer eidValue() throws JspException {
 		try {
-			return currentInstance.getLid();
+			return currentInstance.getEid();
 		} catch (Exception e) {
-			 throw new JspTagException("Error in tag function lidValue()");
+			 throw new JspTagException("Error in tag function eidValue()");
 		}
 	}
 
@@ -372,7 +372,7 @@ public class PersonInByYear extends ESTCTagLibTagSupport {
 
 	private void clearServiceState () {
 		pid = 0;
-		lid = 0;
+		eid = 0;
 		pubyear = 0;
 		locational = null;
 		count = 0;

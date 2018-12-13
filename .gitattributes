@@ -87,6 +87,14 @@ src/main/java/ESTCTagLib/personAt/PersonAtEstcId.java -text
 src/main/java/ESTCTagLib/personAt/PersonAtIterator.java -text
 src/main/java/ESTCTagLib/personAt/PersonAtLocational.java -text
 src/main/java/ESTCTagLib/personAt/PersonAtPersonId.java -text
+src/main/java/ESTCTagLib/personAtByYear/PersonAtByYear.java -text
+src/main/java/ESTCTagLib/personAtByYear/PersonAtByYearCount.java -text
+src/main/java/ESTCTagLib/personAtByYear/PersonAtByYearDeleter.java -text
+src/main/java/ESTCTagLib/personAtByYear/PersonAtByYearEid.java -text
+src/main/java/ESTCTagLib/personAtByYear/PersonAtByYearIterator.java -text
+src/main/java/ESTCTagLib/personAtByYear/PersonAtByYearLocational.java -text
+src/main/java/ESTCTagLib/personAtByYear/PersonAtByYearPid.java -text
+src/main/java/ESTCTagLib/personAtByYear/PersonAtByYearPubyear.java -text
 src/main/java/ESTCTagLib/personAuthority/PersonAuthority.java -text
 src/main/java/ESTCTagLib/personAuthority/PersonAuthorityAlias.java -text
 src/main/java/ESTCTagLib/personAuthority/PersonAuthorityDefined.java -text
