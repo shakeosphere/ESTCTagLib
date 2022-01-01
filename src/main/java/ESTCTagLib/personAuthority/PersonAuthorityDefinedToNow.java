@@ -4,16 +4,16 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.Tag;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.util.Date;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import java.sql.Timestamp;
 
 import ESTCTagLib.ESTCTagLibTagSupport;
 
 @SuppressWarnings("serial")
 public class PersonAuthorityDefinedToNow extends ESTCTagLibTagSupport {
 
-	private static final Log log = LogFactory.getLog(PersonAuthorityDefinedToNow.class);
+	private static final Logger log = LogManager.getLogger(PersonAuthorityDefinedToNow.class);
 
 
 	public int doStartTag() throws JspException {
@@ -38,7 +38,7 @@ public class PersonAuthorityDefinedToNow extends ESTCTagLibTagSupport {
 		return SKIP_BODY;
 	}
 
-	public Date getDefined() throws JspException {
+	public Timestamp getDefined() throws JspException {
 		try {
 			PersonAuthority thePersonAuthority = (PersonAuthority)findAncestorWithClass(this, PersonAuthority.class);
 			return thePersonAuthority.getDefined();

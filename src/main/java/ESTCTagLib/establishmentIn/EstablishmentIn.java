@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -25,7 +25,7 @@ public class EstablishmentIn extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(EstablishmentIn.class);
+	private static final Logger log = LogManager.getLogger(EstablishmentIn.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -200,8 +200,8 @@ public class EstablishmentIn extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.establishment_in set locational = ? where estc_id = ? and establishment_id = ? and llocation_id = ?");
-				stmt.setString(1,locational);
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.establishment_in set locational = ? where estc_id = ?  and establishment_id = ?  and llocation_id = ? ");
+				stmt.setString( 1, locational );
 				stmt.setInt(2,estcId);
 				stmt.setInt(3,establishmentId);
 				stmt.setInt(4,llocationId);

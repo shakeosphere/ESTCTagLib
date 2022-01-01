@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -24,7 +24,7 @@ public class Variant extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(Variant.class);
+	private static final Logger log = LogManager.getLogger(Variant.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -147,8 +147,8 @@ public class Variant extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update moeml.variant set variant = ? where moeml_id = ? and seqnum = ?");
-				stmt.setString(1,variant);
+				PreparedStatement stmt = getConnection().prepareStatement("update moeml.variant set variant = ? where moeml_id = ?  and seqnum = ? ");
+				stmt.setString( 1, variant );
 				stmt.setString(2,moemlId);
 				stmt.setInt(3,seqnum);
 				stmt.executeUpdate();

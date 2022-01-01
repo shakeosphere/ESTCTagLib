@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -26,7 +26,7 @@ public class RecordIterator extends ESTCTagLibBodyTagSupport {
     String c009 = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(RecordIterator.class);
+	private static final Logger log = LogManager.getLogger(RecordIterator.class);
 
 
     PreparedStatement stat = null;
@@ -91,7 +91,7 @@ public class RecordIterator extends ESTCTagLibBodyTagSupport {
             int webapp_keySeq = 1;
             stat = getConnection().prepareStatement("SELECT count(*) from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
-                                                        +  generateLimitCriteria());
+                                                        + generateLimitCriteria());
             rs = stat.executeQuery();
 
             if (rs.next()) {
@@ -103,10 +103,10 @@ public class RecordIterator extends ESTCTagLibBodyTagSupport {
             webapp_keySeq = 1;
             stat = getConnection().prepareStatement("SELECT navigation.record.id from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
-                                                        + " order by " + generateSortCriteria() + generateLimitCriteria());
+                                                        + " order by " + generateSortCriteria()  +  generateLimitCriteria());
             rs = stat.executeQuery();
 
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_INCLUDE;
@@ -160,7 +160,7 @@ public class RecordIterator extends ESTCTagLibBodyTagSupport {
 
     public int doAfterBody() throws JspException {
         try {
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_AGAIN;
@@ -187,21 +187,21 @@ public class RecordIterator extends ESTCTagLibBodyTagSupport {
 
     public int doEndTag() throws JspTagException, JspException {
         try {
-			if(pageContext != null){
+			if( pageContext != null ){
 				Boolean error = (Boolean) pageContext.getAttribute("tagError");
-				if(error != null && error){
+				if( error != null && error ){
 
 					freeConnection();
 					clearServiceState();
 
-				Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
-				String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
+					Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
+					String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
 
-				if(pageContext != null){
-					e = (Exception) pageContext.getAttribute("tagErrorException");
-					message = (String) pageContext.getAttribute("tagErrorMessage");
+					if(pageContext != null){
+						e = (Exception) pageContext.getAttribute("tagErrorException");
+						message = (String) pageContext.getAttribute("tagErrorMessage");
 
-				}
+					}
 					Tag parent = getParent();
 					if(parent != null){
 						return parent.doEndTag();
@@ -214,9 +214,16 @@ public class RecordIterator extends ESTCTagLibBodyTagSupport {
 					}
 				}
 			}
-            rs.close();
-            stat.close();
-        } catch (SQLException e) {
+
+            if( rs != null ){
+                rs.close();
+            }
+
+            if( stat != null ){
+                stat.close();
+            }
+
+        } catch ( SQLException e ) {
             log.error("JDBC error ending Record iterator",e);
 			freeConnection();
 

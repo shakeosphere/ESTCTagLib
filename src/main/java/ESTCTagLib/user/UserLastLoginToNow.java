@@ -4,16 +4,16 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.Tag;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.util.Date;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import java.sql.Timestamp;
 
 import ESTCTagLib.ESTCTagLibTagSupport;
 
 @SuppressWarnings("serial")
 public class UserLastLoginToNow extends ESTCTagLibTagSupport {
 
-	private static final Log log = LogFactory.getLog(UserLastLoginToNow.class);
+	private static final Logger log = LogManager.getLogger(UserLastLoginToNow.class);
 
 
 	public int doStartTag() throws JspException {
@@ -38,7 +38,7 @@ public class UserLastLoginToNow extends ESTCTagLibTagSupport {
 		return SKIP_BODY;
 	}
 
-	public Date getLastLogin() throws JspException {
+	public Timestamp getLastLogin() throws JspException {
 		try {
 			User theUser = (User)findAncestorWithClass(this, User.class);
 			return theUser.getLastLogin();

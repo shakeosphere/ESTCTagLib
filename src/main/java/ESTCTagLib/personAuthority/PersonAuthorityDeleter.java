@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.util.Date;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import java.sql.Timestamp;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;
@@ -22,10 +22,10 @@ public class PersonAuthorityDeleter extends ESTCTagLibBodyTagSupport {
     int pid = 0;
     int ID = 0;
     int alias = 0;
-    Date defined = null;
+    Timestamp defined = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(PersonAuthorityDeleter.class);
+	private static final Logger log = LogManager.getLogger(PersonAuthorityDeleter.class);
 
 
     ResultSet rs = null;

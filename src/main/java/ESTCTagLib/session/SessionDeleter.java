@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.util.Date;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import java.sql.Timestamp;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;
@@ -19,11 +19,11 @@ import ESTCTagLib.user.User;
 @SuppressWarnings("serial")
 public class SessionDeleter extends ESTCTagLibBodyTagSupport {
     int ID = 0;
-    Date start = null;
-    Date finish = null;
+    Timestamp start = null;
+    Timestamp finish = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(SessionDeleter.class);
+	private static final Logger log = LogManager.getLogger(SessionDeleter.class);
 
 
     ResultSet rs = null;
@@ -49,7 +49,7 @@ public class SessionDeleter extends ESTCTagLibBodyTagSupport {
                                                         + (start == null ? "" : " and start = ? ")
                                                         + (ID == 0 ? "" : " and id = ? "));
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
-            if (start != null) stat.setTimestamp(webapp_keySeq++, start == null ? null : new java.sql.Timestamp(start.getTime()));
+            if (start != null) stat.setTimestamp(webapp_keySeq++, start);
 			if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             stat.execute();
 
@@ -134,19 +134,19 @@ public class SessionDeleter extends ESTCTagLibBodyTagSupport {
 		return ID;
 	}
 
-	public Date getStart () {
+	public Timestamp getStart () {
 		return start;
 	}
 
-	public void setStart (Date start) {
+	public void setStart (Timestamp start) {
 		this.start = start;
 	}
 
-	public Date getActualStart () {
+	public Timestamp getActualStart () {
 		return start;
 	}
 
 	public void setStartToNow ( ) {
-		this.start = new java.util.Date();
+		this.start = new java.sql.Timestamp(new java.util.Date().getTime());
 	}
 }

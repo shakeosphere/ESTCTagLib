@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.util.Date;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.sql.Timestamp;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -26,14 +26,14 @@ public class PersonAuthority extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(PersonAuthority.class);
+	private static final Logger log = LogManager.getLogger(PersonAuthority.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
 	int pid = 0;
 	int ID = 0;
 	int alias = 0;
-	Date defined = null;
+	Timestamp defined = null;
 
 	private String var = null;
 
@@ -199,9 +199,9 @@ public class PersonAuthority extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.person_authority set alias = ?, defined = ? where pid = ? and id = ?");
-				stmt.setInt(1,alias);
-				stmt.setTimestamp(2,defined == null ? null : new java.sql.Timestamp(defined.getTime()));
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.person_authority set alias = ?, defined = ? where pid = ?  and id = ? ");
+				stmt.setInt( 1, alias );
+				stmt.setTimestamp( 2, defined );
 				stmt.setInt(3,pid);
 				stmt.setInt(4,ID);
 				stmt.executeUpdate();
@@ -235,7 +235,7 @@ public class PersonAuthority extends ESTCTagLibTagSupport {
 		stmt.setInt(1,pid);
 		stmt.setInt(2,ID);
 		stmt.setInt(3,alias);
-		stmt.setTimestamp(4,defined == null ? null : new java.sql.Timestamp(defined.getTime()));
+		stmt.setTimestamp(4,defined);
 		stmt.executeUpdate();
 		stmt.close();
 		freeConnection();
@@ -278,21 +278,21 @@ public class PersonAuthority extends ESTCTagLibTagSupport {
 		return alias;
 	}
 
-	public Date getDefined () {
+	public Timestamp getDefined () {
 		return defined;
 	}
 
-	public void setDefined (Date defined) {
+	public void setDefined (Timestamp defined) {
 		this.defined = defined;
 		commitNeeded = true;
 	}
 
-	public Date getActualDefined () {
+	public Timestamp getActualDefined () {
 		return defined;
 	}
 
 	public void setDefinedToNow ( ) {
-		this.defined = new java.util.Date();
+		this.defined = new java.sql.Timestamp(new java.util.Date().getTime());
 		commitNeeded = true;
 	}
 
@@ -332,7 +332,7 @@ public class PersonAuthority extends ESTCTagLibTagSupport {
 		}
 	}
 
-	public static Date definedValue() throws JspException {
+	public static Timestamp definedValue() throws JspException {
 		try {
 			return currentInstance.getDefined();
 		} catch (Exception e) {

@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -25,7 +25,7 @@ public class MatchIterator extends ESTCTagLibBodyTagSupport {
     String tag = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(MatchIterator.class);
+	private static final Logger log = LogManager.getLogger(MatchIterator.class);
 
 
     PreparedStatement stat = null;
@@ -175,7 +175,7 @@ public class MatchIterator extends ESTCTagLibBodyTagSupport {
                                                         + generateJoinCriteria()
                                                         + (ID == 0 ? "" : " and id = ?")
                                                         + (moemlId == null ? "" : " and moeml_id = ?")
-                                                        +  generateLimitCriteria());
+                                                        + generateLimitCriteria());
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             if (moemlId != null) stat.setString(webapp_keySeq++, moemlId);
             rs = stat.executeQuery();
@@ -191,12 +191,12 @@ public class MatchIterator extends ESTCTagLibBodyTagSupport {
                                                         + generateJoinCriteria()
                                                         + (ID == 0 ? "" : " and id = ?")
                                                         + (moemlId == null ? "" : " and moeml_id = ?")
-                                                        + " order by " + generateSortCriteria() + generateLimitCriteria());
+                                                        + " order by " + generateSortCriteria()  +  generateLimitCriteria());
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             if (moemlId != null) stat.setString(webapp_keySeq++, moemlId);
             rs = stat.executeQuery();
 
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 moemlId = rs.getString(1);
                 seqnum = rs.getInt(2);
                 ID = rs.getInt(3);
@@ -238,9 +238,9 @@ public class MatchIterator extends ESTCTagLibBodyTagSupport {
     private String generateJoinCriteria() {
        StringBuffer theBuffer = new StringBuffer();
        if (useRecord)
-          theBuffer.append(" and record.ID = match.null");
+          theBuffer.append(" and record.id = match.id");
        if (useGazetteer)
-          theBuffer.append(" and gazetteer.moemlId = match.null");
+          theBuffer.append(" and gazetteer.moeml_id = match.moeml_id");
 
       return theBuffer.toString();
     }
@@ -263,7 +263,7 @@ public class MatchIterator extends ESTCTagLibBodyTagSupport {
 
     public int doAfterBody() throws JspException {
         try {
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 moemlId = rs.getString(1);
                 seqnum = rs.getInt(2);
                 ID = rs.getInt(3);
@@ -293,21 +293,21 @@ public class MatchIterator extends ESTCTagLibBodyTagSupport {
 
     public int doEndTag() throws JspTagException, JspException {
         try {
-			if(pageContext != null){
+			if( pageContext != null ){
 				Boolean error = (Boolean) pageContext.getAttribute("tagError");
-				if(error != null && error){
+				if( error != null && error ){
 
 					freeConnection();
 					clearServiceState();
 
-				Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
-				String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
+					Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
+					String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
 
-				if(pageContext != null){
-					e = (Exception) pageContext.getAttribute("tagErrorException");
-					message = (String) pageContext.getAttribute("tagErrorMessage");
+					if(pageContext != null){
+						e = (Exception) pageContext.getAttribute("tagErrorException");
+						message = (String) pageContext.getAttribute("tagErrorMessage");
 
-				}
+					}
 					Tag parent = getParent();
 					if(parent != null){
 						return parent.doEndTag();
@@ -320,9 +320,16 @@ public class MatchIterator extends ESTCTagLibBodyTagSupport {
 					}
 				}
 			}
-            rs.close();
-            stat.close();
-        } catch (SQLException e) {
+
+            if( rs != null ){
+                rs.close();
+            }
+
+            if( stat != null ){
+                stat.close();
+            }
+
+        } catch ( SQLException e ) {
             log.error("JDBC error ending Match iterator",e);
 			freeConnection();
 

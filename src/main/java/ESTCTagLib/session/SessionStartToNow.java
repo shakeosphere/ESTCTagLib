@@ -1,20 +1,19 @@
 package ESTCTagLib.session;
 
-import java.sql.Timestamp;
-
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.Tag;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import java.sql.Timestamp;
 
 import ESTCTagLib.ESTCTagLibTagSupport;
 
 @SuppressWarnings("serial")
 public class SessionStartToNow extends ESTCTagLibTagSupport {
 
-	private static final Log log = LogFactory.getLog(SessionStartToNow.class);
+	private static final Logger log = LogManager.getLogger(SessionStartToNow.class);
 
 
 	public int doStartTag() throws JspException {
@@ -42,7 +41,7 @@ public class SessionStartToNow extends ESTCTagLibTagSupport {
 	public Timestamp getStart() throws JspException {
 		try {
 			Session theSession = (Session)findAncestorWithClass(this, Session.class);
-			return (Timestamp) theSession.getStart();
+			return theSession.getStart();
 		} catch (Exception e) {
 
 			log.error("Can't find enclosing Session for start tag ", e);

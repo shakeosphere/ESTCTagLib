@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -25,7 +25,7 @@ public class Located extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(Located.class);
+	private static final Logger log = LogManager.getLogger(Located.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -184,7 +184,7 @@ public class Located extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.located set where pid = ? and lid = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.located set where pid = ?  and lid = ? ");
 				stmt.setInt(1,pid);
 				stmt.setInt(2,lid);
 				stmt.executeUpdate();

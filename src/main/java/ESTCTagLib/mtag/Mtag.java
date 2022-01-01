@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -24,7 +24,7 @@ public class Mtag extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(Mtag.class);
+	private static final Logger log = LogManager.getLogger(Mtag.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -150,9 +150,9 @@ public class Mtag extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.mtag set indicator1 = ?, indicator2 = ? where id = ? and tag = ?");
-				stmt.setString(1,indicator1);
-				stmt.setString(2,indicator2);
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.mtag set indicator1 = ?, indicator2 = ? where id = ?  and tag = ? ");
+				stmt.setString( 1, indicator1 );
+				stmt.setString( 2, indicator2 );
 				stmt.setInt(3,ID);
 				stmt.setString(4,tag);
 				stmt.executeUpdate();

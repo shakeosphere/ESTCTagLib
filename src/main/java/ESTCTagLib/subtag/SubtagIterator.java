@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -24,7 +24,7 @@ public class SubtagIterator extends ESTCTagLibBodyTagSupport {
     String value = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(SubtagIterator.class);
+	private static final Logger log = LogManager.getLogger(SubtagIterator.class);
 
 
     PreparedStatement stat = null;
@@ -39,8 +39,8 @@ public class SubtagIterator extends ESTCTagLibBodyTagSupport {
 		SubtagIterator theIterator = new SubtagIterator();
 		try {
 			PreparedStatement stat = theIterator.getConnection().prepareStatement("SELECT count(*) from navigation.subtag where 1=1"
-						+ " and id = ?"
 						+ " and tag = ?"
+						+ " and id = ?"
 						);
 
 			stat.setInt(1,Integer.parseInt(ID));
@@ -111,7 +111,7 @@ public class SubtagIterator extends ESTCTagLibBodyTagSupport {
                                                         + generateJoinCriteria()
                                                         + (ID == 0 ? "" : " and id = ?")
                                                         + (tag == null ? "" : " and tag = ?")
-                                                        +  generateLimitCriteria());
+                                                        + generateLimitCriteria());
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             if (tag != null) stat.setString(webapp_keySeq++, tag);
             rs = stat.executeQuery();
@@ -127,12 +127,12 @@ public class SubtagIterator extends ESTCTagLibBodyTagSupport {
                                                         + generateJoinCriteria()
                                                         + (ID == 0 ? "" : " and id = ?")
                                                         + (tag == null ? "" : " and tag = ?")
-                                                        + " order by " + generateSortCriteria() + generateLimitCriteria());
+                                                        + " order by " + generateSortCriteria()  +  generateLimitCriteria());
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             if (tag != null) stat.setString(webapp_keySeq++, tag);
             rs = stat.executeQuery();
 
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 tag = rs.getString(2);
                 code = rs.getString(3);
@@ -188,7 +188,7 @@ public class SubtagIterator extends ESTCTagLibBodyTagSupport {
 
     public int doAfterBody() throws JspException {
         try {
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 tag = rs.getString(2);
                 code = rs.getString(3);
@@ -217,21 +217,21 @@ public class SubtagIterator extends ESTCTagLibBodyTagSupport {
 
     public int doEndTag() throws JspTagException, JspException {
         try {
-			if(pageContext != null){
+			if( pageContext != null ){
 				Boolean error = (Boolean) pageContext.getAttribute("tagError");
-				if(error != null && error){
+				if( error != null && error ){
 
 					freeConnection();
 					clearServiceState();
 
-				Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
-				String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
+					Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
+					String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
 
-				if(pageContext != null){
-					e = (Exception) pageContext.getAttribute("tagErrorException");
-					message = (String) pageContext.getAttribute("tagErrorMessage");
+					if(pageContext != null){
+						e = (Exception) pageContext.getAttribute("tagErrorException");
+						message = (String) pageContext.getAttribute("tagErrorMessage");
 
-				}
+					}
 					Tag parent = getParent();
 					if(parent != null){
 						return parent.doEndTag();
@@ -244,9 +244,16 @@ public class SubtagIterator extends ESTCTagLibBodyTagSupport {
 					}
 				}
 			}
-            rs.close();
-            stat.close();
-        } catch (SQLException e) {
+
+            if( rs != null ){
+                rs.close();
+            }
+
+            if( stat != null ){
+                stat.close();
+            }
+
+        } catch ( SQLException e ) {
             log.error("JDBC error ending Subtag iterator",e);
 			freeConnection();
 

@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -25,7 +25,7 @@ public class Match extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(Match.class);
+	private static final Logger log = LogManager.getLogger(Match.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -198,7 +198,7 @@ public class Match extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update moeml.match set where moeml_id = ? and seqnum = ? and id = ? and tag = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("update moeml.match set where moeml_id = ?  and seqnum = ?  and id = ?  and tag = ? ");
 				stmt.setString(1,moemlId);
 				stmt.setInt(2,seqnum);
 				stmt.setInt(3,ID);

@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -26,7 +26,7 @@ public class PublisherByYearIterator extends ESTCTagLibBodyTagSupport {
     
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(PublisherIterator.class);
+	private static final Logger log = LogManager.getLogger(PublisherIterator.class);
 
 
     PreparedStatement stat = null;

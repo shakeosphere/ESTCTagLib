@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.util.Date;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.sql.Timestamp;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -25,13 +25,13 @@ public class Session extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(Session.class);
+	private static final Logger log = LogManager.getLogger(Session.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
 	int ID = 0;
-	Date start = null;
-	Date finish = null;
+	Timestamp start = null;
+	Timestamp finish = null;
 
 	private String var = null;
 
@@ -58,14 +58,14 @@ public class Session extends ESTCTagLibTagSupport {
 
 			if (theSessionIterator == null && theUser == null && start == null) {
 				// no start was provided - the default is to assume that it is a new Session and to generate a new start
-				start = new Date();
+				start = null;
 				insertEntity();
 			} else {
 				// an iterator or start was provided as an attribute - we need to load a Session from the database
 				boolean found = false;
 				PreparedStatement stmt = getConnection().prepareStatement("select finish from navigation.session where id = ? and start = ?");
 				stmt.setInt(1,ID);
-				stmt.setTimestamp(2,start == null ? null : new java.sql.Timestamp(start.getTime()));
+				stmt.setTimestamp(2,start);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
 					if (finish == null)
@@ -148,10 +148,10 @@ public class Session extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.session set finish = ? where id = ? and start = ?");
-				stmt.setTimestamp(1,finish == null ? null : new java.sql.Timestamp(finish.getTime()));
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.session set finish = ? where id = ?  and start = ? ");
+				stmt.setTimestamp( 1, finish );
 				stmt.setInt(2,ID);
-				stmt.setTimestamp(3,start == null ? null : new java.sql.Timestamp(start.getTime()));
+				stmt.setTimestamp(3,start);
 				stmt.executeUpdate();
 				stmt.close();
 			}
@@ -181,8 +181,8 @@ public class Session extends ESTCTagLibTagSupport {
 	public void insertEntity() throws JspException, SQLException {
 		PreparedStatement stmt = getConnection().prepareStatement("insert into navigation.session(id,start,finish) values (?,?,?)");
 		stmt.setInt(1,ID);
-		stmt.setTimestamp(2,start == null ? null : new java.sql.Timestamp(start.getTime()));
-		stmt.setTimestamp(3,finish == null ? null : new java.sql.Timestamp(finish.getTime()));
+		stmt.setTimestamp(2,start);
+		stmt.setTimestamp(3,finish);
 		stmt.executeUpdate();
 		stmt.close();
 		freeConnection();
@@ -200,37 +200,37 @@ public class Session extends ESTCTagLibTagSupport {
 		return ID;
 	}
 
-	public Date getStart () {
+	public Timestamp getStart () {
 		return start;
 	}
 
-	public void setStart (Date start) {
+	public void setStart (Timestamp start) {
 		this.start = start;
 	}
 
-	public Date getActualStart () {
+	public Timestamp getActualStart () {
 		return start;
 	}
 
 	public void setStartToNow ( ) {
-		this.start = new java.util.Date();
+		this.start = new java.sql.Timestamp(new java.util.Date().getTime());
 	}
 
-	public Date getFinish () {
+	public Timestamp getFinish () {
 		return finish;
 	}
 
-	public void setFinish (Date finish) {
+	public void setFinish (Timestamp finish) {
 		this.finish = finish;
 		commitNeeded = true;
 	}
 
-	public Date getActualFinish () {
+	public Timestamp getActualFinish () {
 		return finish;
 	}
 
 	public void setFinishToNow ( ) {
-		this.finish = new java.util.Date();
+		this.finish = new java.sql.Timestamp(new java.util.Date().getTime());
 		commitNeeded = true;
 	}
 
@@ -254,7 +254,7 @@ public class Session extends ESTCTagLibTagSupport {
 		}
 	}
 
-	public static Date startValue() throws JspException {
+	public static Timestamp startValue() throws JspException {
 		try {
 			return currentInstance.getStart();
 		} catch (Exception e) {
@@ -262,7 +262,7 @@ public class Session extends ESTCTagLibTagSupport {
 		}
 	}
 
-	public static Date finishValue() throws JspException {
+	public static Timestamp finishValue() throws JspException {
 		try {
 			return currentInstance.getFinish();
 		} catch (Exception e) {

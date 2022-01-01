@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -23,7 +23,7 @@ public class Record extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(Record.class);
+	private static final Logger log = LogManager.getLogger(Record.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -151,13 +151,13 @@ public class Record extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.record set leader = ?, c001 = ?, c003 = ?, c005 = ?, c008 = ?, c009 = ? where id = ?");
-				stmt.setString(1,leader);
-				stmt.setString(2,c001);
-				stmt.setString(3,c003);
-				stmt.setString(4,c005);
-				stmt.setString(5,c008);
-				stmt.setString(6,c009);
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.record set leader = ?, c001 = ?, c003 = ?, c005 = ?, c008 = ?, c009 = ? where id = ? ");
+				stmt.setString( 1, leader );
+				stmt.setString( 2, c001 );
+				stmt.setString( 3, c003 );
+				stmt.setString( 4, c005 );
+				stmt.setString( 5, c008 );
+				stmt.setString( 6, c009 );
 				stmt.setInt(7,ID);
 				stmt.executeUpdate();
 				stmt.close();

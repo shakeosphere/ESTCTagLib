@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -24,7 +24,7 @@ public class Publication extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(Publication.class);
+	private static final Logger log = LogManager.getLogger(Publication.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -195,25 +195,25 @@ public class Publication extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.publication set rec_type = ?, bib_level = ?, multi_level = ?, date_status = ?, date1 = ?, date2 = ?, location = ?, language = ?, illustrations = ?, form = ?, title = ?, remainder = ?, extent = ?, dimensions = ?, other = ?, gac = ?, pub_location = ?, publisher = ? where id = ?");
-				stmt.setString(1,recType);
-				stmt.setString(2,bibLevel);
-				stmt.setString(3,multiLevel);
-				stmt.setString(4,dateStatus);
-				stmt.setString(5,date1);
-				stmt.setString(6,date2);
-				stmt.setString(7,location);
-				stmt.setString(8,language);
-				stmt.setString(9,illustrations);
-				stmt.setString(10,form);
-				stmt.setString(11,title);
-				stmt.setString(12,remainder);
-				stmt.setString(13,extent);
-				stmt.setString(14,dimensions);
-				stmt.setString(15,other);
-				stmt.setString(16,gac);
-				stmt.setString(17,pubLocation);
-				stmt.setString(18,publisher);
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.publication set rec_type = ?, bib_level = ?, multi_level = ?, date_status = ?, date1 = ?, date2 = ?, location = ?, language = ?, illustrations = ?, form = ?, title = ?, remainder = ?, extent = ?, dimensions = ?, other = ?, gac = ?, pub_location = ?, publisher = ? where id = ? ");
+				stmt.setString( 1, recType );
+				stmt.setString( 2, bibLevel );
+				stmt.setString( 3, multiLevel );
+				stmt.setString( 4, dateStatus );
+				stmt.setString( 5, date1 );
+				stmt.setString( 6, date2 );
+				stmt.setString( 7, location );
+				stmt.setString( 8, language );
+				stmt.setString( 9, illustrations );
+				stmt.setString( 10, form );
+				stmt.setString( 11, title );
+				stmt.setString( 12, remainder );
+				stmt.setString( 13, extent );
+				stmt.setString( 14, dimensions );
+				stmt.setString( 15, other );
+				stmt.setString( 16, gac );
+				stmt.setString( 17, pubLocation );
+				stmt.setString( 18, publisher );
 				stmt.setInt(19,ID);
 				stmt.executeUpdate();
 				stmt.close();

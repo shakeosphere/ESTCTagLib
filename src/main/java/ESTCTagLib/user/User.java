@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.util.Date;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.sql.Timestamp;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -24,7 +24,7 @@ public class User extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(User.class);
+	private static final Logger log = LogManager.getLogger(User.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -36,8 +36,8 @@ public class User extends ESTCTagLibTagSupport {
 	String firstName = null;
 	String lastName = null;
 	String email = null;
-	Date created = null;
-	Date lastLogin = null;
+	Timestamp created = null;
+	Timestamp lastLogin = null;
 
 	private String var = null;
 
@@ -161,16 +161,16 @@ public class User extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.user set handle = ?, password = ?, is_approved = ?, is_admin = ?, first_name = ?, last_name = ?, email = ?, created = ?, last_login = ? where id = ?");
-				stmt.setString(1,handle);
-				stmt.setString(2,password);
-				stmt.setBoolean(3,isApproved);
-				stmt.setBoolean(4,isAdmin);
-				stmt.setString(5,firstName);
-				stmt.setString(6,lastName);
-				stmt.setString(7,email);
-				stmt.setTimestamp(8,created == null ? null : new java.sql.Timestamp(created.getTime()));
-				stmt.setTimestamp(9,lastLogin == null ? null : new java.sql.Timestamp(lastLogin.getTime()));
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.user set handle = ?, password = ?, is_approved = ?, is_admin = ?, first_name = ?, last_name = ?, email = ?, created = ?, last_login = ? where id = ? ");
+				stmt.setString( 1, handle );
+				stmt.setString( 2, password );
+				stmt.setBoolean( 3, isApproved );
+				stmt.setBoolean( 4, isAdmin );
+				stmt.setString( 5, firstName );
+				stmt.setString( 6, lastName );
+				stmt.setString( 7, email );
+				stmt.setTimestamp( 8, created );
+				stmt.setTimestamp( 9, lastLogin );
 				stmt.setInt(10,ID);
 				stmt.executeUpdate();
 				stmt.close();
@@ -228,8 +228,8 @@ public class User extends ESTCTagLibTagSupport {
 		stmt.setString(6,firstName);
 		stmt.setString(7,lastName);
 		stmt.setString(8,email);
-		stmt.setTimestamp(9,created == null ? null : new java.sql.Timestamp(created.getTime()));
-		stmt.setTimestamp(10,lastLogin == null ? null : new java.sql.Timestamp(lastLogin.getTime()));
+		stmt.setTimestamp(9,created);
+		stmt.setTimestamp(10,lastLogin);
 		stmt.executeUpdate();
 		stmt.close();
 		freeConnection();
@@ -353,39 +353,39 @@ public class User extends ESTCTagLibTagSupport {
 		return email;
 	}
 
-	public Date getCreated () {
+	public Timestamp getCreated () {
 		return created;
 	}
 
-	public void setCreated (Date created) {
+	public void setCreated (Timestamp created) {
 		this.created = created;
 		commitNeeded = true;
 	}
 
-	public Date getActualCreated () {
+	public Timestamp getActualCreated () {
 		return created;
 	}
 
 	public void setCreatedToNow ( ) {
-		this.created = new java.util.Date();
+		this.created = new java.sql.Timestamp(new java.util.Date().getTime());
 		commitNeeded = true;
 	}
 
-	public Date getLastLogin () {
+	public Timestamp getLastLogin () {
 		return lastLogin;
 	}
 
-	public void setLastLogin (Date lastLogin) {
+	public void setLastLogin (Timestamp lastLogin) {
 		this.lastLogin = lastLogin;
 		commitNeeded = true;
 	}
 
-	public Date getActualLastLogin () {
+	public Timestamp getActualLastLogin () {
 		return lastLogin;
 	}
 
 	public void setLastLoginToNow ( ) {
-		this.lastLogin = new java.util.Date();
+		this.lastLogin = new java.sql.Timestamp(new java.util.Date().getTime());
 		commitNeeded = true;
 	}
 
@@ -465,7 +465,7 @@ public class User extends ESTCTagLibTagSupport {
 		}
 	}
 
-	public static Date createdValue() throws JspException {
+	public static Timestamp createdValue() throws JspException {
 		try {
 			return currentInstance.getCreated();
 		} catch (Exception e) {
@@ -473,7 +473,7 @@ public class User extends ESTCTagLibTagSupport {
 		}
 	}
 
-	public static Date lastLoginValue() throws JspException {
+	public static Timestamp lastLoginValue() throws JspException {
 		try {
 			return currentInstance.getLastLogin();
 		} catch (Exception e) {

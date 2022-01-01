@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -25,7 +25,7 @@ public class Publisher extends ESTCTagLibTagSupport {
 	boolean commitNeeded = false;
 	boolean newRecord = false;
 
-	private static final Log log = LogFactory.getLog(Publisher.class);
+	private static final Logger log = LogManager.getLogger(Publisher.class);
 
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
@@ -184,7 +184,7 @@ public class Publisher extends ESTCTagLibTagSupport {
 				}
 			}
 			if (commitNeeded) {
-				PreparedStatement stmt = getConnection().prepareStatement("update navigation.publisher set where id = ? and pid = ?");
+				PreparedStatement stmt = getConnection().prepareStatement("update navigation.publisher set where id = ?  and pid = ? ");
 				stmt.setInt(1,ID);
 				stmt.setInt(2,pid);
 				stmt.executeUpdate();

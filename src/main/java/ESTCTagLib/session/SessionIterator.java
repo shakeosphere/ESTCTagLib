@@ -4,13 +4,11 @@ package ESTCTagLib.session;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Vector;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -23,11 +21,11 @@ import ESTCTagLib.user.User;
 @SuppressWarnings("serial")
 public class SessionIterator extends ESTCTagLibBodyTagSupport {
     int ID = 0;
-    Date start = null;
-    Date finish = null;
+    Timestamp start = null;
+    Timestamp finish = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(SessionIterator.class);
+	private static final Logger log = LogManager.getLogger(SessionIterator.class);
 
 
     PreparedStatement stat = null;
@@ -75,7 +73,7 @@ public class SessionIterator extends ESTCTagLibBodyTagSupport {
 						);
 
 			stat.setInt(1,Integer.parseInt(ID));
-			stat.setTimestamp(2,(Timestamp) new java.util.Date(Integer.parseInt(start)));
+			stat.setTimestamp(2,new java.sql.Timestamp(Integer.parseInt(start)));
 			ResultSet crs = stat.executeQuery();
 
 			if (crs.next()) {
@@ -108,7 +106,7 @@ public class SessionIterator extends ESTCTagLibBodyTagSupport {
             stat = getConnection().prepareStatement("SELECT count(*) from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
                                                         + (ID == 0 ? "" : " and id = ?")
-                                                        +  generateLimitCriteria());
+                                                        + generateLimitCriteria());
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             rs = stat.executeQuery();
 
@@ -122,11 +120,11 @@ public class SessionIterator extends ESTCTagLibBodyTagSupport {
             stat = getConnection().prepareStatement("SELECT navigation.session.id, navigation.session.start from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
                                                         + (ID == 0 ? "" : " and id = ?")
-                                                        + " order by " + generateSortCriteria() + generateLimitCriteria());
+                                                        + " order by " + generateSortCriteria()  +  generateLimitCriteria());
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             rs = stat.executeQuery();
 
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 start = rs.getTimestamp(2);
                 pageContext.setAttribute(var, ++rsCount);
@@ -181,7 +179,7 @@ public class SessionIterator extends ESTCTagLibBodyTagSupport {
 
     public int doAfterBody() throws JspException {
         try {
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 start = rs.getTimestamp(2);
                 pageContext.setAttribute(var, ++rsCount);
@@ -209,21 +207,21 @@ public class SessionIterator extends ESTCTagLibBodyTagSupport {
 
     public int doEndTag() throws JspTagException, JspException {
         try {
-			if(pageContext != null){
+			if( pageContext != null ){
 				Boolean error = (Boolean) pageContext.getAttribute("tagError");
-				if(error != null && error){
+				if( error != null && error ){
 
 					freeConnection();
 					clearServiceState();
 
-				Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
-				String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
+					Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
+					String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
 
-				if(pageContext != null){
-					e = (Exception) pageContext.getAttribute("tagErrorException");
-					message = (String) pageContext.getAttribute("tagErrorMessage");
+					if(pageContext != null){
+						e = (Exception) pageContext.getAttribute("tagErrorException");
+						message = (String) pageContext.getAttribute("tagErrorMessage");
 
-				}
+					}
 					Tag parent = getParent();
 					if(parent != null){
 						return parent.doEndTag();
@@ -236,9 +234,16 @@ public class SessionIterator extends ESTCTagLibBodyTagSupport {
 					}
 				}
 			}
-            rs.close();
-            stat.close();
-        } catch (SQLException e) {
+
+            if( rs != null ){
+                rs.close();
+            }
+
+            if( stat != null ){
+                stat.close();
+            }
+
+        } catch ( SQLException e ) {
             log.error("JDBC error ending Session iterator",e);
 			freeConnection();
 
@@ -309,19 +314,19 @@ public class SessionIterator extends ESTCTagLibBodyTagSupport {
 		return ID;
 	}
 
-	public Date getStart () {
+	public Timestamp getStart () {
 		return start;
 	}
 
-	public void setStart (Date start) {
+	public void setStart (Timestamp start) {
 		this.start = start;
 	}
 
-	public Date getActualStart () {
+	public Timestamp getActualStart () {
 		return start;
 	}
 
 	public void setStartToNow ( ) {
-		this.start = new java.util.Date();
+		this.start = new java.sql.Timestamp(new java.util.Date().getTime());
 	}
 }

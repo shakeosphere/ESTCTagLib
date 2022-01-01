@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -24,7 +24,7 @@ public class MtagIterator extends ESTCTagLibBodyTagSupport {
     String indicator2 = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(MtagIterator.class);
+	private static final Logger log = LogManager.getLogger(MtagIterator.class);
 
 
     PreparedStatement stat = null;
@@ -105,7 +105,7 @@ public class MtagIterator extends ESTCTagLibBodyTagSupport {
             stat = getConnection().prepareStatement("SELECT count(*) from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
                                                         + (ID == 0 ? "" : " and id = ?")
-                                                        +  generateLimitCriteria());
+                                                        + generateLimitCriteria());
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             rs = stat.executeQuery();
 
@@ -119,11 +119,11 @@ public class MtagIterator extends ESTCTagLibBodyTagSupport {
             stat = getConnection().prepareStatement("SELECT navigation.mtag.id, navigation.mtag.tag from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
                                                         + (ID == 0 ? "" : " and id = ?")
-                                                        + " order by " + generateSortCriteria() + generateLimitCriteria());
+                                                        + " order by " + generateSortCriteria()  +  generateLimitCriteria());
             if (ID != 0) stat.setInt(webapp_keySeq++, ID);
             rs = stat.executeQuery();
 
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 tag = rs.getString(2);
                 pageContext.setAttribute(var, ++rsCount);
@@ -178,7 +178,7 @@ public class MtagIterator extends ESTCTagLibBodyTagSupport {
 
     public int doAfterBody() throws JspException {
         try {
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 tag = rs.getString(2);
                 pageContext.setAttribute(var, ++rsCount);
@@ -206,21 +206,21 @@ public class MtagIterator extends ESTCTagLibBodyTagSupport {
 
     public int doEndTag() throws JspTagException, JspException {
         try {
-			if(pageContext != null){
+			if( pageContext != null ){
 				Boolean error = (Boolean) pageContext.getAttribute("tagError");
-				if(error != null && error){
+				if( error != null && error ){
 
 					freeConnection();
 					clearServiceState();
 
-				Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
-				String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
+					Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
+					String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
 
-				if(pageContext != null){
-					e = (Exception) pageContext.getAttribute("tagErrorException");
-					message = (String) pageContext.getAttribute("tagErrorMessage");
+					if(pageContext != null){
+						e = (Exception) pageContext.getAttribute("tagErrorException");
+						message = (String) pageContext.getAttribute("tagErrorMessage");
 
-				}
+					}
 					Tag parent = getParent();
 					if(parent != null){
 						return parent.doEndTag();
@@ -233,9 +233,16 @@ public class MtagIterator extends ESTCTagLibBodyTagSupport {
 					}
 				}
 			}
-            rs.close();
-            stat.close();
-        } catch (SQLException e) {
+
+            if( rs != null ){
+                rs.close();
+            }
+
+            if( stat != null ){
+                stat.close();
+            }
+
+        } catch ( SQLException e ) {
             log.error("JDBC error ending Mtag iterator",e);
 			freeConnection();
 

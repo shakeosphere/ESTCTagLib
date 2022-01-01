@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.util.Date;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import java.sql.Timestamp;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -26,11 +26,11 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
     String firstName = null;
     String lastName = null;
     String email = null;
-    Date created = null;
-    Date lastLogin = null;
+    Timestamp created = null;
+    Timestamp lastLogin = null;
 	Vector<ESTCTagLibTagSupport> parentEntities = new Vector<ESTCTagLibTagSupport>();
 
-	private static final Log log = LogFactory.getLog(UserIterator.class);
+	private static final Logger log = LogManager.getLogger(UserIterator.class);
 
 
     PreparedStatement stat = null;
@@ -95,7 +95,7 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
             int webapp_keySeq = 1;
             stat = getConnection().prepareStatement("SELECT count(*) from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
-                                                        +  generateLimitCriteria());
+                                                        + generateLimitCriteria());
             rs = stat.executeQuery();
 
             if (rs.next()) {
@@ -107,10 +107,10 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
             webapp_keySeq = 1;
             stat = getConnection().prepareStatement("SELECT navigation.user.id from " + generateFromClause() + " where 1=1"
                                                         + generateJoinCriteria()
-                                                        + " order by " + generateSortCriteria() + generateLimitCriteria());
+                                                        + " order by " + generateSortCriteria()  +  generateLimitCriteria());
             rs = stat.executeQuery();
 
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_INCLUDE;
@@ -164,7 +164,7 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
 
     public int doAfterBody() throws JspException {
         try {
-            if (rs.next()) {
+            if ( rs != null && rs.next() ) {
                 ID = rs.getInt(1);
                 pageContext.setAttribute(var, ++rsCount);
                 return EVAL_BODY_AGAIN;
@@ -191,21 +191,21 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
 
     public int doEndTag() throws JspTagException, JspException {
         try {
-			if(pageContext != null){
+			if( pageContext != null ){
 				Boolean error = (Boolean) pageContext.getAttribute("tagError");
-				if(error != null && error){
+				if( error != null && error ){
 
 					freeConnection();
 					clearServiceState();
 
-				Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
-				String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
+					Exception e = null; // (Exception) pageContext.getAttribute("tagErrorException");
+					String message = null; // (String) pageContext.getAttribute("tagErrorMessage");
 
-				if(pageContext != null){
-					e = (Exception) pageContext.getAttribute("tagErrorException");
-					message = (String) pageContext.getAttribute("tagErrorMessage");
+					if(pageContext != null){
+						e = (Exception) pageContext.getAttribute("tagErrorException");
+						message = (String) pageContext.getAttribute("tagErrorMessage");
 
-				}
+					}
 					Tag parent = getParent();
 					if(parent != null){
 						return parent.doEndTag();
@@ -218,9 +218,16 @@ public class UserIterator extends ESTCTagLibBodyTagSupport {
 					}
 				}
 			}
-            rs.close();
-            stat.close();
-        } catch (SQLException e) {
+
+            if( rs != null ){
+                rs.close();
+            }
+
+            if( stat != null ){
+                stat.close();
+            }
+
+        } catch ( SQLException e ) {
             log.error("JDBC error ending User iterator",e);
 			freeConnection();
 

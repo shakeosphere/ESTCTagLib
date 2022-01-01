@@ -4,15 +4,15 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.Tag;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import ESTCTagLib.ESTCTagLibTagSupport;
 
 @SuppressWarnings("serial")
 public class PersonAtLocational extends ESTCTagLibTagSupport {
 
-	private static final Log log = LogFactory.getLog(PersonAtLocational.class);
+	private static final Logger log = LogManager.getLogger(PersonAtLocational.class);
 
 	public int doStartTag() throws JspException {
 		try {
